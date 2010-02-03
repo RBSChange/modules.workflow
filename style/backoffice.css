@@ -1,0 +1,21 @@
+treechildren::-moz-tree-image(modules_workflow_workflow){
+	list-style-image: url(/icons/small/workflow-workflow.png) ;
+}
+treechildren::-moz-tree-image(modules_workflow_place){
+	list-style-image: url(/icons/small/workflow-place.png) ;
+}
+treechildren::-moz-tree-image(modules_workflow_transition){
+	list-style-image: url(/icons/small/workflow-transition.png) ;
+}
+treechildren::-moz-tree-image(modules_workflow_arc){
+	list-style-image: url(/icons/small/workflow-arc.png) ;
+}
+treechildren::-moz-tree-image(modules_workflow_case){
+	list-style-image: url(/icons/small/document.png) ;
+}
+treechildren::-moz-tree-image(modules_workflow_token){
+	list-style-image: url(/icons/small/document.png) ;
+}
+treechildren::-moz-tree-image(modules_workflow_workitem){
+	list-style-image: url(/icons/small/document.png) ;
+}

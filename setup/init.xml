@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<binding fileName="modules/list/persistentdocument/import/list_binding.xml" />
+	<binding fileName="modules/generic/persistentdocument/import/generic_binding.xml" />
+
+	<systemfolder module="list" relatedmodule="workflow">
+		<staticlist listid="modules_workflow/placetype"
+			label="Liste des types de places" description="Liste des types de places">
+				<staticitem label="&amp;modules.workflow.bo.general.StartPlace;" value="1"/>
+				<staticitem label="&amp;modules.workflow.bo.general.IntermediatePlace;" value="5"/>
+				<staticitem label="&amp;modules.workflow.bo.general.EndPlace;" value="9"/>
+		</staticlist>
+		
+		<staticlist listid="modules_workflow/trigger"
+			label="Liste des types de triggers" description="Liste des types de triggers existant pour les transitions.">
+				<staticitem label="&amp;modules.workflow.bo.general.ManualyByUser;" value="USER"/>
+				<staticitem label="&amp;modules.workflow.bo.general.AutomaticallyBySystem;" value="AUTO"/>
+				<staticitem label="&amp;modules.workflow.bo.general.ByExternalEvent;" value="MSG"/>
+				<staticitem label="&amp;modules.workflow.bo.general.AfterTimeLimitExpired;" value="TIME"/>
+		</staticlist>
+				
+		<staticlist listid="modules_workflow/direction"
+			label="Liste des directions" description="Liste des directions que peuvent prendre les arcs.">
+				<staticitem label="&amp;modules.workflow.bo.general.PlaceToTransition;" value="IN"/>
+				<staticitem label="&amp;modules.workflow.bo.general.TransitionToPlace;" value="OUT"/>
+		</staticlist>
+		
+		<staticlist listid="modules_workflow/arctype"
+			label="Liste des types d'arcs" description="Liste des types que peuvent prendre les arcs.">
+				<staticitem label="&amp;modules.workflow.bo.general.OrdinarySequentialFlow;" value="SEQ"/>
+				<staticitem label="&amp;modules.workflow.bo.general.ExplicitOrSplit;" value="EX_OR_SP"/>
+				<staticitem label="&amp;modules.workflow.bo.general.ImplicitOrSplit;" value="IM_OR_SP"/>
+				<staticitem label="&amp;modules.workflow.bo.general.OrJoin;" value="OR_JO"/>
+				<staticitem label="&amp;modules.workflow.bo.general.AndSplit;" value="AND_SP"/>
+				<staticitem label="&amp;modules.workflow.bo.general.AndJoin;" value="AND_JO"/>
+		</staticlist>
+		
+		<dynamiclist listid="modules_workflow/contextualtransitions"
+			label="Liste des transitions d'un workflow" description="Liste des transitions d'un workflow.">
+		</dynamiclist>
+		
+		<dynamiclist listid="modules_workflow/contextualplaces"
+			label="Liste des places d'un workflow" description="Liste des places d'un workflow.">
+		</dynamiclist>
+	</systemfolder>
+</script>

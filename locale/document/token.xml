@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+  <entity id="document-name">
+    <locale lang="fr">token</locale>
+    <locale lang="de">Token</locale>
+  </entity>
+  <entity id="label">
+    <locale lang="fr">nom</locale>
+    <locale lang="de">Name</locale>
+  </entity>
+  <entity id="workflow">
+    <locale lang="fr">workflow</locale>
+    <locale lang="de">Workflow</locale>
+  </entity>
+  <entity id="place">
+    <locale lang="fr">place</locale>
+    <locale lang="de">Platz</locale>
+  </entity>
+  <entity id="context">
+    <locale lang="fr">contexte</locale>
+    <locale lang="de">Kontext</locale>
+  </entity>
+</localization>

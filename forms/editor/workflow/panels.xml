@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panels>
+	<panel name="resume" />
+	<panel name="properties" />
+	<panel name="publication" />
+	<panel name="create" />
+	
+	<xul>
+		<javascript>
+			<constructor><![CDATA[
+				this.addTab('case', '&modules.workflow.bo.doceditor.case-panel.Tab-label;', 'document');
+			]]></constructor>
+		</javascript>
+	</xul>	
+</panels>

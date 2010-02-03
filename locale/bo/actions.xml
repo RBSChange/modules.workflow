@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+  <entity id="create_">
+    <locale lang="fr">créer</locale>
+    <locale lang="en">create</locale>
+    <locale lang="de">neu</locale>
+  </entity>
+  <entity id="create-Workflow">
+    <locale lang="fr">créer un workflow</locale>
+    <locale lang="en">create a workflow</locale>
+    <locale lang="de">einen Workflow erstellen</locale>
+  </entity>
+  <entity id="create-Place">
+    <locale lang="fr">créer une place</locale>
+    <locale lang="en">create a place</locale>
+    <locale lang="de">einen Platz erstellen</locale>
+  </entity>
+  <entity id="create-Transition">
+    <locale lang="fr">créer une transition</locale>
+    <locale lang="en">create a transition</locale>
+    <locale lang="de">einen Übergang erstellen</locale>
+  </entity>
+  <entity id="create-Arc">
+    <locale lang="fr">créer un arc</locale>
+    <locale lang="en">create an arc</locale>
+    <locale lang="de">einen Bogen erstellen</locale>
+  </entity>
+  <entity id="validate-Workflow">
+    <locale lang="fr">valider le workflow</locale>
+    <locale lang="en">validate the workflow</locale>
+    <locale lang="de">den Workflow freigeben</locale>
+  </entity>
+</localization>

@@ -1,0 +1,260 @@
+<?xml version="1.0"?>
+<bindings xmlns="http://www.mozilla.org/xbl" xmlns:xbl="http://www.mozilla.org/xbl"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">	
+	<binding id="cCasePanel"  extends="layout.cDocumentEditor#cDocumentEditorPanel">
+		<implementation>
+			<field name="mTargetId"></field>
+			<field name="mPageSize">20</field>
+			<field name="mDocumentTotal">0</field>
+			<field name="mStartIndex">0</field>
+			<field name="mEndIndex">0</field>
+		
+			<constructor><![CDATA[
+				wCore.debug("cCaseList.constructor");
+			]]></constructor>
+
+			<method name="getInitializeParameters">
+				<body><![CDATA[
+					return {
+						modulename: "workflow",
+						action: "LoadCasesForWorkflow", 
+						cmpref: this.documentEditor.documentid, 
+						targetId: this.mTargetId, 
+						lang: Context.W_LANG,
+						startIndex: this.mStartIndex,
+						pageSize: this.mPageSize
+					};
+				]]></body>
+			</method>
+
+			<method name="fireInitializeComplete">
+				<parameter name="result" />
+				<body><![CDATA[
+					if (result.status != "OK")
+					{
+						this.showErrorMessage(result.contents.errorMessage);
+					}
+					else
+					{									
+						var docs = result.contents.documents;
+						var doc;
+						var row;
+						var rows = document.getAnonymousElementByAttribute(this, 'anonid', 'document-rows');
+						for (var i = 0; i < docs.length; i++)
+						{
+							doc = docs[i];
+							row = rows.childNodes[i+1];
+							if (row == null)
+							{
+								row = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul', 'row');
+								row.className = 'document';
+								row.panel = this;
+								rows.appendChild(row);
+							}
+							else
+							{
+								row.removeAttribute('collapsed');
+							}
+							
+							for (var name in doc)
+							{
+								row.setAttribute(name, doc[name]);
+							}
+						}
+						while (row = rows.childNodes[i+1])
+						{
+							row.setAttribute('collapsed', 'true');
+							i++;
+						}
+						this.updateNavigation(result.contents);
+					}
+					this.mInitialized = true;
+					this.gotoTop();
+				]]></body>
+			</method>
+	
+			<method name="refresh">
+				<parameter name="id" />
+				<body><![CDATA[
+					this.documentEditor.executeServerAction('case', 'Initialize');
+				]]></body>
+			</method>
+	
+			<method name="edit">
+				<parameter name="id" />
+				<body><![CDATA[
+					var uri = ['workflow', 'openDocument', 'modules_workflow_case', id, 'history'].join(',');
+					openActionUri(uri);
+				]]></body>
+			</method>
+			
+			<method name="updateNavigation">
+				<parameter name="contents" />
+				<body><![CDATA[
+					this.mDocumentTotal = parseInt(contents.total);
+					this.mStartIndex = parseInt(contents.startIndex);
+					
+					var viewDoc = contents.documents.length;
+					wCore.debug('viewDoc = '+viewDoc);
+					this.mEndIndex = this.mStartIndex + viewDoc;
+	
+					document.getAnonymousElementByAttribute(this, "anonid", "navigationtotal").value = this.mDocumentTotal;
+					var disableBack = (this.mStartIndex == 0);
+					document.getAnonymousElementByAttribute(this, "anonid", "navigationbegin").disabled = disableBack;
+					document.getAnonymousElementByAttribute(this, "anonid", "navigationback2").disabled = disableBack;
+					document.getAnonymousElementByAttribute(this, "anonid", "navigationback").disabled = disableBack;
+					var disableNext = (this.mEndIndex >= this.mDocumentTotal);
+					document.getAnonymousElementByAttribute(this, "anonid", "navigationnext").disabled = disableNext;
+					document.getAnonymousElementByAttribute(this, "anonid", "navigationnext2").disabled = disableNext;
+					document.getAnonymousElementByAttribute(this, "anonid", "navigationend").disabled = disableNext;
+					
+					var navigationindex = document.getAnonymousElementByAttribute(this, "anonid", "navigationindex");
+					navigationindex.value = (this.mStartIndex + 1) + ' - ' + (this.mStartIndex + viewDoc);
+				]]></body>
+			</method>
+
+			<method name="navigateBegin">
+				<body><![CDATA[
+					this.mStartIndex = 0;
+					this.refresh();
+				]]></body>
+			</method>
+
+			<method name="navigateBack">
+				<parameter name="quick" />
+				<body><![CDATA[
+					this.mStartIndex -= this.mPageSize;
+					if (quick && (this.mStartIndex - (5 * this.mPageSize) >= 0))
+					{
+						this.mStartIndex -= (5 * this.mPageSize);
+					}
+					this.mStartIndex -= this.mPageSize;
+					this.refresh();
+				]]></body>
+			</method>
+
+			<method name="navigateNext">
+				<parameter name="quick" />
+				<body><![CDATA[
+					this.mStartIndex += this.mPageSize;
+					if (quick && (this.mStartIndex + (5 * this.mPageSize) < this.mDocumentTotal))
+					{
+						this.mStartIndex += (5 * this.mPageSize);
+					}
+					this.refresh();
+				]]></body>
+			</method>
+
+			<method name="navigateEnd">
+				<body><![CDATA[
+					this.mStartIndex = this.mDocumentTotal - (this.mDocumentTotal % this.mPageSize);
+					if (this.mStartIndex == this.mDocumentTotal)
+					{
+						this.mStartIndex -= this.mPageSize;
+					}
+					this.refresh();
+				]]></body>
+			</method>
+		</implementation>
+		<handlers>		
+			<handler event="fieldChanged"><![CDATA[
+				var target = event.originalTarget;
+				wCore.debug('fieldChanged '+target.name+ ', '+target.localName );
+				if (target.localName == 'cfield' && target.name == 'targetId')
+				{
+					this.mTargetId = target.value;
+				}
+			]]></handler>
+			<handler event="command"><![CDATA[
+				var target = event.originalTarget;
+				if (target.localName == 'toolbarbutton' && target.hasAttribute('action'))
+				{
+					switch (target.getAttribute('action'))
+					{						
+						case 'edit':
+							this.edit(target.getAttribute('documentId'));
+							break;
+					}
+					return;
+				}
+				else if (target.localName == 'button' && target.getAttribute('action') == 'refresh')
+				{
+					this.refresh();
+				}
+			]]></handler>
+		</handlers>	
+		<resources>
+			<stylesheet src="modules.uixul.cEditorGrid" />
+		</resources>		
+		<content>
+			<xul:vbox flex="1">
+				<xul:cmessageinfo anonid="message" />
+				<xul:vbox class="filters" />
+				<xul:toolbox anonid="pagination-toolbox" orient="horizontal" class="change-toolbox">
+					<xul:toolbar align="center" pack="center" anonid="navigationtb" orient="horizontal" flex="1" class="change-toolbar">
+						<xul:toolbarbutton anonid="navigationbegin" disabled="true" oncommand="navigateBegin()" image="{HttpHost}/icons/small/control-begin.png" tooltiptext="&amp;modules.uixul.bo.general.Navigate-begin;" />
+						<xul:toolbarbutton anonid="navigationback2" disabled="true" oncommand="navigateBack(true)" image="{HttpHost}/icons/small/control-double-backward.png" tooltiptext="&amp;modules.uixul.bo.general.Navigate-back-quick;" />
+						<xul:toolbarbutton anonid="navigationback" disabled="true" oncommand="navigateBack()" image="{HttpHost}/icons/small/control-backward.png" tooltiptext="&amp;modules.uixul.bo.general.Navigate-back;" />
+						<xul:hbox align="center">
+							<xul:label anonid="navigationpagelabel" value="&amp;modules.uixul.bo.general.Documents;" />
+							<xul:label anonid="navigationindex" value="0" />
+							<xul:label anonid="navigationpageseparator" value="&amp;modules.uixul.bo.general.out-of;" />
+							<xul:label anonid="navigationtotal" value="0" />
+						</xul:hbox>
+						<xul:toolbarbutton anonid="navigationnext" disabled="true" oncommand="navigateNext()" image="{HttpHost}/icons/small/control-forward.png" tooltiptext="&amp;modules.uixul.bo.general.Navigate-next;" />
+						<xul:toolbarbutton anonid="navigationnext2" disabled="true" oncommand="navigateNext(true)" image="{HttpHost}/icons/small/control-double-forward.png" tooltiptext="&amp;modules.uixul.bo.general.Navigate-next-quick;" />
+						<xul:toolbarbutton anonid="navigationend" disabled="true" oncommand="navigateEnd()" image="{HttpHost}/icons/small/control-end.png" tooltiptext="&amp;modules.uixul.bo.general.Navigate-end;" />
+					</xul:toolbar>
+				</xul:toolbox>
+					<xul:grid flex="1">
+						<xul:columns class="columns" />
+						<xul:rows anonid="document-rows">
+							<xul:row class="head" />
+						</xul:rows>
+					</xul:grid>
+				<children/>
+			</xul:vbox>
+		</content>	
+	</binding>
+	
+	<binding id="cCasePanelFilters">
+		<content>
+			<xul:hbox align="center">
+				<xul:label value="&amp;modules.workflow.bo.doceditor.case-panel.Filter-by-target-id;" /> <xul:cfield anonid="targetId" name="targetId" fieldtype="integer" hidehelp="true" hidespinbuttons="true" /> <xul:button action="refresh" image="{HttpHost}/icons/small/refresh.png" label="&amp;modules.workflow.bo.doceditor.case-panel.Refresh;" />
+			</xul:hbox>
+		</content>
+	</binding>
+	
+	<binding id="cCasePanelColumns">
+		<content>
+			<xul:column />
+			<xul:column flex="1" />
+			<xul:column flex="1" />
+			<xul:column flex="1" />
+			<xul:column flex="1" />
+		</content>
+	</binding>
+	
+	<binding id="cCasePanelHead">
+		<content>
+			<xul:label />
+			<xul:label value="&amp;modules.workflow.bo.doceditor.case-panel.Target;" />
+			<xul:label value="&amp;modules.workflow.bo.doceditor.case-panel.Creation-date;" />
+			<xul:label value="&amp;modules.workflow.bo.doceditor.case-panel.Last-modification-date;" />
+			<xul:label value="&amp;modules.workflow.bo.doceditor.case-panel.Status;" />
+		</content>
+	</binding>
+	
+	<binding id="cCasePanelDocument">
+		<content>
+			<xul:toolbar class="actions">
+				<xul:toolbarbutton xbl:inherits="documentId" action="edit" hidespinbuttons="true" image="{HttpHost}/icons/small/view.png" tooltiptext="&amp;modules.workflow.bo.doceditor.case-panel.View-informations;" />
+			</xul:toolbar>
+			<xul:label xbl:inherits="value=targetId" />
+			<xul:label xbl:inherits="value=creationdate" />
+			<xul:label xbl:inherits="value=modificationdate" />
+			<xul:label xbl:inherits="value=statusLabel" />
+		</content>
+	</binding>
+</bindings>

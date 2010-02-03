@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+  <entity id="document-name">
+    <locale lang="fr">place</locale>
+    <locale lang="de">Platz</locale>
+  </entity>
+  <entity id="label">
+    <locale lang="fr">nom</locale>
+    <locale lang="de">Name</locale>
+  </entity>
+  <entity id="label-help">
+    <locale lang="fr">nom de la place.</locale>
+    <locale lang="de">Platzname.</locale>
+  </entity>
+  <entity id="description">
+    <locale lang="fr">description</locale>
+    <locale lang="de">Beschreibung</locale>
+  </entity>
+  <entity id="description-help">
+    <locale lang="fr">description de la place</locale>
+    <locale lang="de">Platzbeschreibung</locale>
+  </entity>
+  <entity id="placetype">
+    <locale lang="fr">type</locale>
+    <locale lang="de">Typ</locale>
+  </entity>
+  <entity id="placetype-help">
+    <locale lang="fr">type de la place. Ce type n'est pas modifiable car les places de début et de fin sont générées automatiquement.</locale>
+    <locale lang="de">Platztyp. Dieser Typ ist nicht änderbar, denn sie Start- und Endplätze werden automatisch generiert.</locale>
+  </entity>
+</localization>

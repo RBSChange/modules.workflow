@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel>
+	<section labeli18n="modules.uixul.bo.doceditor.fieldsgroup.Title">
+		<field name="transition" />
+		<field name="place" />
+		<field name="direction" />
+		<field name="arctype" />
+		<field name="precondition" />
+	</section>
+	<xul>
+		<javascript>
+			<constructor><![CDATA[
+				this.extendMethod("fireInitializeComplete", this.fireInitializeCompleteExtend);
+			]]></constructor>
+
+			<method name="fireInitializeCompleteExtend">
+				<parameter name="result" />
+				<body><![CDATA[
+					try
+					{
+						this.fields.transition.replaceItems({arcId: this.documentEditor.documentid});
+						this.fields.place.replaceItems({arcId: this.documentEditor.documentid});
+					}
+					catch (e)
+					{
+						wCore.error("arc.propertiespanel.fireInitializeCompleteExtend", [], e);
+					}
+				]]></body>
+			</method>
+		</javascript>
+	</xul>
+</panel>

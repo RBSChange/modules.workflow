@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+  <entity id="Admin">
+    <locale lang="fr">Administrateur</locale>
+    <locale lang="en">Administrator</locale>
+    <locale lang="de">Administrator</locale>
+  </entity>
+  <entity id="Admin-help">
+    <locale lang="fr">Administrateur</locale>
+    <locale lang="en">Administrator</locale>
+    <locale lang="de">Administrator</locale>
+  </entity>
+</localization>

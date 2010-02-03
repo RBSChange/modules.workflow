@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<binding fileName="modules/generic/persistentdocument/import/generic_binding.xml" />
+	<binding name="workflow" className="workflow_WorkflowScriptDocumentElement" />
+
+	<binding name="places" className="workflow_PlacesScriptElement" />
+	<binding name="place" className="workflow_PlaceScriptDocumentElement" />
+	<binding name="startplace" className="workflow_StartPlaceScriptDocumentElement" />
+	<binding name="endplace" className="workflow_EndPlaceScriptDocumentElement" />
+
+	<binding name="transitions" className="workflow_TransitionsScriptElement" />
+	<binding name="transition" className="workflow_TransitionScriptDocumentElement" />
+
+	<binding name="arcs" className="workflow_ArcsScriptElement" />
+	<binding name="arc" className="workflow_ArcScriptDocumentElement" />
+
+	<binding name="token" className="workflow_TokenScriptDocumentElement" />
+	<binding name="workitem" className="workflow_WorkitemScriptDocumentElement" />
+	<binding name="case" className="workflow_CaseScriptDocumentElement" />
+</script>

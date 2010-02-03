@@ -1,0 +1,20 @@
+#edt_workflow_workflow ccasepanel
+{
+	-moz-binding: url(binding:modules.workflow.cWorkflowEditor#cCasePanel);
+}
+#edt_workflow_workflow ccasepanel vbox.filters
+{
+	-moz-binding: url(binding:modules.workflow.cWorkflowEditor#cCasePanelFilters);
+}
+#edt_workflow_workflow ccasepanel columns.columns
+{
+	-moz-binding: url(binding:modules.workflow.cWorkflowEditor#cCasePanelColumns);
+}
+#edt_workflow_workflow ccasepanel row.head
+{
+	-moz-binding: url(binding:modules.workflow.cWorkflowEditor#cCasePanelHead);
+}
+#edt_workflow_workflow ccasepanel row.document
+{
+	-moz-binding: url(binding:modules.workflow.cWorkflowEditor#cCasePanelDocument);
+}

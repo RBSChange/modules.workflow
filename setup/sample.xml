@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<binding fileName="modules/workflow/persistentdocument/import/workflow_binding.xml" />
+	<binding fileName="modules/notification/persistentdocument/import/notification_binding.xml" />
+	
+	<systemfolder module="notification" relatedmodule="workflow">
+			<notification id="n1create"
+				label="Validation à un niveau - Validation du contenu (création)"
+				codename="modules_workflow/VALIDATION1create"
+				availableparameters="{documentId}, {documentLabel}, {documentLang}, {documentPath}, {workflowId}, {workflowLabel}, {transitionId}, {transitionLabel}, {currentUserId}, {currentUserFullname}, {__LAST_COMMENTARY}, {__LAST_DECISION}"
+				subject="[Nouvelle tâche] {transitionLabel} sur le document {documentId}"
+				body="une nouvelle tâche vous a été affectée :
+Tâche : {transitionLabel}
+Document concerné : {documentLabel} ({documentId})
+Commentaire : {__LAST_COMMENTARY}" />
+
+			<notification id="n1terminate"
+				label="Validation à un niveau - Validation du contenu (exécution)"
+				codename="modules_workflow/VALIDATION1terminate"
+				availableparameters="{documentId}, {documentLabel}, {documentLang}, {documentPath}, {workflowId}, {workflowLabel}, {transitionId}, {transitionLabel}, {currentUserId}, {currentUserFullname}, {__LAST_COMMENTARY}, {__LAST_DECISION}, {decision}"
+				subject="[Tâche exécutée] {transitionLabel} sur le document {documentId}"
+				body="votre décision a bien été enregistrée pour la tâche suivante :
+Tâche : {transitionLabel}
+Document concerné : {documentLabel} ({documentId})
+Décision : {__LAST_DECISION}
+Commentaire : {__LAST_COMMENTARY}" />
+
+			<notification id="n1cancel"
+				label="Validation à un niveau - Validation du contenu (annulation)"
+				codename="modules_workflow/VALIDATION1cancel"
+				availableparameters="{documentId}, {documentLabel}, {documentLang}, {documentPath}, {workflowId}, {workflowLabel}, {transitionId}, {transitionLabel}, {currentUserId}, {currentUserFullname}, {__LAST_COMMENTARY}, {__LAST_DECISION}"
+				subject="[Tâche annulée] {transitionLabel} sur le document {documentId}"
+				body="la tâche suivante a été annulée :
+Tâche : {transitionLabel}
+Document concerné : {documentLabel} ({documentId})
+Commentaire : {__LAST_COMMENTARY}" />
+
+
+			<notification
+				label="Validation à un niveau - Activation du document"
+				codename="Validation à un niveau - Activation du document"
+				availableparameters="{documentId}, {documentLabel}, {documentLang}, {documentPath}, {workflowId}, {workflowLabel}, {transitionId}, {transitionLabel}, {currentUserId}, {currentUserFullname}, {__LAST_COMMENTARY}, {__LAST_DECISION}"
+				subject="[Acceptation] le document n°{documentId} '{documentLabel}' a été accepté"
+				body="le document n°{documentId} '{documentLabel}' a été validé et est maintenant actif." />
+
+			<notification
+				label="Validation à un niveau - Retour brouillon"
+				codename="Validation à un niveau - Retour brouillon"
+				availableparameters="{documentId}, {documentLabel}, {documentLang}, {documentPath}, {workflowId}, {workflowLabel}, {transitionId}, {transitionLabel}, {currentUserId}, {currentUserFullname}, {__LAST_COMMENTARY}, {__LAST_DECISION}"
+				subject="[Retour brouillon] le document n°{documentId} '{documentLabel}' est retourné à l'état brouillon"
+				body="le document n°{documentId} '{documentLabel}' a été refusé, il revient donc à l'état de brouillon." />
+
+			<notification
+				label="Validation à un niveau - Erreur"
+				codename="Validation à un niveau - Erreur"
+				availableparameters="{documentId}, {documentLabel}, {documentLang}, {documentPath}, {workflowId}, {workflowLabel}, {transitionId}, {transitionLabel}, {currentUserId}, {currentUserFullname}, {__LAST_COMMENTARY}, {__LAST_DECISION}"
+				subject="[Retour brouillon] le document n°{documentId} '{documentLabel}' est retourné à l'état brouillon"
+				body="une erreur s'est produite durant le processus de validation du document n°{documentId} '{documentLabel}', il revient donc à l'état de brouillon." />
+
+	</systemfolder>
+	
+	<rootfolder module="workflow" >
+		<folder label="Exemple de workflow">
+			<workflow starttaskid="VALIDATION1" label="Exemple de validation à un niveau">
+				<places>
+					<startplace id="pStart" label="Production du contenu" description="Production du contenu via Change."/>
+	
+					<place id="p2" label="Attente du valideur" description="Attende de validation ou refus par l'un des valideurs autorisés." />
+					
+					<place id="p3" label="Contenu accepté" description="Le contenu est accepté et prêt à être publié." />
+		
+					<place id="p4" label="Attente d'annulation" description="Le workflow est annulé pour cause de refus ou d'erreur." />
+		
+					<place id="p5" label="Contenu refusé" description="Le contenu est refusé et prêt à retourner à l'état brouillon." />
+					
+					<endplace id="pEnd" label="Fin" description="Fin du workflow."/>
+				</places>
+				
+				<transitions>
+					<transition id="t0" label="Sélection du valideur" description="Le ou les valideur(s) sont selectionnés par l'application."
+							taskid="VALIDATION1" 
+							trigger="AUTO"
+							actionname="workflow_SelectValidatorWorkflowaction" />
+					
+					<transition id="t1" label="Validation du contenu" description="Validation ou refus du contenu par l'un des valideurs autorisés."
+							taskid="VALIDATION1" 
+							trigger="USER" roleid="Validator"
+							actionname="" 
+							creationnotification-refid="n1create"
+							terminationnotification-refid="n1terminate"
+							cancellationnotification-refid="n1cancel"
+							/>
+					
+					<transition id="t2" label="Activation" description="Le contenu est validé, le workflow le concernant prend fin."
+							taskid="VALIDATION1" 
+							trigger="AUTO"
+							actionname="workflow_ActivateContentWorkflowaction" />
+					
+					<transition id="t3" label="Annulation du workflow" description="Annulation du workflow pour cause de refus ou d'erreur."
+							taskid="VALIDATION1" 
+							trigger="AUTO"
+							actionname="workflow_CancelContentWorkflowaction" />
+						
+					<transition id="t4" label="Rappel" description="Rappel régulier aux valideurs qu'ils doivent valider ce document."
+							taskid="VALIDATION1" 
+							trigger="TIME" timelimit="48"
+							actionname="workflow_RecallWorkflowaction" />	
+							
+					<transition id="t5" label="Retour brouillon" description="Le contenu est refusé et retourne à l'état brouillon, le workflow le concernant prend fin."
+							taskid="VALIDATION1" 
+							trigger="AUTO"
+							actionname="workflow_BackToDraftWorkflowaction" />		
+				</transitions>
+				
+				<arcs>
+					<arc direction="IN" place-refid="pStart" transition-refid="t0" arctype="SEQ" />
+					<arc direction="OUT" transition-refid="t0"  place-refid="p2" arctype="EX_OR_SP" precondition="OK" />
+					<arc direction="OUT" transition-refid="t0"  place-refid="p4" arctype="EX_OR_SP" precondition="KO"  />
+					
+					<arc direction="IN" place-refid="p2" transition-refid="t1" arctype="IM_OR_SP" />
+					
+					<arc direction="IN" place-refid="p2" transition-refid="t4" arctype="IM_OR_SP" />
+					<arc direction="OUT" transition-refid="t4"  place-refid="p2" arctype="SEQ" />
+					
+					<arc direction="OUT" transition-refid="t1"  place-refid="p5" arctype="EX_OR_SP" precondition="REFUSED" />
+					
+					<arc direction="IN" place-refid="p5" transition-refid="t5" arctype="SEQ" />
+					
+					<arc direction="OUT" transition-refid="t1"  place-refid="p3" arctype="EX_OR_SP" precondition="ACCEPTED" />
+					
+					<arc direction="IN" place-refid="p3" transition-refid="t2" arctype="SEQ" />
+					
+					<arc direction="IN" place-refid="p4" transition-refid="t3" arctype="SEQ" />
+					
+					<arc direction="OUT" transition-refid="t3"  place-refid="pEnd" arctype="SEQ" />
+					<arc direction="OUT" transition-refid="t2"  place-refid="pEnd" arctype="SEQ" />
+					<arc direction="OUT" transition-refid="t5"  place-refid="pEnd" arctype="SEQ" />
+				</arcs>
+			</workflow>
+		</folder>
+	</rootfolder>
+</script>

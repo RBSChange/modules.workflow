@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+	<entity id="case-panel.tab-label">
+		<locale lang="fr">instances</locale>
+		<locale lang="en">cases</locale>
+	</entity>
+	<entity id="case-panel.target">
+		<locale lang="fr">cible</locale>
+		<locale lang="en">target</locale>
+	</entity>
+	<entity id="case-panel.creation-date">
+		<locale lang="fr">démarrage</locale>
+		<locale lang="en">start</locale>
+	</entity>
+	<entity id="case-panel.last-modification-date">
+		<locale lang="fr">dernière modification</locale>
+		<locale lang="en">last update</locale>
+	</entity>
+	<entity id="case-panel.view-informations">
+		<locale lang="fr">voir les informations</locale>
+		<locale lang="en">view informations</locale>
+	</entity>
+	<entity id="case-panel.status">
+		<locale lang="fr">statut</locale>
+		<locale lang="en">status</locale>
+	</entity>
+	<entity id="case-panel.status-publicated">
+		<locale lang="fr">en cours</locale>
+		<locale lang="en">running</locale>
+	</entity>
+	<entity id="case-panel.status-filed">
+		<locale lang="fr">terminé</locale>
+		<locale lang="en">ended</locale>
+	</entity>
+	<entity id="case-panel.filter-by-target-id">
+		<locale lang="fr">filtrer par identifiant de la cible</locale>
+		<locale lang="en">filter by target id</locale>
+	</entity>
+	<entity id="case-panel.refresh">
+		<locale lang="fr">rafraichir</locale>
+		<locale lang="en">refresh</locale>
+	</entity>
+</localization>

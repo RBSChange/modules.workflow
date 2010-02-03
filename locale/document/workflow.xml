@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+  <entity id="document-name">
+    <locale lang="fr">workflow</locale>
+    <locale lang="de">Workflow</locale>
+  </entity>
+  <entity id="edition-form-title">
+    <locale lang="fr">propriétés du workflow</locale>
+    <locale lang="de">Eigenschaften Workflow</locale>
+  </entity>
+  <entity id="label">
+    <locale lang="fr">nom</locale>
+    <locale lang="de">Name</locale>
+  </entity>
+  <entity id="label-help">
+    <locale lang="fr">nom du workflow.</locale>
+    <locale lang="de">Name des Workflow.</locale>
+  </entity>
+  <entity id="publicationstatus">
+    <locale lang="fr">statut</locale>
+    <locale lang="de">Status</locale>
+  </entity>
+  <entity id="publicationstatus-help">
+    <locale lang="fr">statut du workflow. Seuls les workflow en état actif peuvent être utilisés</locale>
+    <locale lang="de">Status des Workflow. Allein dis Workflows im aktiven Status können benutzt werden.</locale>
+  </entity>
+  <entity id="startpublicationdate">
+    <locale lang="fr">date de début</locale>
+    <locale lang="de">Anfangsdatum</locale>
+  </entity>
+  <entity id="startpublicationdate-help">
+    <locale lang="fr">date à partir de laquelle le workflow peut être utilisé.</locale>
+    <locale lang="de">Datum ab dem der Workflow benutzt werden kann.</locale>
+  </entity>
+  <entity id="endpublicationdate">
+    <locale lang="fr">date de fin</locale>
+    <locale lang="de">Enddatum</locale>
+  </entity>
+  <entity id="endpublicationdate-help">
+    <locale lang="fr">date jusqu'à laquelle le workflow peut être utilisé.</locale>
+    <locale lang="de">Datum bis zu dem der Workflow benutzt werden kann.</locale>
+  </entity>
+  <entity id="description">
+    <locale lang="fr">description</locale>
+    <locale lang="de">Beschreibung</locale>
+  </entity>
+  <entity id="description-help">
+    <locale lang="fr">description du workflow.</locale>
+    <locale lang="de">Beschreibung des Workflow.</locale>
+  </entity>
+  <entity id="starttaskid">
+    <locale lang="fr">tâche de départ</locale>
+    <locale lang="de">Beginn des Vorgangs</locale>
+  </entity>
+  <entity id="starttaskid-help">
+    <locale lang="fr">la tâche de départ permet de liée un type de document à un workflow. Cet cette tâche qui devra être indiquée dans le model de chaque type de document auquel on veut appliquer ce workflow.</locale>
+    <locale lang="de">der Beginn des Vorgangs ermöglicht den Workflow an ein Dokumententypen zu verbinden. Möchte man den Workflow anwenden, 
+		muss dieser Vorgang im Modell jedes Dokumententypen angegeben werden.</locale>
+  </entity>
+  <entity id="errors">
+    <locale lang="fr">erreurs</locale>
+    <locale lang="de">Fehler</locale>
+  </entity>
+  <entity id="errors-help">
+    <locale lang="fr">erreurs empêchant la validation du workflow.</locale>
+    <locale lang="de">Fehler, die die Freigabe des Workflows verhindern.</locale>
+  </entity>
+  <entity id="arcs">
+    <locale lang="fr">arcs</locale>
+    <locale lang="de">Bögen</locale>
+  </entity>
+  <entity id="arcs-help">
+    <locale lang="fr">arcs du workflow</locale>
+    <locale lang="de">Bögen des Workflows</locale>
+  </entity>
+  <entity id="places">
+    <locale lang="fr">places</locale>
+    <locale lang="de">Plätze</locale>
+  </entity>
+  <entity id="places-help">
+    <locale lang="fr">places du workflow</locale>
+    <locale lang="de">Plätze des Workflows</locale>
+  </entity>
+  <entity id="transitions">
+    <locale lang="fr">transitions</locale>
+    <locale lang="de">Übergänge</locale>
+  </entity>
+  <entity id="transitions-help">
+    <locale lang="fr">transitions du workflow</locale>
+    <locale lang="de">Übergänge des Workflows</locale>
+  </entity>
+</localization>

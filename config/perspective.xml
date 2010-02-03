@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<perspective>
+	<models>
+		<model name="modules_generic/rootfolder">
+			<children>
+				<child model="modules_workflow/workflow" />
+				<child model="modules_generic/folder" />
+				<child model="modules_generic/systemfolder" />
+			</children>
+			<drops>
+				<drop model="modules_workflow/workflow" action="move"/>
+				<drop model="modules_generic/folder" action="move"/>
+			</drops>
+			<columns>
+				<column name="statusLabel" label="Status" flex="1" />
+				<column name="errors" label="Errors" flex="3" />
+			</columns>
+			<contextactions>
+				<contextaction name="edit" />
+				<contextaction name="createFolder" />
+				<contextaction name="createWorkflow" />
+				<contextaction name="openTreeNodeOrder" />
+				<contextaction name="openFolder" />
+			</contextactions>
+		</model>
+		<model name="modules_generic/folder">
+			<children>
+				<child model="modules_workflow/workflow" />
+				<child model="modules_generic/folder" />
+			</children>
+			<drops>
+				<drop model="modules_workflow/workflow" action="move"/>
+				<drop model="modules_generic/folder" action="move"/>
+			</drops>
+			<columns>
+				<column name="statusLabel" label="Status" flex="1" />
+				<column name="errors" label="Errors" flex="3" />
+			</columns>
+			<contextactions>
+				<contextaction name="edit" />
+				<contextaction name="delete" />
+				<contextaction name="createFolder" />
+				<contextaction name="createWorkflow" />
+				<contextaction name="openTreeNodeOrder" />
+				<contextaction name="openFolder" />
+			</contextactions>
+		</model>
+		<model name="modules_generic/systemfolder">
+			<children>
+				<child model="modules_workflow/workflow" />
+			</children>
+			<columns>
+				<column name="statusLabel" label="Status" flex="1" />
+				<column name="errors" label="Errors" flex="3" />
+			</columns>
+			<contextactions>
+				<contextaction name="openFolder" />
+			</contextactions>
+		</model>		
+		<model name="modules_workflow/workflow">
+			<children>
+				<child model="modules_workflow/arc" from="arcs" />
+				<child model="modules_workflow/place" from="places" />
+				<child model="modules_workflow/transition" from="transitions" />
+			</children>
+			<contextactions>
+				<contextaction name="edit" />
+				<contextaction name="delete" />
+				<contextaction name="validateWorkflow" />
+				<groupactions name="create_">
+					<contextaction name="createPlace" />
+					<contextaction name="createTransition" />
+					<contextaction name="createArc" />
+				</groupactions>
+			</contextactions>
+		</model>
+		<model name="modules_workflow/arc">
+			<contextactions>
+				<contextaction name="edit" />
+				<contextaction name="delete" />
+			</contextactions>
+		</model>
+		<model name="modules_workflow/place">
+			<contextactions>
+				<contextaction name="edit" />
+				<contextaction name="delete" />
+			</contextactions>
+		</model>
+		<model name="modules_workflow/transition">
+			<contextactions>
+				<contextaction name="edit" />
+				<contextaction name="delete" />
+			</contextactions>
+		</model>
+	</models>
+	<toolbar>
+		<toolbarbutton name="edit" />
+		<toolbarbutton name="delete" />
+		<toolbarbutton name="validateWorkflow" />
+	</toolbar>
+	<actions>
+		<action name="delete" permission="Delete" icon="delete" label="&amp;modules.uixul.bo.actions.Delete;" />
+		<action name="edit" single="true" permission="Load" icon="edit" label="&amp;modules.uixul.bo.actions.Edit;" />
+		<action name="validateWorkflow" permission="Activate" icon="check" label="&amp;modules.workflow.bo.actions.Validate-Workflow;" />
+		<action name="create_" actions="createPlace,createTransition,createArc" icon="add" />
+		<action name="createPlace" group="create_" permission="Insert_place" icon="add" label="&amp;modules.workflow.bo.actions.Create-Place;" />
+		<action name="createTransition" group="create_" permission="Insert_transition" icon="add" label="&amp;modules.workflow.bo.actions.Create-Transition;" />
+		<action name="createArc" group="create_" permission="Insert_arc" icon="add" label="&amp;modules.workflow.bo.actions.Create-Arc;" />
+		<action name="createFolder" single="true" permission="Insert_folder" icon="create-folder" label="&amp;modules.uixul.bo.actions.Create-folder;" />
+		<action name="createWorkflow" icon="add" permission="Insert_workflow" label="&amp;modules.workflow.bo.actions.Create-Workflow;" />
+		<action name="openTreeNodeOrder" single="true" permission="Order" icon="sort" label="&amp;modules.uixul.bo.actions.Set-children-order;" />
+		<action name="openFolder" icon="open-folder" label="&amp;modules.uixul.bo.actions.OpenFolder;" />
+		<action name="refresh" single="true" icon="refresh" label="&amp;modules.uixul.bo.actions.Refresh;" />
+	</actions>
+</perspective>

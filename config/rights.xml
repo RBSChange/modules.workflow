@@ -1,0 +1,33 @@
+<rights>
+	<actions>
+		<document name="rootfolder" />
+		<document name="systemfolder" />
+		<document name="folder" />
+		<document name="arc" />
+		<document name="case" />
+		<document name="place" />
+		<document name="token" />
+		<document name="transition" />
+		<document name="workflow" />
+		<document name="workitem" />
+	</actions>
+	<roles>	
+		<role name="Admin">
+			<permission name="LoadPermissions.*" />
+			<permission name="SavePermissions.*" />
+			<permission name="GetPreferencesDocument" />
+			<permission name="Enabled" />
+			<permission name="List.*" />
+			<permission name="Insert.*" />
+			<permission name="Update.*" />
+			<permission name="Load.*" />
+			<permission name="Delete.*" />
+			<permission name="Activate.*" />
+			<permission name="Cancel.*" />
+			<permission name="Deactivated.*" />
+			<permission name="ReActivate.*" />
+			<permission name="Order" />
+			<permission name="EditLocale" />
+		</role>
+	</roles>
+</rights>
