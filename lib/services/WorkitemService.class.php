@@ -519,20 +519,15 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		}
 
 		// If there are user ids, instanciate them.
+		if (count($actorsIds) == 0)
+		{
+			return $users;
+		}
+		
+		$actorsIds = users_UserService::getInstance()->convertToPublishedUserIds($actorsIds);
 		foreach ($actorsIds as $actorId)
 		{
-			try 
-			{
-				$user = $this->pp->getDocumentInstance($actorId);
-				if ($user->isPublished())
-				{
-					$users[] = $user;
-				}
-			}
-			catch (Exception $e)
-			{
-				Framework::exception($e);
-			}
+			$users[] = DocumentHelper::getDocumentInstance($actorId, 'modules_users/user');
 		}
 
 		return $users;

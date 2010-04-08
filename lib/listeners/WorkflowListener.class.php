@@ -36,6 +36,15 @@ class workflow_WorkflowListener
 	 */
 	public function onHourChange($sender, $params)
 	{
+		try
+		{
+			Controller::getInstance();
+		}
+		catch (Exception $e)
+		{
+			Framework::info(__METHOD__ . ' ' . $e->getMessage());
+			Controller::newInstance("controller_ChangeController");
+		}
 		workflow_WorkflowEngineService::getInstance()->executeScheduledTasks();
 	}
 }
