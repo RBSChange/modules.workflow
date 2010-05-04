@@ -5,4 +5,5 @@
 	<actiondef modulename="workflow" actionname="execute.workitem.auto" label="modules.workflow.bo.useractionlogger.execute-workitem-auto" />
 	<actiondef modulename="workflow" actionname="execute.workitem.time" label="modules.workflow.bo.useractionlogger.execute-workitem-time" />
 	<actiondef modulename="workflow" actionname="execute.workitem.msg" label="modules.workflow.bo.useractionlogger.execute-workitem-msg" />
+	<actiondef modulename="workflow" actionname="execute.workitem.auto" label="modules.workflow.bo.useractionlogger.execute-workitem-auto" />
 </script>

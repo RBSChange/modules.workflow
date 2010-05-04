@@ -218,6 +218,7 @@ class workflow_WorkflowEngineService extends BaseService
 	 * @param task_persistentdocument_usertask $task
 	 * @param string $decision
 	 * @param string $commentary
+	 * @param users_persistentdocument_user $user
 	 * @return boolean true if the exection is successfuly performed, false else.
 	 */
 	public function executeTask($task, $decision, $commentary)
@@ -233,7 +234,7 @@ class workflow_WorkflowEngineService extends BaseService
 
 			$caseService->setParameter($case, '__LAST_DECISION', $decision);
 			$caseService->setParameter($case, '__LAST_COMMENTARY', $commentary);
-			workflow_WorkitemService::getInstance()->userTrigger($workitem);
+			workflow_WorkitemService::getInstance()->userTrigger($workitem, $task->getUser());
 			$case->save();
 			if ($workitem->getPublicationstatus() == 'FILED')
 			{
@@ -257,6 +258,33 @@ class workflow_WorkflowEngineService extends BaseService
 		}
 		return false;
 	}
+	
+	/**
+	 * @param integer $documentId
+	 * @param string $taskId
+	 * @param string $message
+	 */
+	public function executeMessageTask($documentId, $taskId, $message = null)
+	{
+		$wis = workflow_WorkitemService::getInstance();
+		$query = $wis->createQuery();
+		$query->add(Restrictions::published());
+		$query->add(Restrictions::eq('documentid', $documentId));
+		$query->createCriteria('transition')
+			->add(Restrictions::eq('taskid', $taskId))
+			->add(Restrictions::eq('trigger', WorkflowHelper::TRIGGER_MESSAGE));
+		$workitem = $query->findUnique();
+		
+		if ($workitem !== null)
+		{
+			$wis->messageTrigger($workitem, $message);
+			workflow_CaseService::getInstance()->save($workitem->getCase());
+		}
+		else
+		{
+			Framework::warn(__METHOD__ . "($documentId, '$taskId', '$message') no workitem");
+		}
+	}
 
 	/**
 	 * Execute all the scheduled tasks that have to be executed.
@@ -272,12 +300,11 @@ class workflow_WorkflowEngineService extends BaseService
 		}
 
 		// Get all published scheduled workitems with a deadline in the past.
-		$provider = f_persistentdocument_PersistentProvider::getInstance();
-		$query = $provider->createQuery('modules_workflow/workitem');
+		$query = workflow_WorkitemService::getInstance()->createQuery();
 		$query->add(Restrictions::le('deadline', $date));
 		$query->add(Restrictions::published());
 		$query->createCriteria('transition')->add(Restrictions::eq('trigger', WorkflowHelper::TRIGGER_TIME));
-		$workitems = $provider->find($query);
+		$workitems = $query->find();
 
 		// Execute the workitems.
 		$executedTasks = 0;
@@ -287,7 +314,7 @@ class workflow_WorkflowEngineService extends BaseService
 		}
 		$wis = workflow_WorkitemService::getInstance();
 		$rc = RequestContext::getInstance();
-		foreach($workitems as $workitem)
+		foreach ($workitems as $workitem)
 		{
 			try
 			{
@@ -319,7 +346,6 @@ class workflow_WorkflowEngineService extends BaseService
 	 */
 	public function createTasksForWorkitem($workitem)
 	{
-		// TODO : test
 		if ($workitem->getTransition()->getTrigger() == WorkflowHelper::TRIGGER_USER)
 		{
 			// Get tasks information.

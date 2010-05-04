@@ -42,5 +42,9 @@
 		<dynamiclist listid="modules_workflow/contextualplaces"
 			label="Liste des places d'un workflow" description="Liste des places d'un workflow.">
 		</dynamiclist>
+		
+		<dynamiclist listid="modules_workflow/existingstarttasks"
+			label="Workflows disponibles" description="Liste des workflows disponibles.">
+		</dynamiclist>
 	</systemfolder>
 </script>

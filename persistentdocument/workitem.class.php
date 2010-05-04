@@ -15,7 +15,7 @@ class workflow_persistentdocument_workitem extends workflow_persistentdocument_w
 	 */
 	public function getCase()
 	{
-		if (is_null($this->m_case))
+		if ($this->m_case === null)
 		{
 			$this->checkLoaded();
 			$relations = $this->getProvider()->getChildRelationBySlaveDocumentId($this->getId(), 'workitem', 'modules_workflow/case');

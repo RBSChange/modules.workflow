@@ -11,7 +11,7 @@ class workflow_RecallWorkflowaction extends workflow_BaseWorkflowaction
 	 */
 	function execute()
 	{
-		// Do nothing. The tasks will be re-created, so the notifications will be send again.
+		// Do nothing. The tasks will be re-created, so the notifications will be sent again.
 		$this->setExecutionStatus(workflow_WorkitemService::EXECUTION_SUCCESS);
 		return true;
 	}

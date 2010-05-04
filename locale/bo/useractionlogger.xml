@@ -12,4 +12,10 @@
 	<entity id="execute-workitem-msg">
 		<locale lang="fr">exécution de la transition message '{transition}' avec le statut '{status}'</locale>
 	</entity>
+	<entity id="execute-workitem-auto">
+		<locale lang="fr">execute.workitem.auto {transition} {status} {documentlabel}</locale>
+	</entity>
+	<entity id="log-execute-workitem-auto">
+		<locale lang="fr">log-execute-workitem-auto</locale>
+	</entity>
 </localization>

@@ -141,14 +141,14 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 */
 	protected function sendNotification($notificationCodeName, $receivers, $replacements)
 	{
-		// Get the notification by label.
+		// Get the notification by codename.
 		$notificationService = notification_NotificationService::getInstance();
 		$notification = $notificationService->getNotificationByCodeName($notificationCodeName);
 		if (!$notification)
 		{
 			if (Framework::isWarnEnabled())
 			{
-				Framework::warn(__METHOD__ . ' : there is no notification for the label "' . $notificationCodeName . '"');
+				Framework::warn(__METHOD__ . ' : there is no notification for the codename "' . $notificationCodeName . '"');
 			}
 			return;
 		}

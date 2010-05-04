@@ -114,7 +114,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		$workitem->setLabel($transition->getLabel());
 		$workitem->setDocumentId($case->getDocumentId());
 		$workitem->setPublicationStatus('ACTIVE');
-		if (!is_null($transition->getTimelimit()))
+		if ($transition->getTimelimit() !== null)
 		{
 			$date = new Date();
 			$date->addSeconds($transition->getTimelimit() * 3600);
@@ -220,7 +220,6 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 				$this->addCurrentUserDocumentEntry('execute.workitem.time', $case, $params, 'workflow');
 				break;
 
-			// TODO
 			case 'MSG':
 				$this->addCurrentUserDocumentEntry('execute.workitem.msg', $case, $params, 'workflow');
 				break;
@@ -358,9 +357,10 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 	/**
 	 * Activate a user trigger.
 	 * @param workflow_persistentdocument_workitem $workitem
+	 * @param users_persistentdocument_user $user
 	 * @return workflow_persistentdocument_workitem
 	 */
-	public function userTrigger($workitem)
+	public function userTrigger($workitem, $user = null)
 	{
 		if ($workitem->isPublished())
 		{
@@ -370,8 +370,12 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 			}
 			try
 			{
-				$user = users_UserService::getInstance()->getCurrentUser();
-				if ($user)
+				if ($user === null)
+				{
+					$user = users_UserService::getInstance()->getCurrentUser();
+				}
+				
+				if ($user !== null)
 				{
 					$userId = $user->getId();
 				}
@@ -379,6 +383,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 				{
 					$userId = null;
 				}
+				
 				if (Framework::isDebugEnabled())
 				{
 					Framework::debug(__METHOD__ . ' : set userId = ' . $userId . ' for workitem ' . $workitem->getId());
@@ -471,6 +476,19 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 	}
 
 	/**
+	 * @param integer $documentId
+	 * @return array<workflow_persistentdocument_workitem>
+	 */
+	public function getActiveMessageWorkitemsByDocumentId($documentId)
+	{
+		$query = $this->createQuery();
+		$query->add(Restrictions::eq('documentid', $documentId));
+		$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLICATED')));
+		$query->add(Restrictions::eq('transition.trigger', WorkflowHelper::TRIGGER_MESSAGE));
+		return $query->find();
+	}
+	
+	/**
 	 * Get all users that can execute the workitem.
 	 * If the case parameter '__NEXT_VALID_ACTORS_IDS' is set and contains an array of user ids, these users are returned.
 	 * Else, the wwwadmin is returned in an array.
@@ -496,9 +514,9 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 			}
 			$actorsIds = $permissionService->getUsersByRoleAndDocumentId($roleName, $workitem->getDocumentid());
 		}
-		else 
+		else if ($clearParameter)
 		{
-			workflow_CaseService::getInstance()->setParameter($workitem->getCase(), '__NEXT_ACTORS_IDS', null);
+			workflow_CaseService::getInstance()->clearParameter($workitem->getCase(), '__NEXT_ACTORS_IDS');
 		}
 
 		// If the parameter AFFECT_TASKS_TO_SUPER_ADMIN is set to true, add the super-administrator.
@@ -543,9 +561,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		$task->setLabel($label);
 		
 		$classname = $workitem->getExecActionName();
-		if(!empty($classname) &&
-			f_util_ClassUtils::classExists($classname) &&
-			f_util_ClassUtils::methodExists($classname, 'updateTaskInfos'))
+		if (!empty($classname) && f_util_ClassUtils::classExists($classname) && f_util_ClassUtils::methodExists($classname, 'updateTaskInfos'))
 		{
 			
 			$action = new $classname();

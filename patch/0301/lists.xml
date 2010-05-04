@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<binding fileName="modules/list/persistentdocument/import/list_binding.xml" />
+	<binding fileName="modules/generic/persistentdocument/import/generic_binding.xml" />
+
+	<systemfolder module="list" relatedmodule="workflow">
+		<dynamiclist listid="modules_workflow/existingstarttasks"
+			label="Workflows disponibles" description="Liste des workflows disponibles.">
+		</dynamiclist>
+	</systemfolder>
+</script>

@@ -6,6 +6,24 @@
 class workflow_persistentdocument_case extends workflow_persistentdocument_casebase
 {
 	/**
+	 * @param string $name
+	 * @return mixed
+	 */
+	public function getParameter($name)
+	{
+		return $this->getDocumentService()->getParameter($this, $name);
+	}
+	
+	/**
+	 * @param string $name
+	 * @param mixed $value
+	 */
+	public function setParameter($name, $value)
+	{
+		$this->getDocumentService()->setParameter($this, $name, $value);
+	}
+	
+	/**
 	 * Add the parameters defined in the document model.
 	 * @param integer $documentid
 	 */
