@@ -151,21 +151,15 @@ class workflow_WorkflowEngineService extends BaseService
 		// Verify that we have a document id.
 		if (empty($documentId))
 		{
-			if (Framework::isErrorEnabled())
-			{
-				Framework::error(__METHOD__ . ' : no document id');
-			}
-			return null;
+			Framework::error(__METHOD__ . ' : no document id');
+			return;
 		}
 
 		// Get the start task id for this document.
 		if (empty($taskId))
 		{
-			if (Framework::isErrorEnabled())
-			{
-				Framework::error(__METHOD__ . ' : no task id');
-			}
-			return null;
+			Framework::error(__METHOD__ . ' : no task id');
+			return;
 		}
 
 		$workitems = workflow_WorkitemService::getInstance()->getActiveWorkitems($documentId, $taskId);
@@ -176,10 +170,7 @@ class workflow_WorkflowEngineService extends BaseService
 		}
 		else
 		{
-			if (Framework::isWarnEnabled())
-			{
-				Framework::warn(__METHOD__ . ' : no case found for document ' . $documentId . ' and task ' . $taskId);
-			}
+			Framework::warn(__METHOD__ . ' : no case found for document ' . $documentId . ' and task ' . $taskId);
 		}
 	}
 
