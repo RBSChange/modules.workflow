@@ -388,11 +388,11 @@ class workflow_WorkflowEngineService extends BaseService
 	public function getActiveWorkflowDefinitions($getInvalide = false, $startDate = null, $endDate = null)
 	{
 		// Calculate dates.
-		if (is_null($startDate))
+		if ($startDate === null)
 		{
-			$date = date('Y-m-d H:i:s');
+			$startDate = date('Y-m-d H:i:s');
 		}
-		if (is_null($endDate))
+		if ($endDate === null)
 		{
 			$endDate = $startDate;
 		}
@@ -571,8 +571,6 @@ class workflow_WorkflowEngineService extends BaseService
 	}
 	
 	/**
-	 * Enter description here...
-	 *
 	 * @param f_persistentdocument_PersistentDocument $document
 	 * @param workflow_persistentdocument_workflow $workflow
 	 * @param workflow_persistentdocument_workitem $workitem
@@ -611,7 +609,6 @@ class workflow_WorkflowEngineService extends BaseService
 		    $replacements['taskLabel'] = $usertask->getLabel();
 		    $replacements['taskDescription'] = $usertask->getDescription();
 		}
-
 			
 		$currentUser = users_UserService::getInstance()->getCurrentUser();
 		if ($currentUser !== null)

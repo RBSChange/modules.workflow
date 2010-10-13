@@ -86,7 +86,6 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 */
 	protected function getDocument()
 	{
-		// TODO : test
 		if ($this->workitem)
 		{
 			return DocumentHelper::getDocumentInstance($this->workitem->getDocumentid());
