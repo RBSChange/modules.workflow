@@ -31,123 +31,6 @@ class WorkflowHelper
 	const DEFAULT_REPLACEMENTS = '{documentId}, {documentLabel}, {documentLang}, {documentPath}, {workflowId}, {workflowLabel}, {transitionId}, {transitionLabel}, {currentUserId}, {currentUserFullname}, {__LAST_COMMENTARY}, {__LAST_DECISION}';
 
 	/**
-	 * @return workflow_WorkflowService
-	 * @deprecated use workflow_WorkflowService::getInstance()
-	 */
-	public static function getWorkflowService()
-	{
-		return workflow_WorkflowService::getInstance();
-	}
-
-	/**
-	 * @return workflow_PlaceService
-	 * @deprecated use workflow_PlaceService::getInstance()
-	 */
-	public static function getPlaceService()
-	{
-		return workflow_PlaceService::getInstance();
-	}
-
-	/**
-	 * @return workflow_TransitionService
-	 * @deprecated use workflow_TransitionService::getInstance()
-	 */
-	public static function getTransitionService()
-	{
-		return workflow_TransitionService::getInstance();
-	}
-
-	/**
-	 * @return workflow_ArcService
-	 * @deprecated use workflow_ArcService::getInstance()
-	 */
-	public static function getArcService()
-	{
-		return workflow_ArcService::getInstance();
-	}
-
-	/**
-	 * @return workflow_CaseService
-	 * @deprecated use workflow_CaseService::getInstance()
-	 */
-	public static function getCaseService()
-	{
-		return workflow_CaseService::getInstance();
-	}
-
-	/**
-	 * @return workflow_TokenService
-	 * @deprecated use workflow_TokenService::getInstance()
-	 */
-	public static function getTokenService()
-	{
-		return workflow_TokenService::getInstance();
-	}
-
-	/**
-	 * @return workflow_WorkitemService
-	 * @deprecated use workflow_WorkitemService::getInstance()
-	 */
-	public static function getWorkitemService()
-	{
-		return workflow_WorkitemService::getInstance();
-	}
-
-	/**
-	 * @return notification_NotificationService
-	 * @deprecated use notification_NotificationService::getInstance()
-	 */
-	public static function getNotificationService()
-	{
-		return notification_NotificationService::getInstance();
-	}
-
-	/**
-	 * @return users_UserService
-	 * @deprecated use users_UserService::getInstance()
-	 */
-	public static function getUserService()
-	{
-		return users_UserService::getInstance();
-	}
-
-	/**
-	 * @return workflow_WorkflowTesterService
-	 * @deprecated use workflow_WorkflowTesterService::getInstance()
-	 */
-	public static function getWorkflowTesterService()
-	{
-		return workflow_WorkflowTesterService::getInstance();
-	}
-
-	/**
-	 * @return workflow_WorkflowDesignerService
-	 * @deprecated use workflow_WorkflowDesignerService::getInstance()
-	 */
-	public static function getWorkflowDesignerService()
-	{
-		return workflow_WorkflowDesignerService::getInstance();
-	}
-
-	/**
-	 * @return workflow_WorkflowEngineService
-	 * @deprecated use workflow_WorkflowEngineService::getInstance()
-	 */
-	public static function getWorkflowEngineService()
-	{
-		return workflow_WorkflowEngineService::getInstance();
-	}
-
-	/**
-	 * @return f_persistentdocument_DocumentService
-	 * @deprecated use f_persistentdocument_DocumentService::getInstance()
-	 */
-	public static function getDocumentService()
-	{
-		return f_persistentdocument_DocumentService::getInstance();
-	}
-
-	/**
 	 * Add new log entry.
 	 * @param integer $documentId
 	 * @param string $actorName
@@ -159,5 +42,101 @@ class WorkflowHelper
 	public static function addLogEntry($documentId, $actorName, $actionLabel, $decision = '', $commentary = '')
 	{
 		generic_DocumentlogentryService::getInstance()->addLogEntry($documentId, $actorName, $actionLabel, $decision, $commentary);
+	}
+	
+	/**
+	 * @deprecated use workflow_WorkflowService::getInstance()
+	 */
+	public static function getWorkflowService()
+	{
+		return workflow_WorkflowService::getInstance();
+	}
+
+	/**
+	 * @deprecated use workflow_PlaceService::getInstance()
+	 */
+	public static function getPlaceService()
+	{
+		return workflow_PlaceService::getInstance();
+	}
+
+	/**
+	 * @deprecated use workflow_TransitionService::getInstance()
+	 */
+	public static function getTransitionService()
+	{
+		return workflow_TransitionService::getInstance();
+	}
+
+	/**
+	 * @deprecated use workflow_ArcService::getInstance()
+	 */
+	public static function getArcService()
+	{
+		return workflow_ArcService::getInstance();
+	}
+
+	/**
+	 * @deprecated use workflow_CaseService::getInstance()
+	 */
+	public static function getCaseService()
+	{
+		return workflow_CaseService::getInstance();
+	}
+
+	/**
+	 * @deprecated use workflow_TokenService::getInstance()
+	 */
+	public static function getTokenService()
+	{
+		return workflow_TokenService::getInstance();
+	}
+
+	/**
+	 * @deprecated use workflow_WorkitemService::getInstance()
+	 */
+	public static function getWorkitemService()
+	{
+		return workflow_WorkitemService::getInstance();
+	}
+
+	/**
+	 * @deprecated use notification_NotificationService::getInstance()
+	 */
+	public static function getNotificationService()
+	{
+		return notification_NotificationService::getInstance();
+	}
+
+	/**
+	 * @deprecated use users_UserService::getInstance()
+	 */
+	public static function getUserService()
+	{
+		return users_UserService::getInstance();
+	}
+
+	/**
+	 * @deprecated use workflow_WorkflowDesignerService::getInstance()
+	 */
+	public static function getWorkflowDesignerService()
+	{
+		return workflow_WorkflowDesignerService::getInstance();
+	}
+
+	/**
+	 * @deprecated use workflow_WorkflowEngineService::getInstance()
+	 */
+	public static function getWorkflowEngineService()
+	{
+		return workflow_WorkflowEngineService::getInstance();
+	}
+
+	/**
+	 * @deprecated use f_persistentdocument_DocumentService::getInstance()
+	 */
+	public static function getDocumentService()
+	{
+		return f_persistentdocument_DocumentService::getInstance();
 	}
 }

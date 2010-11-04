@@ -77,7 +77,7 @@ class workflow_TransitionService extends f_persistentdocument_DocumentService
 			else if (!f_util_ClassUtils::classExists($classname))
 			{
 				$error = f_Locale::translate('&modules.workflow.bo.general.Error-TransitionActionDoesNotExist;', array('id' => $transition->getId(), 'actionName' => $classname));
-				WorkflowHelper::getWorkflowService()->invalidate($transition->getWorkflow(), $error);
+				workflow_WorkflowService::getInstance()->invalidate($transition->getWorkflow(), $error);
 				if (Framework::isDebugEnabled())
 				{
 					Framework::debug(__METHOD__ . ' : ' . $error);

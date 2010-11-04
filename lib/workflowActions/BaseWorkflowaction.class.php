@@ -184,7 +184,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	protected function setCaseParameter($name, $value)
 	{
 		$case = $this->getWorkitem()->getCase();
-		WorkflowHelper::getCaseService()->setParameter($case, $name, $value);
+		workflow_CaseService::getInstance()->setParameter($case, $name, $value);
 	}	
 	
 	/**

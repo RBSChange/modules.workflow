@@ -1,99 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-<style tal:replace="cssInclusion"/>
-<window
-	id="ChangeUserTask"
-	i18n:attributes="title &amp;modules.task.bo.general.User-task-title;"
-	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-
-    <span tal:replace="scriptInclusion" />
-
-    <script type="text/javascript">
-    //
-    function UserTaskViewer()
-    {
-    	this.taskId = ${document/taskId};
-		this.controller = document.getElementById("wcontroller");
-
-		this.accept = function()
-		{
-			document.getElementById('acceptButton').disabled = true;
-			document.getElementById('refuseButton').disabled = true;	
-			this.submitDecision('ACCEPTED');
-		}
-
-		this.refuse = function()
-		{
-			document.getElementById('acceptButton').disabled = true;
-			document.getElementById('refuseButton').disabled = true;
-			this.submitDecision('REFUSED');
-		}
-
-		this.submitDecision = function(decision)
-		{
-			var params = new wControllerExecuteParameters();
-			params.actionLabel = '&amp;modules.task.bo.general.Accept;';
-			params.senderObject = this;
-			params.module = 'task';
-			params.action = 'RunUserTask';
-			params.requestParameters = {
-				cmpref: this.taskId,
-				decision: decision,
-				commentary: document.getElementById('commentary').value
-				};
-			this.controller.executeWithParameters(params);
-		}
-
-		this.onRunUserTaskSuccess = function(e4x)
-		{
-			window.Dashboard.closeDetail();
-		}
-
-		this.onCommentaryChange = function()
-		{
-			var disabled = trim(document.getElementById('commentary').value).length == 0;
-			document.getElementById('acceptButton').disabled = disabled;
-			document.getElementById('refuseButton').disabled = disabled;
-		}
-
-		this.toggleMoreDetails = function()
-		{
-			var panel = document.getElementById('previewPanel');
-			if (panel.collapsed) {
-				panel.show();
-			} else {
-				panel.hide();
+<tal:block>
+	${cssInclusion}
+	<window id="ChangeUserTask"	i18n:attributes="title &amp;modules.task.bo.general.User-task-title;"
+		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	    ${scriptInclusion}
+	
+	    <script type="text/javascript">
+	    //
+	    function UserTaskViewer()
+	    {
+	    	this.taskId = ${document/taskId};
+			this.controller = document.getElementById("wcontroller");
+	
+			this.accept = function()
+			{
+				document.getElementById('acceptButton').disabled = true;
+				document.getElementById('refuseButton').disabled = true;	
+				this.submitDecision('ACCEPTED');
 			}
-		}
-    }
-
-    window.userTaskViewer;
-	window.addEventListener('load', function() {
-    	window.userTaskViewer = new UserTaskViewer();
-    	}, false);
-    //
-    </script>
-
-    <wcontroller flex="1" id="wcontroller">
-		<toolbox>
-			<toolbar>
-			 	<observes element="wcontroller" attribute="disabled" />
-				<label i18n:attributes="value &amp;modules.task.bo.general.User-task-title;" style="font-weight: bold; font-size: 12pt;" />
-				<toolbarspacer flex="1" />
-				<toolbarbutton oncommand="userTaskViewer.toggleMoreDetails()" i18n:attributes="label &amp;modules.task.bo.general.DetailsSpaced;" change:icon="document_info/small" />
-				<toolbarseparator />
-				<toolbarbutton id="acceptButton" oncommand="userTaskViewer.accept();" i18n:attributes="label &amp;modules.task.bo.general.AcceptSpaced;" change:icon="media_play_green/small" disabled="true" />
-				<toolbarbutton id="refuseButton" oncommand="userTaskViewer.refuse();" i18n:attributes="label &amp;modules.task.bo.general.RefuseSpaced;" change:icon="media_stop_red/small" disabled="true" />
-			</toolbar>
-		</toolbox>
-		<vbox>
-			<description i18n:translate="&amp;modules.task.bo.general.User-task-help;" />
-			<label control="commentary" i18n:attributes="value &amp;modules.task.bo.general.User-task-decision-commentaryLabel;" />
-			<textbox multiline="true" id="commentary" flex="1" rows="2" oninput="userTaskViewer.onCommentaryChange()" style="margin-bottom:2px">
-			 	<observes element="wcontroller" attribute="disabled" />
-			</textbox>
-		</vbox>
-		<wpreviewpanel id="previewPanel" tal:attributes="document-id document/id" collapsed="true" />
-		<iframe flex="1" tal:attributes="src document/previewUrl" style="width: 100%; height: 300px; border: 0px none; border-top: 5px solid silver" />
-	</wcontroller>
-</window>
+	
+			this.refuse = function()
+			{
+				document.getElementById('acceptButton').disabled = true;
+				document.getElementById('refuseButton').disabled = true;
+				this.submitDecision('REFUSED');
+			}
+	
+			this.submitDecision = function(decision)
+			{
+				var params = new wControllerExecuteParameters();
+				params.actionLabel = '&amp;modules.task.bo.general.Accept;';
+				params.senderObject = this;
+				params.module = 'task';
+				params.action = 'RunUserTask';
+				params.requestParameters = {
+					cmpref: this.taskId,
+					decision: decision,
+					commentary: document.getElementById('commentary').value
+					};
+				this.controller.executeWithParameters(params);
+			}
+	
+			this.onRunUserTaskSuccess = function(e4x)
+			{
+				window.Dashboard.closeDetail();
+			}
+	
+			this.onCommentaryChange = function()
+			{
+				var disabled = trim(document.getElementById('commentary').value).length == 0;
+				document.getElementById('acceptButton').disabled = disabled;
+				document.getElementById('refuseButton').disabled = disabled;
+			}
+	
+			this.toggleMoreDetails = function()
+			{
+				var panel = document.getElementById('previewPanel');
+				if (panel.collapsed) {
+					panel.show();
+				} else {
+					panel.hide();
+				}
+			}
+	    }
+	
+	    window.userTaskViewer;
+		window.addEventListener('load', function() {
+	    	window.userTaskViewer = new UserTaskViewer();
+	    	}, false);
+	    //
+	    </script>
+	
+	    <wcontroller flex="1" id="wcontroller">
+			<toolbox>
+				<toolbar>
+				 	<observes element="wcontroller" attribute="disabled" />
+					<label i18n:attributes="value &amp;modules.task.bo.general.User-task-title;" style="font-weight: bold; font-size: 12pt;" />
+					<toolbarspacer flex="1" />
+					<toolbarbutton oncommand="userTaskViewer.toggleMoreDetails()" i18n:attributes="label &amp;modules.task.bo.general.DetailsSpaced;" change:icon="document_info/small" />
+					<toolbarseparator />
+					<toolbarbutton id="acceptButton" oncommand="userTaskViewer.accept();" i18n:attributes="label &amp;modules.task.bo.general.AcceptSpaced;" change:icon="media_play_green/small" disabled="true" />
+					<toolbarbutton id="refuseButton" oncommand="userTaskViewer.refuse();" i18n:attributes="label &amp;modules.task.bo.general.RefuseSpaced;" change:icon="media_stop_red/small" disabled="true" />
+				</toolbar>
+			</toolbox>
+			<vbox>
+				<description i18n:translate="&amp;modules.task.bo.general.User-task-help;" />
+				<label control="commentary" i18n:attributes="value &amp;modules.task.bo.general.User-task-decision-commentaryLabel;" />
+				<textbox multiline="true" id="commentary" flex="1" rows="2" oninput="userTaskViewer.onCommentaryChange()" style="margin-bottom:2px">
+				 	<observes element="wcontroller" attribute="disabled" />
+				</textbox>
+			</vbox>
+			<wpreviewpanel id="previewPanel" tal:attributes="document-id document/id" collapsed="true" />
+			<iframe flex="1" tal:attributes="src document/previewUrl" style="width: 100%; height: 300px; border: 0px none; border-top: 5px solid silver" />
+		</wcontroller>
+	</window>
+</tal:block>
