@@ -44,8 +44,10 @@ class WorkflowHelper
 		generic_DocumentlogentryService::getInstance()->addLogEntry($documentId, $actorName, $actionLabel, $decision, $commentary);
 	}
 	
+	// Deprecated
+	
 	/**
-	 * @deprecated use workflow_WorkflowService::getInstance()
+	 * @deprecated (will be removed in 4.0) use workflow_WorkflowService::getInstance()
 	 */
 	public static function getWorkflowService()
 	{
@@ -53,7 +55,7 @@ class WorkflowHelper
 	}
 
 	/**
-	 * @deprecated use workflow_PlaceService::getInstance()
+	 * @deprecated (will be removed in 4.0) use workflow_PlaceService::getInstance()
 	 */
 	public static function getPlaceService()
 	{
@@ -61,7 +63,7 @@ class WorkflowHelper
 	}
 
 	/**
-	 * @deprecated use workflow_TransitionService::getInstance()
+	 * @deprecated (will be removed in 4.0) use workflow_TransitionService::getInstance()
 	 */
 	public static function getTransitionService()
 	{
@@ -69,7 +71,7 @@ class WorkflowHelper
 	}
 
 	/**
-	 * @deprecated use workflow_ArcService::getInstance()
+	 * @deprecated (will be removed in 4.0) use workflow_ArcService::getInstance()
 	 */
 	public static function getArcService()
 	{
@@ -77,7 +79,7 @@ class WorkflowHelper
 	}
 
 	/**
-	 * @deprecated use workflow_CaseService::getInstance()
+	 * @deprecated (will be removed in 4.0) use workflow_CaseService::getInstance()
 	 */
 	public static function getCaseService()
 	{
@@ -85,7 +87,7 @@ class WorkflowHelper
 	}
 
 	/**
-	 * @deprecated use workflow_TokenService::getInstance()
+	 * @deprecated (will be removed in 4.0) use workflow_TokenService::getInstance()
 	 */
 	public static function getTokenService()
 	{
@@ -93,7 +95,7 @@ class WorkflowHelper
 	}
 
 	/**
-	 * @deprecated use workflow_WorkitemService::getInstance()
+	 * @deprecated (will be removed in 4.0) use workflow_WorkitemService::getInstance()
 	 */
 	public static function getWorkitemService()
 	{
@@ -101,7 +103,7 @@ class WorkflowHelper
 	}
 
 	/**
-	 * @deprecated use notification_NotificationService::getInstance()
+	 * @deprecated (will be removed in 4.0) use notification_NotificationService::getInstance()
 	 */
 	public static function getNotificationService()
 	{
@@ -109,7 +111,7 @@ class WorkflowHelper
 	}
 
 	/**
-	 * @deprecated use users_UserService::getInstance()
+	 * @deprecated (will be removed in 4.0) use users_UserService::getInstance()
 	 */
 	public static function getUserService()
 	{
@@ -117,7 +119,7 @@ class WorkflowHelper
 	}
 
 	/**
-	 * @deprecated use workflow_WorkflowDesignerService::getInstance()
+	 * @deprecated (will be removed in 4.0) use workflow_WorkflowDesignerService::getInstance()
 	 */
 	public static function getWorkflowDesignerService()
 	{
@@ -125,7 +127,7 @@ class WorkflowHelper
 	}
 
 	/**
-	 * @deprecated use workflow_WorkflowEngineService::getInstance()
+	 * @deprecated (will be removed in 4.0) use workflow_WorkflowEngineService::getInstance()
 	 */
 	public static function getWorkflowEngineService()
 	{
@@ -133,7 +135,7 @@ class WorkflowHelper
 	}
 
 	/**
-	 * @deprecated use f_persistentdocument_DocumentService::getInstance()
+	 * @deprecated (will be removed in 4.0) use f_persistentdocument_DocumentService::getInstance()
 	 */
 	public static function getDocumentService()
 	{
