@@ -14,7 +14,7 @@ class workflow_ValidateWorkflowAction extends f_action_BaseAction
 		$workflowIds = $this->getDocumentIdArrayFromRequest($request);
 		if (Framework::isDebugEnabled())
 		{
-			Framework::debug(__METHOD__ . " : ids = \n" . f_util_StringUtils::parray($workflowIds));
+			Framework::debug(__METHOD__ . " : ids = \n" . var_expor($workflowIds, true));
 		}
 
 		$workflowDesignerService = workflow_WorkflowDesignerService::getInstance();

@@ -78,7 +78,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		{
 			Framework::debug(__METHOD__ . ' : is workitem ' . $workitem->getId() . ' active ? Status = ' . $publicationStatus);
 		}
-		return ($publicationStatus == 'ACTIVE' || $workitem->isPublicated());
+		return ($publicationStatus == 'ACTIVE' || $workitem->isPublished());
 	}
 
 	/**

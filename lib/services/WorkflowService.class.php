@@ -246,7 +246,7 @@ class workflow_WorkflowService extends f_persistentdocument_DocumentService
 		{
 			Framework::debug(__METHOD__ . ' : start for the workflow ' . $workflow->getId());
 		}
-		return ($workflow->getPublicationstatus() == 'ACTIVE' || $workflow->isPublicated());
+		return ($workflow->getPublicationstatus() == 'ACTIVE' || $workflow->isPublished());
 	}
 
 	/**

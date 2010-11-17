@@ -55,7 +55,7 @@ class workflow_TokenService extends f_persistentdocument_DocumentService
 	 */
 	public function isActive($token)
 	{
-		return ($token->getPublicationstatus() == 'ACTIVE' || $token->isPublicated());
+		return ($token->getPublicationstatus() == 'ACTIVE' || $token->isPublished());
 	}
 
 	/**
