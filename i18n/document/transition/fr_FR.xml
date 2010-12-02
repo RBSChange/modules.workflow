@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.workflow.document.transition" lcid="fr_FR">
+  <key id="document-name">transition</key>
+  <key id="label">nom</key>
+  <key id="label-help">nom de la transition</key>
+  <key id="description">description</key>
+  <key id="description-help">description de la transition.</key>
+  <key id="actionname">nom de l'action</key>
+  <key id="actionname-help">nom de l'action qui sera effectuée en par la transition.</key>
+  <key id="trigger">déclancheur</key>
+  <key id="trigger-help">type d'événement pouvant déclancher cette transition.</key>
+  <key id="timelimit">délai</key>
+  <key id="timelimit-help">délai à partir duquel la transition sera effectuée. Ce délai n'est utilisé que dans le cas des transition schedulées.</key>
+  <key id="taskid">tâche</key>
+  <key id="taskid-help">identifiant de la tâche.</key>
+  <key id="roleid">rôle</key>
+  <key id="roleid-help">rôle permettant d'effectuer cette transition.</key>
+  <key id="creationnotification">notification de création</key>
+  <key id="creationnotification-help">cette notification est envoyée au propriétaire de la tâche à la création de celle-ci.</key>
+  <key id="terminationnotification">notification d'exécution</key>
+  <key id="terminationnotification-help">cette notification est envoyée au propriétaire de la tâche après exécution de celle-ci.</key>
+  <key id="cancellationnotification">notification d'annulation</key>
+  <key id="cancellationnotification-help">cette notification est envoyée au propriétaire de la tâche après annulation de celle-ci.</key>
+</i18n>

@@ -1,9 +1,5 @@
 <?php
-/**
- * This action just validates a workflow.
- * @package modules.workflow
- */
-class workflow_ValidateWorkflowAction extends f_action_BaseAction
+class workflow_ValidateWorkflowAction extends f_action_BaseJSONAction
 {
 	/**
 	 * @param Context $context
@@ -11,26 +7,10 @@ class workflow_ValidateWorkflowAction extends f_action_BaseAction
 	 */
 	public function _execute($context, $request)
 	{
-		$workflowIds = $this->getDocumentIdArrayFromRequest($request);
-		if (Framework::isDebugEnabled())
-		{
-			Framework::debug(__METHOD__ . " : ids = \n" . var_expor($workflowIds, true));
-		}
-
+		$workflow = $this->getDocumentInstanceFromRequest($request);
 		$workflowDesignerService = workflow_WorkflowDesignerService::getInstance();
-		foreach ($workflowIds as $workflowId)
-		{
-			if (Framework::isDebugEnabled())
-			{
-				Framework::debug(__METHOD__ . " : validate $workflowId");
-			}
-			$workflowDesignerService->validateWorkflowDefinitionById($workflowId);
-		}
-
-		if (Framework::isDebugEnabled())
-		{
-			Framework::debug(__METHOD__ . " : return success view");
-		}
-		return self::getSuccessView();
+		$ok = $workflowDesignerService->validateWorkflowDefinition($workflow) ? 'success' : 'error';
+		$this->logAction($workflow);
+		return $this->sendJSON(array('message' => LocaleService::getInstance()->transBO('m.workflow.bo.actions.validate-workflow-' . $ok)));
 	}
 }

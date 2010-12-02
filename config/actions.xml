@@ -19,8 +19,14 @@
 	<action name="validateWorkflow">
 		<parameter name="listWidget" />
 		<body><![CDATA[
-	    	var ids = listWidget.getSelectedIds();
-			this.execute("%label%", "ValidateWorkflow", { {K::COMPONENT_ID_ACCESSOR}: ids });
+	    	var id = listWidget.getSelectedIds()[0];
+			this.executeJSON("ValidateWorkflow", {cmpref: id});
+	    ]]></body>
+	</action>
+	<action name="onValidateWorkflowSuccess">
+		<parameter name="result" />
+		<body><![CDATA[
+	    	getController().alert(result.contents.message);
 	    ]]></body>
 	</action>
 </actions>

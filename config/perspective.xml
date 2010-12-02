@@ -101,7 +101,7 @@
 	<actions>
 		<action name="delete" permission="Delete" icon="delete" label="&amp;modules.uixul.bo.actions.Delete;" />
 		<action name="edit" single="true" permission="Load" icon="edit" label="&amp;modules.uixul.bo.actions.Edit;" />
-		<action name="validateWorkflow" permission="Activate" icon="check" label="&amp;modules.workflow.bo.actions.Validate-Workflow;" />
+		<action name="validateWorkflow" single="true" permission="Activate" icon="check" label="&amp;modules.workflow.bo.actions.Validate-Workflow;" />
 		<action name="create_" actions="createPlace,createTransition,createArc" icon="add" />
 		<action name="createPlace" group="create_" permission="Insert_place" icon="add" label="&amp;modules.workflow.bo.actions.Create-Place;" />
 		<action name="createTransition" group="create_" permission="Insert_transition" icon="add" label="&amp;modules.workflow.bo.actions.Create-Transition;" />

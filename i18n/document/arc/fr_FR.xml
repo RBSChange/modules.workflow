@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.workflow.document.arc" lcid="fr_FR">
+  <key id="document-name">arc</key>
+  <key id="label">nom</key>
+  <key id="label-help">nom de l'arc.</key>
+  <key id="transition">transition</key>
+  <key id="transition-help">transition de laquelle part ou vers laquelle mène cet arc.</key>
+  <key id="place">place</key>
+  <key id="place-help">place de laquelle part ou vers laquelle mène cet arc.</key>
+  <key id="direction">direction</key>
+  <key id="direction-help">sens dans lequel est orienté l'arc.</key>
+  <key id="arctype">type</key>
+  <key id="arctype-help">type d'arc.</key>
+  <key id="precondition">precondition</key>
+  <key id="precondition-help">la precondition n'est utilisée que dans le cas des arcs de type séparation en mode ″ou explicite″. Elle permet de déterminer quel arc sera choisi dans quel cas.</key>
+</i18n>

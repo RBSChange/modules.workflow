@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.workflow.document.permission" lcid="de_DE">
+  <key id="admin">Administrator</key>
+  <key id="admin-help">Administrator</key>
+</i18n>

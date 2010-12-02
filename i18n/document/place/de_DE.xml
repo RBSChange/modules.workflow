@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.workflow.document.place" lcid="de_DE">
+  <key id="document-name">Platz</key>
+  <key id="label">Name</key>
+  <key id="label-help">Platzname.</key>
+  <key id="description">Beschreibung</key>
+  <key id="description-help">Platzbeschreibung</key>
+  <key id="placetype">Typ</key>
+  <key id="placetype-help">Platztyp. Dieser Typ ist nicht änderbar, denn sie Start- und Endplätze werden automatisch generiert.</key>
+</i18n>

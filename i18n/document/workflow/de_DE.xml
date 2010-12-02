@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.workflow.document.workflow" lcid="de_DE">
+  <key id="document-name">Workflow</key>
+  <key id="edition-form-title">Eigenschaften Workflow</key>
+  <key id="label">Name</key>
+  <key id="label-help">Name des Workflow.</key>
+  <key id="publicationstatus">Status</key>
+  <key id="publicationstatus-help">Status des Workflow. Allein dis Workflows im aktiven Status können benutzt werden.</key>
+  <key id="startpublicationdate">Anfangsdatum</key>
+  <key id="startpublicationdate-help">Datum ab dem der Workflow benutzt werden kann.</key>
+  <key id="endpublicationdate">Enddatum</key>
+  <key id="endpublicationdate-help">Datum bis zu dem der Workflow benutzt werden kann.</key>
+  <key id="description">Beschreibung</key>
+  <key id="description-help">Beschreibung des Workflow.</key>
+  <key id="starttaskid">Beginn des Vorgangs</key>
+  <key id="starttaskid-help">der Beginn des Vorgangs ermöglicht den Workflow an ein Dokumententypen zu verbinden. Möchte man den Workflow anwenden, 
+		muss dieser Vorgang im Modell jedes Dokumententypen angegeben werden.</key>
+  <key id="errors">Fehler</key>
+  <key id="errors-help">Fehler, die die Freigabe des Workflows verhindern.</key>
+  <key id="arcs">Bögen</key>
+  <key id="arcs-help">Bögen des Workflows</key>
+  <key id="places">Plätze</key>
+  <key id="places-help">Plätze des Workflows</key>
+  <key id="transitions">Übergänge</key>
+  <key id="transitions-help">Übergänge des Workflows</key>
+</i18n>

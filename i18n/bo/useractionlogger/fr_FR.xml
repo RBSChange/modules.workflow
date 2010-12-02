@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.workflow.bo.useractionlogger" lcid="fr_FR">
+  <key id="execute-workitem-user">exécution de la transition utilisateur '{transition}' par '{user}' avec le statut '{status}'</key>
+  <key id="execute-workitem-auto">exécution de la transition automatique '{transition}' avec le statut '{status}'</key>
+  <key id="execute-workitem-time">exécution de la transition programmée '{transition}' avec le statut '{status}'</key>
+  <key id="execute-workitem-msg">exécution de la transition message '{transition}' avec le statut '{status}'</key>
+  <key id="log-execute-workitem-auto">log-execute-workitem-auto</key>
+  <key id="validateworkflow-workflow">validateworkflow.workflow {documentlabel}</key>
+  <key id="log-validateworkflow-workflow">log validateworkflow workflow</key>
+</i18n>

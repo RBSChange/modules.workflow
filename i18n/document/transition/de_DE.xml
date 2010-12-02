@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.workflow.document.transition" lcid="de_DE">
+  <key id="document-name">Übergang</key>
+  <key id="label">Name</key>
+  <key id="label-help">Name des Übergangs</key>
+  <key id="description">Beschreibung</key>
+  <key id="description-help">Beschreibung des Übergangs.</key>
+  <key id="actionname">Name der Aktion</key>
+  <key id="actionname-help">Name der Aktion, die vom Übergang ausgeführt wird.</key>
+  <key id="trigger">Auslöser</key>
+  <key id="trigger-help">Ereignistyp, welcher diesen Übergang auslösen kann.</key>
+  <key id="timelimit">Frist</key>
+  <key id="timelimit-help">Frist ab welcher der Übergang ausgeführt wird. Diese Frist wird ausschliesslich im Falle von geplanten Übergängen genutzt.</key>
+  <key id="taskid">Vorgang</key>
+  <key id="taskid-help">VorgangsID.</key>
+  <key id="roleid">Rolle</key>
+  <key id="roleid-help">Rolle für die Ausführung dieses Übergangs.</key>
+  <key id="creationnotification">Erstellungsbenachrichtigung</key>
+  <key id="creationnotification-help">diese Benachrichtigung wird bei Erstellung des Vorgangs seinem Inhaber gesendet.</key>
+  <key id="terminationnotification">Ausführungsbenachrichtigung</key>
+  <key id="terminationnotification-help">diese Benachrichtigung wird bei Ausführung des Vorgangs seinem Inhaber gesendet.</key>
+  <key id="cancellationnotification">Abbruchsbenachrichtigung</key>
+  <key id="cancellationnotification-help">diese Benachrichtigung wird bei Abbruch des Vorgangs seinem Inhaber gesendet.</key>
+</i18n>

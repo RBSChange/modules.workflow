@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.workflow.document.arc" lcid="de_DE">
+  <key id="document-name">Bogen</key>
+  <key id="label">Name</key>
+  <key id="label-help">Bogenname.</key>
+  <key id="transition">Übergang</key>
+  <key id="transition-help">Übergang von oder zu welchem der Bogen führt.</key>
+  <key id="place">Platz</key>
+  <key id="place-help">Platz von oder zu welchem der Bogen führt.</key>
+  <key id="direction">Richtung</key>
+  <key id="direction-help">Richtung in welche der Bogen orientiert ist.</key>
+  <key id="arctype">Typ</key>
+  <key id="arctype-help">Bogentyp.</key>
+  <key id="precondition">Vorbedingung</key>
+  <key id="precondition-help">die Vorbedingung wird ausschliesslich im Falle von Bögen des Typs Aufteilung im Modus ″oder explizit″ genutzt. Sie 
+		ermöglicht die determinierung von welchem Bogen wann gewählt wird.</key>
+</i18n>

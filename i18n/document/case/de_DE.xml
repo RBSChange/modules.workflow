@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.workflow.document.case" lcid="de_DE">
+  <key id="document-name">Workflow Instanz</key>
+  <key id="label">Name</key>
+  <key id="workflow">Workflow</key>
+  <key id="context">Kontext</key>
+  <key id="parameters">Parameter</key>
+  <key id="casestatus">casestatus</key>
+  <key id="token">Token</key>
+  <key id="workitem">workitem</key>
+  <key id="documentid">documentid</key>
+</i18n>
