@@ -27,6 +27,14 @@
 		<parameter name="result" />
 		<body><![CDATA[
 	    	getController().alert(result.contents.message);
+	    	this.refreshMainViewDeck();
+	    ]]></body>
+	</action>
+	<action name="onValidateWorkflowError">
+		<parameter name="result" />
+		<body><![CDATA[
+	    	getController().alert(result.contents.message);
+	    	this.refreshMainViewDeck();
 	    ]]></body>
 	</action>
 </actions>
