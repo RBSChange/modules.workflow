@@ -502,7 +502,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		$users = array();
 		
 		$workflowActionName = $workitem->getExecActionName();
-		if (f_util_ClassUtils::methodExists($workflowActionName, "getActorIds"))
+		if (!empty($workflowActionName) && f_util_ClassUtils::methodExists($workflowActionName, "getActorIds"))
 		{
 			$workflowAction = $workitem->getExecAction();
 			$actorsIds = $workflowAction->getActorIds();
