@@ -51,4 +51,41 @@ class workflow_persistentdocument_workitem extends workflow_persistentdocument_w
 
 		return $classname;
 	}
+	
+	/**
+	 * @return workflow_Workflowaction
+	 * @throws Exception if workflowaction class does not exists
+	 */
+	public function getExecAction()
+	{
+		$className = $this->getExecActionName();
+		if (!f_util_ClassUtils::classExists($className))
+		{
+			throw new Exception("Could not find class ".$className);
+		}
+		$action = new $className();
+		$action->initialize($this);
+		return $action;
+	}
+	
+	/**
+	 * @return f_persistentdocument_PersistentDocument
+	 */
+	public function getDocument()
+	{
+		return DocumentHelper::getDocumentInstance($this->getDocumentid());
+	}
+	
+	/**
+	 * @return users_persistentdocument_user
+	 */
+	public function getUser()
+	{
+		$userid = $this->getUserid();
+		if ($userid)
+		{
+			return DocumentHelper::getDocumentInstance($userid);
+		}
+		return null;
+	}
 }

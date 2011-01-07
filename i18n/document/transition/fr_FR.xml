@@ -10,7 +10,7 @@
   <key id="trigger">déclancheur</key>
   <key id="trigger-help">type d'événement pouvant déclancher cette transition.</key>
   <key id="timelimit">délai</key>
-  <key id="timelimit-help">délai à partir duquel la transition sera effectuée. Ce délai n'est utilisé que dans le cas des transition schedulées.</key>
+  <key id="timelimit-help">délai (en heure) à partir duquel la transition sera effectuée. Ce délai n'est utilisé que dans le cas des transition schedulées.</key>
   <key id="taskid">tâche</key>
   <key id="taskid-help">identifiant de la tâche.</key>
   <key id="roleid">rôle</key>

@@ -202,6 +202,8 @@ class workflow_CaseService extends f_persistentdocument_DocumentService
 		}
 		return $activeWorkitemsArray;
 	}
+	
+	
 
 	/**
 	 * Get a parameter value.
@@ -344,6 +346,18 @@ class workflow_CaseService extends f_persistentdocument_DocumentService
 			$query->setMaxResults($limit);
 		}
 		return $query->find();
+	}
+	
+	/**
+	 * @param Integer $targetId
+	 * @return workflow_persistentdocument_case
+	 */
+	public function getByTargetId($targetId)
+	{
+		return $this->createQuery()
+			->add(Restrictions::published())
+			->add(Restrictions::eq("documentid", $targetId))
+			->findUnique();
 	}
 	
 	/**

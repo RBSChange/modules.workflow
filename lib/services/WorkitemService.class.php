@@ -501,22 +501,31 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 	{
 		$users = array();
 		
-		// If there are next actors defined, return them, else get the user for the defined roles.
-		$actorsIds = workflow_CaseService::getInstance()->getParameter($workitem->getCase(), '__NEXT_ACTORS_IDS');
-		if (!is_array($actorsIds) && count($actorsIds) == 0)
+		$workflowActionName = $workitem->getExecActionName();
+		if (f_util_ClassUtils::methodExists($workflowActionName, "getActorIds"))
 		{
-			$permissionService = f_permission_PermissionService::getInstance();
-			$roleName = $workitem->getTransition()->getRoleid();
-			$roleName = $permissionService->resolveRole($roleName, $workitem->getDocumentid());
-			if (Framework::isDebugEnabled())
-			{
-				Framework::debug(__METHOD__ . ' workItem = ' . $workitem->getId() . ', roleName = ' . $roleName);
-			}
-			$actorsIds = $permissionService->getUsersByRoleAndDocumentId($roleName, $workitem->getDocumentid());
+			$workflowAction = $workitem->getExecAction();
+			$actorsIds = $workflowAction->getActorIds();
 		}
-		else if ($clearParameter)
+		else
 		{
-			workflow_CaseService::getInstance()->clearParameter($workitem->getCase(), '__NEXT_ACTORS_IDS');
+			// If there are next actors defined, return them, else get the user for the defined roles.
+			$actorsIds = workflow_CaseService::getInstance()->getParameter($workitem->getCase(), '__NEXT_ACTORS_IDS');
+			if (!is_array($actorsIds) && count($actorsIds) == 0)
+			{
+				$permissionService = f_permission_PermissionService::getInstance();
+				$roleName = $workitem->getTransition()->getRoleid();
+				$roleName = $permissionService->resolveRole($roleName, $workitem->getDocumentid());
+				if (Framework::isDebugEnabled())
+				{
+					Framework::debug(__METHOD__ . ' workItem = ' . $workitem->getId() . ', roleName = ' . $roleName);
+				}
+				$actorsIds = $permissionService->getUsersByRoleAndDocumentId($roleName, $workitem->getDocumentid());
+			}
+			else if ($clearParameter)
+			{
+				workflow_CaseService::getInstance()->clearParameter($workitem->getCase(), '__NEXT_ACTORS_IDS');
+			}
 		}
 
 		// If the parameter AFFECT_TASKS_TO_SUPER_ADMIN is set to true, add the super-administrator.
