@@ -53,12 +53,16 @@ class workflow_persistentdocument_workitem extends workflow_persistentdocument_w
 	}
 	
 	/**
-	 * @return workflow_Workflowaction
+	 * @return workflow_Workflowaction|null
 	 * @throws Exception if workflowaction class does not exists
 	 */
 	public function getExecAction()
 	{
 		$className = $this->getExecActionName();
+		if (empty($className))
+		{
+			return null;
+		}
 		if (!f_util_ClassUtils::classExists($className))
 		{
 			throw new Exception("Could not find class ".$className);
