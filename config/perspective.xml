@@ -59,9 +59,9 @@
 		</model>		
 		<model name="modules_workflow/workflow">
 			<children>
-				<child model="modules_workflow/arc" from="arcs" />
 				<child model="modules_workflow/place" from="places" />
 				<child model="modules_workflow/transition" from="transitions" />
+				<child model="modules_workflow/arc" from="arcs" />
 			</children>
 			<contextactions>
 				<contextaction name="edit" />
