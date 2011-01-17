@@ -361,6 +361,15 @@ class workflow_CaseService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
+	 * @param Integer $targetId
+	 * @return workflow_persistentdocument_case
+	 */
+	public function getAllByTargetId($targetId)
+	{
+		return $this->createQuery()->add(Restrictions::eq("documentid", $targetId))->find();
+	}
+	
+	/**
 	 * @param workflow_persistentdocument_case $document
 	 * @param Integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
