@@ -87,40 +87,26 @@ class workflow_ArcService extends f_persistentdocument_DocumentService
 	 */
 	public function validatePath($arc)
 	{
+		$workflow = $arc->getWorkflow();
+		$workflowService = $workflow->getDocumentService();
 		if (is_null($arc->getPlace()) || is_null($arc->getTransition()))
 		{
-			$error = f_Locale::translate('&modules.workflow.bo.general.Error-ArcBadlyConnected;', array('id' => $arc->getId()));
-			workflow_WorkflowService::getInstance()->invalidate($arc->getWorkflow(), $error);
-			if (Framework::isDebugEnabled())
-			{
-				Framework::debug(__METHOD__ . ' : ' . $error);
-			}
+			$workflowService->setActivePublicationStatusInfo($workflow, '&modules.workflow.bo.general.Error-StartAndEndPlacesNeeded;', array('id' => $arc->getId()));
 			return false;
 		}
 
 		if (!$this->checkType($arc))
 		{
-			$error = f_Locale::translate('&modules.workflow.bo.general.Error-BadArcType;', array('id' => $arc->getId()));
-			workflow_WorkflowService::getInstance()->invalidate($arc->getWorkflow(), $error);
-			if (Framework::isDebugEnabled())
-			{
-				Framework::debug(__METHOD__ . ' : ' . $error);
-			}
+			$workflowService->setActivePublicationStatusInfo($workflow, '&modules.workflow.bo.general.Error-BadArcType;', array('id' => $arc->getId()));
 			return false;
 		}
 
 
 		if (!$this->checkPrecondition($arc))
 		{
-			$error = f_Locale::translate('&modules.workflow.bo.general.Error-BadArcPrecondition;', array('id' => $arc->getId()));
-			workflow_WorkflowService::getInstance()->invalidate($arc->getWorkflow(), $error);
-			if (Framework::isDebugEnabled())
-			{
-				Framework::debug(__METHOD__ . ' : ' . $error);
-			}
+			$workflowService->setActivePublicationStatusInfo($workflow, '&modules.workflow.bo.general.Error-BadArcPrecondition;', array('id' => $arc->getId()));
 			return false;
 		}
-
 		return true;
 	}
 

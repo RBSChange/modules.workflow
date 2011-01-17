@@ -11,10 +11,6 @@
 				<drop model="modules_workflow/workflow" action="move"/>
 				<drop model="modules_generic/folder" action="move"/>
 			</drops>
-			<columns>
-				<column name="statusLabel" label="Status" flex="1" />
-				<column name="errors" label="Errors" flex="3" />
-			</columns>
 			<contextactions>
 				<contextaction name="edit" />
 				<contextaction name="createFolder" />
@@ -32,10 +28,6 @@
 				<drop model="modules_workflow/workflow" action="move"/>
 				<drop model="modules_generic/folder" action="move"/>
 			</drops>
-			<columns>
-				<column name="statusLabel" label="Status" flex="1" />
-				<column name="errors" label="Errors" flex="3" />
-			</columns>
 			<contextactions>
 				<contextaction name="edit" />
 				<contextaction name="delete" />
@@ -49,10 +41,6 @@
 			<children>
 				<child model="modules_workflow/workflow" />
 			</children>
-			<columns>
-				<column name="statusLabel" label="Status" flex="1" />
-				<column name="errors" label="Errors" flex="3" />
-			</columns>
 			<contextactions>
 				<contextaction name="openFolder" />
 			</contextactions>

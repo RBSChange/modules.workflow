@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.workflow.document.workflow" lcid="fr_FR">
-  <key id="document-name">workflow</key>
-  <key id="edition-form-title">propriétés du workflow</key>
-  <key id="label">nom</key>
-  <key id="label-help">nom du workflow.</key>
-  <key id="publicationstatus">statut</key>
-  <key id="publicationstatus-help">statut du workflow. Seuls les workflow en état actif peuvent être utilisés</key>
-  <key id="startpublicationdate">date de début</key>
-  <key id="startpublicationdate-help">date à partir de laquelle le workflow peut être utilisé.</key>
-  <key id="endpublicationdate">date de fin</key>
-  <key id="endpublicationdate-help">date jusqu'à laquelle le workflow peut être utilisé.</key>
-  <key id="description">description</key>
-  <key id="description-help">description du workflow.</key>
-  <key id="starttaskid">tâche de départ</key>
-  <key id="starttaskid-help">la tâche de départ permet de liée un type de document à un workflow. Cet cette tâche qui devra être indiquée dans le model de chaque type de document auquel on veut appliquer ce workflow.</key>
-  <key id="errors">erreurs</key>
-  <key id="errors-help">erreurs empêchant la validation du workflow.</key>
-  <key id="arcs">arcs</key>
-  <key id="arcs-help">arcs du workflow</key>
-  <key id="places">places</key>
-  <key id="places-help">places du workflow</key>
-  <key id="transitions">transitions</key>
-  <key id="transitions-help">transitions du workflow</key>
+	<key id="document-name">workflow</key>
+	<key id="edition-form-title">propriétés du workflow</key>
+	<key id="label">nom</key>
+	<key id="label-help">nom du workflow.</key>
+	<key id="publicationstatus">statut</key>
+	<key id="publicationstatus-help">statut du workflow. Seuls les workflow en état actif peuvent être utilisés</key>
+	<key id="startpublicationdate">date de début</key>
+	<key id="startpublicationdate-help">date à partir de laquelle le workflow peut être utilisé.</key>
+	<key id="endpublicationdate">date de fin</key>
+	<key id="endpublicationdate-help">date jusqu'à laquelle le workflow peut être utilisé.</key>
+	<key id="description">description</key>
+	<key id="description-help">description du workflow.</key>
+	<key id="starttaskid">tâche de départ</key>
+	<key id="starttaskid-help">la tâche de départ permet de liée un type de document à un workflow. Cet cette tâche qui devra être indiquée dans le model de chaque type de document auquel on veut appliquer ce workflow.</key>
+	<key id="errors">erreurs</key>
+	<key id="errors-help">erreurs empêchant la validation du workflow.</key>
+	<key id="arcs">arcs</key>
+	<key id="arcs-help">arcs du workflow</key>
+	<key id="places">places</key>
+	<key id="places-help">places du workflow</key>
+	<key id="transitions">transitions</key>
+	<key id="transitions-help">transitions du workflow</key>
 </i18n>

@@ -16,8 +16,5 @@ class workflow_WorkflowScriptDocumentElement extends import_ScriptDocumentElemen
         {
             $workflow->getDocumentService()->activate($workflow->getId());
         }
-        
-        $workflowDesignerService = workflow_WorkflowDesignerService::getInstance();
-		$workflowDesignerService->validateWorkflowDefinitionById($workflow->getId());
     }
 }

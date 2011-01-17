@@ -7,7 +7,6 @@
 	</section>
 	<section name="publication" linkedtab="publication" labeli18n="modules.uixul.bo.doceditor.section.Status" image="{IconsBase}/small/status.png">
 		<property name="status" labeli18n="modules.uixul.bo.doceditor.property.Status" />
-		<property name="workflow" labeli18n="modules.uixul.bo.doceditor.property.Workflow" />
 	</section>
 	<section name="history" linkedtab="history" actiontexti18n="modules.uixul.bo.doceditor.section.action.View" labeli18n="modules.uixul.bo.doceditor.section.History"
 		image="{IconsBase}/small/history.png">

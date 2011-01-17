@@ -34,18 +34,4 @@ class workflow_persistentdocument_workflow extends workflow_persistentdocument_w
 		parent::addTransitions($newValue);
 		$newValue->setWorkflow($this);
 	}
-	
-	/**
-	 * @param string $moduleName
-	 * @param string $treeType
-	 * @param array<string, string> $nodeAttributes
-	 */
-	protected function addTreeAttributes($moduleName, $treeType, &$nodeAttributes)
-	{
-		if ($treeType == 'wlist')
-		{
-			$nodeAttributes['statusLabel'] = f_Locale::translate('&framework.persistentdocument.status.' . ucfirst(strtolower($this->getPublicationstatus())) . ';');
-			$nodeAttributes['errors'] = $this->getErrors();
-		}
-	}
 }

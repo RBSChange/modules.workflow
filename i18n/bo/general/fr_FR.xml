@@ -10,11 +10,12 @@
   <key id="error-taskandlabelneeded">Le label et la tâche de départ sont obligatoires.</key>
   <key id="error-startandendplacesneeded">Les places de début et de fin sont obligatoires.</key>
   <key id="error-placebadlyconnected">La place d'id {id} est mal connectée.</key>
-  <key id="error-transitionactiondoesnotexist">L'action {actionName} de transition d'id {id} n'existe pas.</key>
+  <key id="error-transitionactiondoesnotexist">L'action {actionName} sur la transition d'id {id} n'existe pas.</key>
   <key id="error-transitionbadlyconnected">La transition d'id {id} est mal connectée.</key>
   <key id="error-arcbadlyconnected">L'arc d'id {id} est mal connectée.</key>
   <key id="error-badarctype">Le type et la direction de l'arc d'id {id} sont incompatibles.</key>
   <key id="error-badarcprecondition">L'arc d'id {id} attend une précondition.</key>
+  <key id="error-anothervalidworkflowoninterval">Il y a déjà un autre workflow valide pour cette tâche de départ sur cet intervalle de temps.</key>
   <key id="manualybyuser">manuel par  un utilisateur</key>
   <key id="automaticallybysystem">automatique</key>
   <key id="byexternalevent">événement extérieur</key>

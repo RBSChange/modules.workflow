@@ -5,7 +5,6 @@
 	<panel name="publication" />
 	<panel name="history" />
 	<panel name="create" />
-	
 	<xul>
 		<javascript>
 			<constructor><![CDATA[

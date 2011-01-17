@@ -86,13 +86,10 @@ class workflow_PlaceService extends f_persistentdocument_DocumentService
 				}
 				break;
 		}
-
-		$error = f_Locale::translate('&modules.workflow.bo.general.Error-PlaceBadlyConnected;', array('id' => $place->getId()));
-		workflow_WorkflowService::getInstance()->invalidate($place->getWorkflow(), $error);
-		if (Framework::isDebugEnabled())
-		{
-			Framework::debug(__METHOD__ . ' : ' . $error);
-		}
+		
+		$workflow = $place->getWorkflow();
+		$workflowService = $workflow->getDocumentService();
+		$workflowService->setActivePublicationStatusInfo($workflow, '&modules.workflow.bo.general.Error-PlaceBadlyConnected;', array('id' => $place->getId()));
 		return false;
 	}
 

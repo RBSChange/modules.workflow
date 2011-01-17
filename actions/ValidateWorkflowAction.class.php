@@ -8,9 +8,20 @@ class workflow_ValidateWorkflowAction extends f_action_BaseJSONAction
 	public function _execute($context, $request)
 	{
 		$workflow = $this->getDocumentInstanceFromRequest($request);
-		$workflowDesignerService = workflow_WorkflowDesignerService::getInstance();
-		$ok = $workflowDesignerService->validateWorkflowDefinition($workflow) ? 'success' : 'error';
+		$workflow->getDocumentService()->publishIfPossible($workflow->getId());
 		$this->logAction($workflow);
-		return $this->sendJSON(array('message' => LocaleService::getInstance()->transBO('m.workflow.bo.actions.validate-workflow-' . $ok)));
+		if ($workflow->isPublished())
+		{
+			$message = LocaleService::getInstance()->transBO('m.workflow.bo.actions.validate-workflow-success', array('ucf'));
+		}
+		else
+		{
+			$message = $workflow->getDocumentService()->getUIActivePublicationStatusInfo($workflow, RequestContext::getInstance()->getLang());
+			if (!$message)
+			{
+				$message = LocaleService::getInstance()->transBO('m.workflow.bo.actions.validate-workflow-error', array('ucf'));
+			}
+		}
+		return $this->sendJSON(array('message' => $message));
 	}
 }

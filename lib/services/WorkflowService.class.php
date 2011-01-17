@@ -68,6 +68,67 @@ class workflow_WorkflowService extends f_persistentdocument_DocumentService
 			$case->delete();
 		}
 	}
+	
+	/**
+	 * @param workflow_persistentdocument_workflow $document
+	 * @return boolean true if the document is publishable, false if it is not.
+	 */
+	public function isPublishable($document)
+	{
+		// Validate this workflow document.
+		$task = $document->getStarttaskid();
+		if (empty($task))
+		{
+			$this->setActivePublicationStatusInfo($document, '&modules.workflow.bo.general.Error-TaskAndLabelNeeded;');
+			return false;
+		}
+
+		// Check if there is a start place and a end place.
+		if ($this->getStartPlace($document) === null || $this->getEndPlace($document) === null)
+		{
+			$this->setActivePublicationStatusInfo($document, '&modules.workflow.bo.general.Error-StartAndEndPlacesNeeded;');
+			return false;
+		}
+
+		// Validate arcs.
+		$arcsArray = $document->getArcsArray();
+		foreach ($arcsArray as $arc)
+		{
+			if (!$arc->getDocumentService()->validatePath($arc))
+			{
+				return false;
+			}
+		}
+
+		// Validate places.
+		$placeArray = $document->getPlacesArray();
+		foreach ($placeArray as $place)
+		{
+			if (!$place->getDocumentService()->validatePath($place))
+			{
+				return false;
+			}
+		}
+
+		// Validate transitions.
+		$transitionArray = $document->getTransitionsArray();
+		foreach ($transitionArray as $transition)
+		{
+			if (!$transition->getDocumentService()->validatePath($transition))
+			{
+				return false;
+			}
+		}
+
+		// Test if there is no orther active workflow for this task on the publication interval.
+		if ($this->hasOtherActiveWorkflowDefinitions($document))
+		{
+			$this->setActivePublicationStatusInfo($document, '&modules.workflow.bo.general.Error-AnotherValidWorkflowOnInterval;');
+			return false;
+		}
+
+		return parent::isPublishable($document);
+	}
 
 	/**
 	 * Get the workflow start place.
@@ -114,142 +175,6 @@ class workflow_WorkflowService extends f_persistentdocument_DocumentService
 	}
 
 	/**
-	 * Validate this workflow definition.
-	 * @param workflow_persistentdocument_workflow $workflow
-	 * @return boolean
-	 */
-	public function validatePath($workflow)
-	{
-		if (Framework::isDebugEnabled())
-		{
-			Framework::debug(__METHOD__ . ' : start for the workflow ' . $workflow->getId());
-		}
-		workflow_WorkflowService::getInstance()->invalidate($workflow);
-
-		// Validate this workflow document.
-		$task = $workflow->getStarttaskid();
-		$label = $workflow->getLabel();
-		if (empty($task) || empty($label))
-		{
-			$workflow->setErrors(f_Locale::translate('&modules.workflow.bo.general.Error-TaskAndLabelNeeded;'));
-			$workflow->save();
-			if (Framework::isDebugEnabled())
-			{
-				Framework::debug(__METHOD__ . ' : ' . $workflow->getErrors());
-			}
-			return false;
-		}
-
-		// Check if there is a start place and a end place.
-		if (is_null($this->getStartPlace($workflow)) || is_null($this->getEndPlace($workflow)))
-		{
-			$workflow->setErrors(f_Locale::translate('&modules.workflow.bo.general.Error-StartAndEndPlacesNeeded;'));
-			$workflow->save();
-			if (Framework::isDebugEnabled())
-			{
-				Framework::debug(__METHOD__ . ' : ' . $workflow->getErrors());
-			}
-			return false;
-		}
-
-		// Validate arcs.
-		$arcService = workflow_ArcService::getInstance();
-		$arcsArray = $workflow->getArcsArray();
-		foreach ($arcsArray as $arc)
-		{
-			if (!$arcService->validatePath($arc))
-			{
-				return false;
-			}
-		}
-
-		// Validate places.
-		$placeService = workflow_PlaceService::getInstance();
-		$placeArray = $workflow->getPlacesArray();
-		foreach ($placeArray as $place)
-		{
-			if (!$placeService->validatePath($place))
-			{
-				return false;
-			}
-		}
-
-		// Validate transitions.
-		$transitionService = workflow_TransitionService::getInstance();
-		$transitionArray = $workflow->getTransitionsArray();
-		foreach ($transitionArray as $transition)
-		{
-			if (!$transitionService->validatePath($transition))
-			{
-				return false;
-			}
-		}
-
-		// Test if there is no orther active workflow for this task on the publication interval.
-		$task = $workflow->getStarttaskid();
-		$startDate = $workflow->getStartpublicationdate();
-		$endDate = $workflow->getEndpublicationdate();
-		$otherWorkflows = workflow_WorkflowEngineService::getInstance()->execGetActiveWorkflowDefinitions($task, $startDate, $endDate, false, false);
-		if (Framework::isDebugEnabled())
-		{
-			Framework::debug(__METHOD__ . ' : nb other valid workflows = ' . count($otherWorkflows));
-		}
-		if (count($otherWorkflows) > 0)
-		{
-			$workflow->setErrors(f_Locale::translate('&modules.workflow.bo.general.Error-AnotherValidWorkflowOnInterval;'));
-			$workflow->save();
-			if (Framework::isDebugEnabled())
-			{
-				Framework::debug(__METHOD__ . ' : ' . $workflow->getErrors());
-			}
-			return false;
-		}
-
-		// If we arrive up to here, the workflow is valid.
-		$workflow->setPublicationstatus('ACTIVE');
-		$workflow->save();
-		if (Framework::isDebugEnabled())
-		{
-			Framework::debug(__METHOD__ . ' : the workflow ' . $workflow->getId() . ' is valid');
-		}
-		return true;
-	}
-
-	/**
-	 * Invalidate this workflow definition.
-	 * @param workflow_persistentdocument_workflow $workflow
-	 * @param string $errors error message to set.
-	 * @param boolean $doSave say if we want to save the workflow.
-	 */
-	public function invalidate($workflow, $errors = null, $doSave = true)
-	{
-		if (Framework::isDebugEnabled())
-		{
-			Framework::debug(__METHOD__ . ' : start for the workflow ' . $workflow->getId());
-		}
-		$workflow->setPublicationstatus('DRAFT');
-		$workflow->setErrors(empty($errors) ? "" : $errors);
-		if ($doSave)
-		{
-			$workflow->save();
-		}
-	}
-
-	/**
-	 * Say if this workflow is valid.
-	 * @param workflow_persistentdocument_workflow $workflow
-	 * @return boolean
-	 */
-	public function isDefinitionValid($workflow)
-	{
-		if (Framework::isDebugEnabled())
-		{
-			Framework::debug(__METHOD__ . ' : start for the workflow ' . $workflow->getId());
-		}
-		return ($workflow->getPublicationstatus() == 'ACTIVE' || $workflow->isPublished());
-	}
-
-	/**
 	 * @param String $startTaskId
 	 * @return Boolean
 	 */
@@ -259,5 +184,55 @@ class workflow_WorkflowService extends f_persistentdocument_DocumentService
 		$query->add(Restrictions::eq('starttaskid', $startTaskId));
 		$query->setMaxResults(1);
 		return count($query->find()) != 0;
+	}
+	
+	/**
+	 * @param workflow_persistentdocument_workflow $workflow
+	 * @return boolean
+	 */
+	public function hasOtherActiveWorkflowDefinitions($workflow)
+	{
+		$query = $this->createQuery()->add(Restrictions::ne('id', $workflow->getId()));
+		$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLICATED')));
+		$query->add(Restrictions::eq('starttaskid', $workflow->getStarttaskid()));
+		$endDate = $workflow->getEndpublicationdate();
+		if ($endDate)
+		{
+			$query->add(Restrictions::orExp(Restrictions::isEmpty('startpublicationdate'), Restrictions::lt('startpublicationdate', $endDate)));
+		}
+		$startDate = $workflow->getStartpublicationdate();
+		if ($startDate)
+		{
+			$query->add(Restrictions::orExp(Restrictions::isEmpty('endpublicationdate'), Restrictions::gt('endpublicationdate', $startDate)));
+		}
+		$query->setProjection(Projections::rowCount('count'));
+		
+		return f_util_ArrayUtils::firstElement($query->findColumn('count')) > 0;
+	}
+	
+	// Deprecated.
+	
+	/**
+	 * @deprecated (will be removed in 4.0) use publishIfPossible instead
+	 */
+	public function validatePath($workflow)
+	{
+		return $this->publishIfPossible($workflow->getId());
+	}
+
+	/**
+	 * @deprecated (will be removed in 4.0) use publishIfPossible instead
+	 */
+	public function invalidate($workflow, $errors = null, $doSave = true)
+	{
+		$this->publishIfPossible($workflow->getId());
+	}
+	
+	/**
+	 * @deprecated (will be removed in 4.0)
+	 */
+	public function isDefinitionValid($workflow)
+	{
+		return ($workflow->getPublicationstatus() == 'ACTIVE' || $workflow->isPublished());
 	}
 }

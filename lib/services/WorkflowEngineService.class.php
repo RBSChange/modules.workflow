@@ -387,7 +387,6 @@ class workflow_WorkflowEngineService extends BaseService
 	 */
 	public function getActiveWorkflowDefinitions($getInvalide = false, $startDate = null, $endDate = null)
 	{
-		// Calculate dates.
 		if ($startDate === null)
 		{
 			$startDate = date('Y-m-d H:i:s');
@@ -410,7 +409,7 @@ class workflow_WorkflowEngineService extends BaseService
 	public function getActiveWorkflowDefinitionByStarttaskid($startTaskId, $date = null)
 	{
 		// Calculate dates.
-		if (is_null($date))
+		if ($date === null)
 		{
 			$date = date('Y-m-d H:i:s');
 		}
@@ -429,7 +428,6 @@ class workflow_WorkflowEngineService extends BaseService
 	 */
 	public function execGetActiveWorkflowDefinitions($startTaskId = null, $startDate = null, $endDate = null, $getInvalide = false, $unique = false)
 	{
-		// Construct the query.
 		$provider = f_persistentdocument_PersistentProvider::getInstance();
 		$query = $provider->createQuery('modules_workflow/workflow');
 		if (!$getInvalide)
@@ -449,7 +447,6 @@ class workflow_WorkflowEngineService extends BaseService
 			$query->add(Restrictions::orExp(Restrictions::isEmpty('endpublicationdate'), Restrictions::gt('endpublicationdate', $startDate)));
 		}
 
-		// Execute the query.
 		if ($unique)
 		{
 			return array($provider->findUnique($query));

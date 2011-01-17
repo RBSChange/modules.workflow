@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<i18n baseKey="m.workflow.bo.general.column" lcid="en_GB">
-  <key id="status">status</key>
-  <key id="errors">errors</key>
-</i18n>

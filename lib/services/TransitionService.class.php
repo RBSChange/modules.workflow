@@ -62,9 +62,11 @@ class workflow_TransitionService extends f_persistentdocument_DocumentService
 	 */
 	public function validatePath($transition)
 	{
+		$workflow = $transition->getWorkflow();
+		$workflowService = $workflow->getDocumentService();
+				
 		// Check if the action is valid.
 		$classname = $transition->getActionname();
-
 		if (!empty($classname))
 		{
 			if (strpos($classname, '{') !== false )
@@ -76,12 +78,7 @@ class workflow_TransitionService extends f_persistentdocument_DocumentService
 			}
 			else if (!f_util_ClassUtils::classExists($classname))
 			{
-				$error = f_Locale::translate('&modules.workflow.bo.general.Error-TransitionActionDoesNotExist;', array('id' => $transition->getId(), 'actionName' => $classname));
-				workflow_WorkflowService::getInstance()->invalidate($transition->getWorkflow(), $error);
-				if (Framework::isDebugEnabled())
-				{
-					Framework::debug(__METHOD__ . ' : ' . $error);
-				}
+				$workflowService->setActivePublicationStatusInfo($workflow, '&modules.workflow.bo.general.Error-TransitionActionDoesNotExist;', array('id' => $transition->getId(), 'actionName' => $classname));
 				return false;
 			}
 		}
@@ -94,12 +91,7 @@ class workflow_TransitionService extends f_persistentdocument_DocumentService
 			return true;
 		}
 
-		$error = f_Locale::translate('&modules.workflow.bo.general.Error-TransitionBadlyConnected;', array('id' => $transition->getId()));
-		workflow_WorkflowService::getInstance()->invalidate($transition->getWorkflow(), $error);
-		if (Framework::isDebugEnabled())
-		{
-			Framework::debug(__METHOD__ . ' : ' . $error);
-		}
+		$workflowService->setActivePublicationStatusInfo($workflow, '&modules.workflow.bo.general.Error-TransitionBadlyConnected;', array('id' => $transition->getId()));
 		return false;
 	}
 
