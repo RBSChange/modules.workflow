@@ -102,7 +102,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 		$document = $this->getDocument();
 		if (Framework::isDebugEnabled())
 		{
-			Framework::debuf(__METHOD__ . ' : change document ' . $document->getId() . ' status from ' . $document->getPublicationStatus() . ' to ' . $newStatus);
+			Framework::debug(__METHOD__ . ' : change document ' . $document->getId() . ' status from ' . $document->getPublicationStatus() . ' to ' . $newStatus);
 		}
 		$document->setPublicationstatus($newStatus);
 		$document->save();
