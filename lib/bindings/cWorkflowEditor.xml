@@ -228,33 +228,33 @@
 	
 	<binding id="cCasePanelColumns">
 		<content>
+			<xul:column flex="1" />
+			<xul:column flex="1" />
+			<xul:column flex="1" />
+			<xul:column flex="1" />
 			<xul:column />
-			<xul:column flex="1" />
-			<xul:column flex="1" />
-			<xul:column flex="1" />
-			<xul:column flex="1" />
 		</content>
 	</binding>
 	
 	<binding id="cCasePanelHead">
 		<content>
-			<xul:label />
 			<xul:label value="&amp;modules.workflow.bo.doceditor.case-panel.Target;" />
 			<xul:label value="&amp;modules.workflow.bo.doceditor.case-panel.Creation-date;" />
 			<xul:label value="&amp;modules.workflow.bo.doceditor.case-panel.Last-modification-date;" />
 			<xul:label value="&amp;modules.workflow.bo.doceditor.case-panel.Status;" />
+			<xul:label />
 		</content>
 	</binding>
 	
 	<binding id="cCasePanelDocument">
 		<content>
-			<xul:toolbar class="actions">
-				<xul:toolbarbutton xbl:inherits="documentId" action="edit" hidespinbuttons="true" image="{IconsBase}/small/view.png" tooltiptext="&amp;modules.workflow.bo.doceditor.case-panel.View-informations;" />
-			</xul:toolbar>
 			<xul:label xbl:inherits="value=targetId" />
 			<xul:label xbl:inherits="value=creationdate" />
 			<xul:label xbl:inherits="value=modificationdate" />
 			<xul:label xbl:inherits="value=statusLabel" />
+			<xul:toolbar class="actions">
+				<xul:toolbarbutton xbl:inherits="documentId" action="edit" hidespinbuttons="true" image="{IconsBase}/small/edit.png" tooltiptext="&amp;modules.workflow.bo.doceditor.case-panel.View-informations;" />
+			</xul:toolbar>
 		</content>
 	</binding>
 </bindings>
