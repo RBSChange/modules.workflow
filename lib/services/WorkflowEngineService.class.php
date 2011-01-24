@@ -63,10 +63,7 @@ class workflow_WorkflowEngineService extends BaseService
 		// Verify that we have a document id.
 		if (empty($documentId))
 		{
-			if (Framework::isErrorEnabled())
-			{
-				Framework::error(__METHOD__ . ' : no document id');
-			}
+			Framework::error(__METHOD__ . ' : no document id');
 			return null;
 		}
 
@@ -74,15 +71,13 @@ class workflow_WorkflowEngineService extends BaseService
 		if (empty($taskId))
 		{
 			$taskId = $this->getStartTaskIdForDocumentId($documentId);
-			if (empty($taskId))
-			{
-				if (Framework::isErrorEnabled())
-				{
-					Framework::error(__METHOD__ . ' : no taskId found for ' . $documentId);
-				}
-				return null;
-			}
 		}
+		if (empty($taskId))
+		{
+			Framework::error(__METHOD__ . ' : no taskId found for ' . $documentId);
+			return null;
+		}
+		
 		return $this->execInitWorkflowInstance($documentId, $taskId, $startParameters);
 	}
 
@@ -133,10 +128,7 @@ class workflow_WorkflowEngineService extends BaseService
 		}
 		else
 		{
-			if (Framework::isErrorEnabled())
-			{
-				Framework::error(__METHOD__ . ' : no workflow found for documentId = ' . $documentId . ', taskId = ' . $taskId);
-			}
+			Framework::error(__METHOD__ . ' : no workflow found for documentId = ' . $documentId . ', taskId = ' . $taskId);
 			return null;
 		}
 	}
