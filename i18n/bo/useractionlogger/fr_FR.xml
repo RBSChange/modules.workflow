@@ -7,4 +7,10 @@
   <key id="log-execute-workitem-auto">log-execute-workitem-auto</key>
   <key id="validateworkflow-workflow">validateworkflow.workflow {documentlabel}</key>
   <key id="log-validateworkflow-workflow">log validateworkflow workflow</key>
+  <key id="savepermissions-rootfolder">savepermissions.rootfolder {documentlabel}</key>
+  <key id="log-savepermissions-rootfolder">log savepermissions rootfolder</key>
+  <key id="deactivated-workflow">deactivated.workflow {documentlabel}</key>
+  <key id="log-deactivated-workflow">log deactivated workflow</key>
+  <key id="reactivate-workflow">reactivate.workflow {documentlabel}</key>
+  <key id="log-reactivate-workflow">log reactivate workflow</key>
 </i18n>
