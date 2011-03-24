@@ -142,7 +142,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	{
 		// Get the notification by codename.
 		$notificationService = notification_NotificationService::getInstance();
-		$notification = $notificationService->getNotificationByCodeName($notificationCodeName);
+		$notification = $notificationService->getByCodeName($notificationCodeName);
 		if (!$notification)
 		{
 			if (Framework::isWarnEnabled())
