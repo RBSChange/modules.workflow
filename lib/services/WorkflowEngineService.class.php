@@ -333,9 +333,9 @@ class workflow_WorkflowEngineService extends BaseService
 		{
 			// Get tasks information.
 			$transition = $workitem->getTransition();
-			$creationnotification = $transition->getCreationnotification();
-			$terminationnotification = $transition->getTerminationnotification();
-			$cancellationnotification = $transition->getCancellationnotification();
+			$creationnotification = $this->localizeNotification($transition->getCreationnotification(), $workitem);
+			$terminationnotification = $this->localizeNotification($transition->getTerminationnotification(), $workitem);
+			$cancellationnotification = $this->localizeNotification($transition->getCancellationnotification(), $workitem);
 			$description = $transition->getDescription();
 
 			// Generate one task for each allowed user.
@@ -365,6 +365,30 @@ class workflow_WorkflowEngineService extends BaseService
 				throw new NoUserForWorkitemException('No-valid-user-found-for-this-workitem');
 			}
 		}
+	}
+	
+	/**
+	 * @param notification_persistentdocument_notification
+	 * @param workflow_persistentdocument_workitem $workitem
+	 * @return notification_persistentdocument_notification
+	 */
+	protected function localizeNotification($notification, $workitem)
+	{
+		if ($notification === null)
+		{
+			return null;
+		}
+		$classname = $workitem->getExecActionName();
+		if (!empty($classname) && f_util_ClassUtils::classExists($classname))
+		{
+			$action = new $classname();
+			$action->initialize($workitem);
+			list($websiteId, $lang) = $action->getNotificationWebsiteIdAndLang($notification->getCodename());
+			$notification = notification_NotificationService::getInstance()
+				->getByCodeName($codeName, $websiteId);
+			return $notification;
+		}
+		return $notification;
 	}
 
 	/**
