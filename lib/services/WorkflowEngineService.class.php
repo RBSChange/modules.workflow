@@ -391,10 +391,9 @@ class workflow_WorkflowEngineService extends BaseService
 		{
 			$action = new $classname();
 			$action->initialize($workitem);
-			list($websiteId, $lang) = $action->getNotificationWebsiteIdAndLang($notification->getCodename());
-			$notification = notification_NotificationService::getInstance()
-				->getByCodeName($codeName, $websiteId);
-			return $notification;
+			$codeName = $notification->getCodename();
+			list($websiteId, $lang) = $action->getNotificationWebsiteIdAndLang($codeName);
+			$notification = notification_NotificationService::getInstance()->getByCodeName($codeName, $websiteId);
 		}
 		return $notification;
 	}
