@@ -171,7 +171,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 * @param String $notificationCodeName
 	 * @return array array(websiteId, lang) by default, workflow's document websiteId and original lang
 	 */
-	protected function getNotificationWebsiteIdAndLang($notificationCodeName)
+	public function getNotificationWebsiteIdAndLang($notificationCodeName)
 	{
 		$document = $this->getDocument();
 		return array($document->getDocumentService()->getWebsiteId($document), $document->getLang());
