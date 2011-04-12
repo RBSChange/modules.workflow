@@ -5,6 +5,9 @@
  */
 class workflow_BaseWorkflowaction implements workflow_Workflowaction
 {
+	/**
+	 * @var string
+	 */
 	protected $executionStatus = workflow_WorkitemService::EXECUTION_NOEXECUTION;
 
 	/**
@@ -27,7 +30,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 */
 	public function execute()
 	{
-		// Do nothing.
+		// Do nothing by default.
 		$this->setExecutionStatus(workflow_WorkitemService::EXECUTION_SUCCESS);
 		return true;
 	}
@@ -109,69 +112,95 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	}
 
 	/**
-	 * Set a notification to the document author with the default sender.
-	 * @param string $notificationCodeName
-	 * @param array $replacements an associative array with the word to replace as the key and the replacement as the value.
+	 * Send a notification to the document author with the default sender. The notification replacements are returned by the callback function.
+	 * @param string $codeName
+	 * @param function $callback
+	 * @param mixed $callbackParameter
+	 * @return boolean
 	 */
-	protected function sendNotificationToAuthor($notificationCodeName, $replacements)
+	protected function sendNotificationToAuthorCallback($codeName, $callback = null, $callbackParameter = null)
 	{
 		// Look for the document author.
 		$userId = workflow_CaseService::getInstance()->getParameter($this->getWorkitem()->getCase(), '__DOCUMENT_AUTHOR_ID');
-		if (!$userId)
+		if ($userId)
 		{
-			if (Framework::isInfoEnabled())
-			{
-				Framework::info(__METHOD__ . ' : there is no user to send notification');
-			}
-			return;
+			$user = users_persistentdocument_user::getInstanceById($userId);
+			return $this->sendNotificationToUserCallback($codeName, $user, $callback, $callbackParameter);
 		}
-		$user = DocumentHelper::getDocumentInstance($userId);
-
-		// Send the notification.
-		$receiver = sprintf('%s <%s>', f_util_StringUtils::strip_accents($user->getFullname()), $user->getEmail());
-		$this->sendNotification($notificationCodeName, array($receiver), $replacements);
+		else if (Framework::isInfoEnabled())
+		{
+			Framework::info(__METHOD__ . '(codename = ' . $codeName . '): there is no user to send notification');
+		}
+		return false;
 	}
 
 	/**
-	 * Set a notification to the document author with the default sender.
-	 * @param string $notificationCodeName
-	 * @param array<string> $receivers an array of email addresses.
-	 * @param array $replacements an associative array with the word to replace as the key and the replacement as the value.
+	 * Send a notification to the document author with the default sender. The notification replacements are returned by the callback function.
+	 * @param string $codeName
+	 * @param function $callback
+	 * @param mixed $callbackParameter
+	 * @return boolean
 	 */
-	protected function sendNotification($notificationCodeName, $receivers, $replacements)
+	protected function sendSuffixedNotificationToAuthorCallback($codeName, $suffix, $callback = null, $callbackParameter = null)
 	{
-		// Get the notification by codename.
-		$notificationService = notification_NotificationService::getInstance();
-		$notification = $notificationService->getByCodeName($notificationCodeName);
-		if (!$notification)
+		// Look for the document author.
+		$userId = workflow_CaseService::getInstance()->getParameter($this->getWorkitem()->getCase(), '__DOCUMENT_AUTHOR_ID');
+		if ($userId)
 		{
-			if (Framework::isWarnEnabled())
-			{
-				Framework::warn(__METHOD__ . ' : there is no notification for the codename "' . $notificationCodeName . '"');
-			}
-			return;
+			$user = users_persistentdocument_user::getInstanceById($userId);
+			return $this->sendSuffixedNotificationToUserCallback($codeName, $suffix, $user, $callback, $callbackParameter);
 		}
-
-		$defaultParameters = workflow_WorkflowEngineService::getInstance()
-		                    ->getDefaultNotificationParameters($this->getDocument(), $this->getWorkitem());
-
-		// Add the case parameters.
-		$caseParameters = workflow_CaseService::getInstance()->getParametersArray($this->getWorkitem()->getCase());
-		$replacements = array_merge($replacements, $defaultParameters, $caseParameters);
-
-		// Send the notification.
-		$notificationService->sendMail($notification, $receivers, $replacements);
-		if (Framework::isDebugEnabled())
+		else if (Framework::isInfoEnabled())
 		{
-			Framework::debug(__METHOD__ . ' : mail sent to ' . implode(', ', $receivers));
+			Framework::info(__METHOD__ . '(codename = ' . $codeName . '): there is no user to send notification');
 		}
+		return false;
+	}
+
+	/**
+	 * Send a notification to the document author with the default sender. The notification replacements are returned by the callback function.
+	 * @param string $codeName
+	 * @param users_persistentdocument_user $user
+	 * @param string $callback function name
+	 * @param mixed $callbackParameter
+	 * @return boolean
+	 */
+	protected function sendNotificationToUserCallback($codeName, $user, $callback = null, $callbackParameter = null)
+	{
+		list($websiteId, $lang) = $this->getNotificationWebsiteIdAndLang($codeName);
+		$notification = notification_NotificationService::getInstance()->getConfiguredByCodeName($codeName, $websiteId, $lang);
+		if ($notification !== null)
+		{
+			$notification->setSendingModuleName('workflow');
+		}
+		return $user->getDocumentService()->sendNotificationToUserCallback($notification, $user, $callback, $callbackParameter);
+	}
+
+	/**
+	 * Send a notification to the document author with the default sender. The notification replacements are returned by the callback function.
+	 * @param string $codeName
+	 * @param string $suffix
+	 * @param users_persistentdocument_user $user
+	 * @param string $callback function name
+	 * @param mixed $callbackParameter
+	 * @return boolean
+	 */
+	protected function sendSuffixedNotificationToUserCallback($codeName, $suffix, $user, $callback = null, $callbackParameter = null)
+	{
+		list($websiteId, $lang) = $this->getNotificationWebsiteIdAndLang($codeName);
+		$notification = notification_NotificationService::getInstance()->getConfiguredByCodeNameAndSuffix($codeName, $suffix, $websiteId, $lang);
+		if ($notification !== null)
+		{
+			$notification->setSendingModuleName('workflow');
+		}
+		return $user->getDocumentService()->sendNotificationToUserCallback($notification, $user, $callback, $callbackParameter);
 	}
 	
 	/**
 	 * @param String $notificationCodeName
 	 * @return array array(websiteId, lang) by default, workflow's document websiteId and original lang
 	 */
-	protected function getNotificationWebsiteIdAndLang($notificationCodeName)
+	public function getNotificationWebsiteIdAndLang($notificationCodeName)
 	{
 		$document = $this->getDocument();
 		return array($document->getDocumentService()->getWebsiteId($document), $document->getLang());
@@ -219,5 +248,83 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	public function updateTaskInfos($task)
 	{
 		//TODO customize $task information here.
+	}
+	
+	/**
+	 * @param task_persistentdocument_usertask $task
+	 * @return array
+	 */
+	public function getCancellationNotifParameters($usertask)
+	{
+		// Add the decision.
+		$decision = f_Locale::translate('&modules.workflow.bo.general.decision-' . strtolower($this->getDecision()) . ';');
+		return array('decision' => $decision);
+	}
+	
+	/**
+	 * @param task_persistentdocument_usertask $task
+	 * @return array
+	 */
+	public function getTerminationNotifParameters($usertask)
+	{
+		// Add the decision.
+		$decision = f_Locale::translate('&modules.workflow.bo.general.decision-' . strtolower($this->getDecision()) . ';');
+		return array('decision' => $decision);
+	}
+	
+	// Deprecated.
+
+	/**
+	 * @deprecated (will be removed in 4.0) use sendNotificationToAuthorCallback
+	 */
+	protected function sendNotificationToAuthor($notificationCodeName, $replacements)
+	{
+		// Look for the document author.
+		$userId = workflow_CaseService::getInstance()->getParameter($this->getWorkitem()->getCase(), '__DOCUMENT_AUTHOR_ID');
+		if (!$userId)
+		{
+			if (Framework::isInfoEnabled())
+			{
+				Framework::info(__METHOD__ . ' : there is no user to send notification');
+			}
+			return;
+		}
+		$user = DocumentHelper::getDocumentInstance($userId);
+
+		// Send the notification.
+		$receiver = sprintf('%s <%s>', f_util_StringUtils::strip_accents($user->getFullname()), $user->getEmail());
+		$this->sendNotification($notificationCodeName, array($receiver), $replacements);
+	}
+
+	/**
+	 * @deprecated (will be removed in 4.0)
+	 */
+	protected function sendNotification($notificationCodeName, $receivers, $replacements)
+	{
+		// Get the notification by codename.
+		$notificationService = notification_NotificationService::getInstance();
+		$notification = $notificationService->getByCodeName($notificationCodeName);
+		if (!$notification)
+		{
+			if (Framework::isWarnEnabled())
+			{
+				Framework::warn(__METHOD__ . ' : there is no notification for the codename "' . $notificationCodeName . '"');
+			}
+			return;
+		}
+
+		$defaultParameters = workflow_WorkflowEngineService::getInstance()
+		                    ->getDefaultNotificationParameters($this->getDocument(), $this->getWorkitem());
+
+		// Add the case parameters.
+		$caseParameters = workflow_CaseService::getInstance()->getParametersArray($this->getWorkitem()->getCase());
+		$replacements = array_merge($replacements, $defaultParameters, $caseParameters);
+
+		// Send the notification.
+		$notificationService->sendMail($notification, $receivers, $replacements);
+		if (Framework::isDebugEnabled())
+		{
+			Framework::debug(__METHOD__ . ' : mail sent to ' . implode(', ', $receivers));
+		}
 	}
 }
