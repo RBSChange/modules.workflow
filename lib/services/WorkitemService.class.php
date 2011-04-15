@@ -116,9 +116,9 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		$workitem->setPublicationStatus('ACTIVE');
 		if ($transition->getTimelimit() !== null)
 		{
-			$date = new Date();
-			$date->addSeconds($transition->getTimelimit() * 3600);
-			$workitem->setDeadline($date->getDate());
+			$date = date_Calendar::getInstance();
+			$date->add(date_Calendar::HOUR, $transition->getTimelimit());
+			$workitem->setDeadline($date->toString());
 		}
 		$case->addWorkitem($workitem);
 
