@@ -16,7 +16,7 @@
   <key id="error-badarctype">Le type et la direction de l'arc d'id {id} sont incompatibles.</key>
   <key id="error-badarcprecondition">L'arc d'id {id} attend une précondition.</key>
   <key id="error-anothervalidworkflowoninterval">Il y a déjà un autre workflow valide pour cette tâche de départ sur cet intervalle de temps.</key>
-  <key id="manualybyuser">manuel par  un utilisateur</key>
+  <key id="manualybyuser">manuel par un utilisateur</key>
   <key id="automaticallybysystem">automatique</key>
   <key id="byexternalevent">événement extérieur</key>
   <key id="aftertimelimitexpired">après un certain délai</key>
