@@ -16,14 +16,9 @@ class workflow_BackToDraftWorkflowaction extends workflow_BaseWorkflowaction
 		$document->getDocumentService()->cancel($document->getId());
 
 		// Send the activation alert.
-		$notificationLabel = workflow_CaseService::getInstance()->getParameter($this->getWorkitem()->getCase(), 'NOTIFICATION_BACK_TO_DRAFT');
-		if (!$notificationLabel)
-		{
-			$notificationLabel = $this->getWorkitem()->getCase()->getWorkflow()->getLabel() . ' - Retour brouillon';
-		}
-
+		$notificationCodeName = $this->getCaseParameter('NOTIFICATION_BACK_TO_DRAFT');
 		$replacements = array('documentId' => $document->getId());
-		$this->sendNotificationToAuthor($notificationLabel, $replacements);
+		$this->sendNotificationToAuthor($notificationCodeName, $replacements);
 
 		$this->setExecutionStatus(workflow_WorkitemService::EXECUTION_SUCCESS);
 		return true;

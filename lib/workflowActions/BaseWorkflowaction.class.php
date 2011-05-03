@@ -254,11 +254,20 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 * @param task_persistentdocument_usertask $task
 	 * @return array
 	 */
+	public function getCreationNotifParameters($usertask)
+	{
+		return $this->getCommonNotifParameters($usertask);
+	}
+	
+	/**
+	 * @param task_persistentdocument_usertask $task
+	 * @return array
+	 */
 	public function getCancellationNotifParameters($usertask)
 	{
 		// Add the decision.
 		$decision = f_Locale::translate('&modules.workflow.bo.general.decision-' . strtolower($this->getDecision()) . ';');
-		return array('decision' => $decision);
+		return array_merge($this->getCommonNotifParameters($usertask), array('decision' => $decision));
 	}
 	
 	/**
@@ -269,7 +278,16 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	{
 		// Add the decision.
 		$decision = f_Locale::translate('&modules.workflow.bo.general.decision-' . strtolower($this->getDecision()) . ';');
-		return array('decision' => $decision);
+		return array_merge($this->getCommonNotifParameters($usertask), array('decision' => $decision));
+	}
+	
+	/**
+	 * @param task_persistentdocument_usertask $task
+	 * @return array
+	 */
+	protected function getCommonNotifParameters($usertask)
+	{
+		return array();
 	}
 	
 	// Deprecated.
@@ -312,14 +330,14 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 			}
 			return;
 		}
-
-		$defaultParameters = workflow_WorkflowEngineService::getInstance()
-		                    ->getDefaultNotificationParameters($this->getDocument(), $this->getWorkitem());
-
+		
+		$wes = workflow_WorkflowEngineService::getInstance();
+		$defaultParameters = $wes->getDefaultNotificationParameters($this->getDocument(), $this->getWorkitem());
+		
 		// Add the case parameters.
 		$caseParameters = workflow_CaseService::getInstance()->getParametersArray($this->getWorkitem()->getCase());
 		$replacements = array_merge($replacements, $defaultParameters, $caseParameters);
-
+		
 		// Send the notification.
 		$notificationService->sendMail($notification, $receivers, $replacements);
 		if (Framework::isDebugEnabled())

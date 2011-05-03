@@ -12,19 +12,13 @@ class workflow_CancelContentWorkflowaction extends workflow_BaseWorkflowaction
 	function execute()
 	{
 		// Update the document's status.
-
 		$document = $this->getDocument();
 		$document->getDocumentService()->cancel($document->getId());
 
 		// Send the cancellation alert.
-		$notificationLabel = workflow_CaseService::getInstance()->getParameter($this->getWorkitem()->getCase(), 'NOTIFICATION_ERROR');
-		if (!$notificationLabel)
-		{
-			$notificationLabel = $this->getWorkitem()->getCase()->getWorkflow()->getLabel() . ' - Erreur';
-		}
-
+		$notificationCodeName = $this->getCaseParameter('NOTIFICATION_ERROR');
 		$replacements = array('documentId' => $document->getId());
-		$this->sendNotificationToAuthor($notificationLabel, $replacements);
+		$this->sendNotificationToAuthor($notificationCodeName, $replacements);
 
 		$this->setExecutionStatus(workflow_WorkitemService::EXECUTION_SUCCESS);
 		return true;
