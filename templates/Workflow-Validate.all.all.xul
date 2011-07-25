@@ -79,10 +79,10 @@
 				 	<observes element="wcontroller" attribute="disabled" />
 					<label i18n:attributes="value &amp;modules.task.bo.general.User-task-title;" style="font-weight: bold; font-size: 12pt;" />
 					<toolbarspacer flex="1" />
-					<toolbarbutton oncommand="userTaskViewer.toggleMoreDetails()" i18n:attributes="label &amp;modules.task.bo.general.DetailsSpaced;" change:icon="document_info/small" />
+					<toolbarbutton oncommand="userTaskViewer.toggleMoreDetails()" i18n:attributes="label &amp;modules.task.bo.general.DetailsSpaced;" change:img="icon/small/info.png" />
 					<toolbarseparator />
-					<toolbarbutton id="acceptButton" oncommand="userTaskViewer.accept();" i18n:attributes="label &amp;modules.task.bo.general.AcceptSpaced;" change:icon="media_play_green/small" disabled="true" />
-					<toolbarbutton id="refuseButton" oncommand="userTaskViewer.refuse();" i18n:attributes="label &amp;modules.task.bo.general.RefuseSpaced;" change:icon="media_stop_red/small" disabled="true" />
+					<toolbarbutton id="acceptButton" oncommand="userTaskViewer.accept();" i18n:attributes="label &amp;modules.task.bo.general.AcceptSpaced;" change:img="icon/small/control-start.png" disabled="true" />
+					<toolbarbutton id="refuseButton" oncommand="userTaskViewer.refuse();" i18n:attributes="label &amp;modules.task.bo.general.RefuseSpaced;" change:img="icon/small/control-stop.png" disabled="true" />
 				</toolbar>
 			</toolbox>
 			<vbox>
