@@ -2,7 +2,7 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <tal:block>
 	${cssInclusion}
-	<window id="ChangeUserTask"	i18n:attributes="title &amp;modules.task.bo.general.User-task-title;"
+	<window id="ChangeUserTask"	title="${trans:m.task.bo.general.user-task-title,ucf,attr}"
 		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
 	    ${scriptInclusion}
@@ -77,17 +77,17 @@
 			<toolbox>
 				<toolbar>
 				 	<observes element="wcontroller" attribute="disabled" />
-					<label i18n:attributes="value &amp;modules.task.bo.general.User-task-title;" style="font-weight: bold; font-size: 12pt;" />
+					<label value="${trans:m.task.bo.general.user-task-title,ucf,attr}" style="font-weight: bold; font-size: 12pt;" />
 					<toolbarspacer flex="1" />
-					<toolbarbutton oncommand="userTaskViewer.toggleMoreDetails()" i18n:attributes="label &amp;modules.task.bo.general.DetailsSpaced;" change:img="icon/small/info.png" />
+					<toolbarbutton oncommand="userTaskViewer.toggleMoreDetails()" label="${trans:m.task.bo.general.detailsspaced,ucf,attr}" change:img="icon/small/info.png" />
 					<toolbarseparator />
-					<toolbarbutton id="acceptButton" oncommand="userTaskViewer.accept();" i18n:attributes="label &amp;modules.task.bo.general.AcceptSpaced;" change:img="icon/small/control-start.png" disabled="true" />
-					<toolbarbutton id="refuseButton" oncommand="userTaskViewer.refuse();" i18n:attributes="label &amp;modules.task.bo.general.RefuseSpaced;" change:img="icon/small/control-stop.png" disabled="true" />
+					<toolbarbutton id="acceptButton" oncommand="userTaskViewer.accept();" label="${trans:m.task.bo.general.acceptspaced,ucf,attr}" change:img="icon/small/control-start.png" disabled="true" />
+					<toolbarbutton id="refuseButton" oncommand="userTaskViewer.refuse();" label="${trans:m.task.bo.general.refusespaced,ucf,attr}" change:img="icon/small/control-stop.png" disabled="true" />
 				</toolbar>
 			</toolbox>
 			<vbox>
-				<description i18n:translate="&amp;modules.task.bo.general.User-task-help;" />
-				<label control="commentary" i18n:attributes="value &amp;modules.task.bo.general.User-task-decision-commentaryLabel;" />
+				<description tal:content="trans:m.task.bo.general.user-task-help,ucf" />
+				<label control="commentary" value="${trans:m.task.bo.general.user-task-decision-commentary,ucf,lab,attr}" />
 				<textbox multiline="true" id="commentary" flex="1" rows="2" oninput="userTaskViewer.onCommentaryChange()" style="margin-bottom:2px">
 				 	<observes element="wcontroller" attribute="disabled" />
 				</textbox>
