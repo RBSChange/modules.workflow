@@ -26,7 +26,6 @@ class workflow_LoadCasesForWorkflowAction extends f_action_BaseJSONAction
 		$documentsInfo = array();
 		if ($result['total'] > 0)
 		{
-			$dateTimeFormat = f_Locale::translateUI('&modules.uixul.bo.datePicker.calendar.dataWriterTimeFormat;');
 			foreach (workflow_CaseService::getInstance()->getByWorkflow($workflowId, $targetId, $offset, $limit) as $case)
 			{	
 				$status = $case->getPublicationstatus();
@@ -35,8 +34,8 @@ class workflow_LoadCasesForWorkflowAction extends f_action_BaseJSONAction
 				$documentInfo['targetId'] = $case->getDocumentid();
 				$documentInfo['status'] = $status;
 				$documentInfo['statusLabel'] = $this->getStatusLabel($status);
-				$documentInfo['creationdate'] = date_DateFormat::format($case->getUICreationdate(), $dateTimeFormat);
-				$documentInfo['modificationdate'] = date_DateFormat::format($case->getUIModificationdate(), $dateTimeFormat);
+				$documentInfo['creationdate'] = date_Formatter::toDefaultDateTimeBO($case->getUICreationdate());
+				$documentInfo['modificationdate'] = date_Formatter::toDefaultDateTimeBO($case->getUIModificationdate());
 				$documentsInfo[] = $documentInfo;
 			}
 		}
@@ -58,7 +57,7 @@ class workflow_LoadCasesForWorkflowAction extends f_action_BaseJSONAction
 	{
 		if (!isset($this->statusLabels[$status]))
 		{
-			$this->statusLabels[$status] = f_Locale::translate('&modules.workflow.bo.doceditor.case-panel.Status-' . ucfirst(strtolower($status)) . ';');
+			$this->statusLabels[$status] = LocaleService::getInstance()->transBO('m.workflow.bo.doceditor.case-panel.status-' . strtolower($status), array('ucf'));
 		}
 		return $this->statusLabels[$status];
 	}
