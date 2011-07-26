@@ -19,11 +19,11 @@ class workflow_ValidateView extends f_view_BaseView
 			RequestContext::getInstance()->beginI18nWork($lang);
 
 			$workDocument = DocumentHelper::getDocumentInstance($task->getWorkitem()->getDocumentid());
-			$model = $workDocument->getDocumentModel();
+			$model = $workDocument->getPersistentModel();
 			$document = DocumentHelper::getPropertiesOf($workDocument);
 			$document['id'] = $workDocument->getId();
 			$document['taskId'] = $task->getId();
-			$document["type"]   = f_Locale::translate($model->getLabel()) . " (" . $model->getDocumentName() . ")";
+			$document["type"] = f_Locale::translate($model->getLabel()) . " (" . $model->getDocumentName() . ")";
 			$document['previewUrl'] = LinkHelper::getDocumentUrl($workDocument, null,
 				array(website_DisplayAction::DISABLE_PUBLICATION_WORKFLOW => 'true', K::LANG_ACCESSOR => $lang));
 			RequestContext::getInstance()->endI18nWork();

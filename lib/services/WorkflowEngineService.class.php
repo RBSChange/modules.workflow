@@ -362,7 +362,7 @@ class workflow_WorkflowEngineService extends BaseService
 					Framework::debug(__METHOD__ . ' : No valid user found, so cancel the case and throw NoUserForWorkitemException.');
 				}
 				workflow_WorkflowEngineService::getInstance()->execCancelWorkflowInstance($workitem->getDocumentid(), $workitem->getCase());
-				throw new NoUserForWorkitemException('No-valid-user-found-for-this-workitem');
+				throw new BaseException('No-valid-user-found-for-this-workitem', 'framework.exception.errors.No-valid-user-found-for-this-workitem');
 			}
 		}
 	}
