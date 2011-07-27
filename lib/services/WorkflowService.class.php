@@ -209,30 +209,4 @@ class workflow_WorkflowService extends f_persistentdocument_DocumentService
 		
 		return f_util_ArrayUtils::firstElement($query->findColumn('count')) > 0;
 	}
-	
-	// Deprecated.
-	
-	/**
-	 * @deprecated (will be removed in 4.0) use publishIfPossible instead
-	 */
-	public function validatePath($workflow)
-	{
-		return $this->publishIfPossible($workflow->getId());
-	}
-
-	/**
-	 * @deprecated (will be removed in 4.0) use publishIfPossible instead
-	 */
-	public function invalidate($workflow, $errors = null, $doSave = true)
-	{
-		$this->publishIfPossible($workflow->getId());
-	}
-	
-	/**
-	 * @deprecated (will be removed in 4.0)
-	 */
-	public function isDefinitionValid($workflow)
-	{
-		return ($workflow->getPublicationstatus() == 'ACTIVE' || $workflow->isPublished());
-	}
 }
