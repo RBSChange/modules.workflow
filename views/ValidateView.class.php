@@ -32,12 +32,11 @@ class workflow_ValidateView extends f_view_BaseView
 		{
 			RequestContext::getInstance()->endI18nWork($e);
 		}
-
 		$this->setAttribute('document', $document);
 
 		$this->setAttribute(
            'cssInclusion',
-           $this->getStyleService()
+           website_StyleService::getInstance()
 	    	  ->registerStyle('modules.dashboard.dashboard')
 	    	  ->registerStyle('modules.uixul.bindings')
 	    	  ->registerStyle('modules.uixul.backoffice')
@@ -45,15 +44,8 @@ class workflow_ValidateView extends f_view_BaseView
 	    );
 
 		// include JavaScript
-		$scripts = array(
-			'modules.uixul.lib.default',
-			'modules.dashboard.lib.js.dashboardwidget'
-		);
-		foreach ($scripts as $script)
-		{
-			$this->getJsService()->registerScript($script);
-		}
-
-        $this->setAttribute('scriptInclusion', $this->getJsService()->executeInline(K::XUL));
+		$jss = website_JsService::getInstance();
+		$jss->registerScript('modules.uixul.lib.default')->registerScript('modules.dashboard.lib.js.dashboardwidget');
+        $this->setAttribute('scriptInclusion', $jss->executeInline(K::XUL));
 	}
 }
