@@ -42,6 +42,9 @@
 				<child model="modules_workflow/workflow" />
 			</children>
 			<contextactions>
+				<contextaction name="edit" />
+				<contextaction name="delete" />
+				<contextaction name="openTreeNodeOrder" />
 				<contextaction name="openFolder" />
 			</contextactions>
 		</model>		
