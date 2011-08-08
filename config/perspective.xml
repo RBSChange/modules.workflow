@@ -54,6 +54,9 @@
 				<column name="errors" label="Errors" flex="3" />
 			</columns>
 			<contextactions>
+				<contextaction name="edit" />
+				<contextaction name="delete" />
+				<contextaction name="openTreeNodeOrder" />
 				<contextaction name="openFolder" />
 			</contextactions>
 		</model>		
