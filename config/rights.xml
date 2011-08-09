@@ -27,7 +27,6 @@
 			<permission name="Deactivated.*" />
 			<permission name="ReActivate.*" />
 			<permission name="Order" />
-			<permission name="EditLocale" />
 		</role>
 	</roles>
 </rights>

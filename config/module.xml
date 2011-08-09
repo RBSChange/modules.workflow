@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
 	<module>
-		<enabled>true</enabled>
 		<visible>true</visible>
 		<icon>workflow-workflow</icon>
 		<category>admin</category>
