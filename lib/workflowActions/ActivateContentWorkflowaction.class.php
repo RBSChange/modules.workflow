@@ -18,8 +18,7 @@ class workflow_ActivateContentWorkflowaction extends workflow_BaseWorkflowaction
 		// Send the activation alert.
 		$notificationCodeName = $this->getCaseParameter('NOTIFICATION_ACTIVATION');
 		$replacements = array('documentId' => $document->getId());
-		$this->sendNotificationToAuthor($notificationCodeName, $replacements);
-
+		$this->sendNotificationToAuthorCallback($notificationCodeName, null, $replacements);
 		$this->setExecutionStatus(workflow_WorkitemService::EXECUTION_SUCCESS);
 		return true;
 	}

@@ -18,7 +18,7 @@ class workflow_BackToDraftWorkflowaction extends workflow_BaseWorkflowaction
 		// Send the activation alert.
 		$notificationCodeName = $this->getCaseParameter('NOTIFICATION_BACK_TO_DRAFT');
 		$replacements = array('documentId' => $document->getId());
-		$this->sendNotificationToAuthor($notificationCodeName, $replacements);
+		$this->sendNotificationToAuthorCallback($notificationCodeName, null, $replacements);
 
 		$this->setExecutionStatus(workflow_WorkitemService::EXECUTION_SUCCESS);
 		return true;

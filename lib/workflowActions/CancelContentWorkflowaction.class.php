@@ -18,7 +18,7 @@ class workflow_CancelContentWorkflowaction extends workflow_BaseWorkflowaction
 		// Send the cancellation alert.
 		$notificationCodeName = $this->getCaseParameter('NOTIFICATION_ERROR');
 		$replacements = array('documentId' => $document->getId());
-		$this->sendNotificationToAuthor($notificationCodeName, $replacements);
+		$this->sendNotificationToAuthorCallback($notificationCodeName, null, $replacements);
 
 		$this->setExecutionStatus(workflow_WorkitemService::EXECUTION_SUCCESS);
 		return true;

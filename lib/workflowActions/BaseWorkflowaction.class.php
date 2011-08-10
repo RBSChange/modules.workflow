@@ -118,7 +118,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 * @param mixed $callbackParameter
 	 * @return boolean
 	 */
-	protected function sendNotificationToAuthorCallback($codeName, $callback = null, $callbackParameter = null)
+	protected function sendNotificationToAuthorCallback($codeName, $callback = null, $callbackParameter = array())
 	{
 		// Look for the document author.
 		$userId = workflow_CaseService::getInstance()->getParameter($this->getWorkitem()->getCase(), '__DOCUMENT_AUTHOR_ID');
@@ -141,7 +141,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 * @param mixed $callbackParameter
 	 * @return boolean
 	 */
-	protected function sendSuffixedNotificationToAuthorCallback($codeName, $suffix, $callback = null, $callbackParameter = null)
+	protected function sendSuffixedNotificationToAuthorCallback($codeName, $suffix, $callback = null, $callbackParameter = array())
 	{
 		// Look for the document author.
 		$userId = workflow_CaseService::getInstance()->getParameter($this->getWorkitem()->getCase(), '__DOCUMENT_AUTHOR_ID');
@@ -165,7 +165,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 * @param mixed $callbackParameter
 	 * @return boolean
 	 */
-	protected function sendNotificationToUserCallback($codeName, $user, $callback = null, $callbackParameter = null)
+	protected function sendNotificationToUserCallback($codeName, $user, $callback = null, $callbackParameter = array())
 	{
 		list($websiteId, $lang) = $this->getNotificationWebsiteIdAndLang($codeName);
 		$notification = notification_NotificationService::getInstance()->getConfiguredByCodeName($codeName, $websiteId, $lang);
@@ -185,7 +185,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 * @param mixed $callbackParameter
 	 * @return boolean
 	 */
-	protected function sendSuffixedNotificationToUserCallback($codeName, $suffix, $user, $callback = null, $callbackParameter = null)
+	protected function sendSuffixedNotificationToUserCallback($codeName, $suffix, $user, $callback = null, $callbackParameter = array())
 	{
 		list($websiteId, $lang) = $this->getNotificationWebsiteIdAndLang($codeName);
 		$notification = notification_NotificationService::getInstance()->getConfiguredByCodeNameAndSuffix($codeName, $suffix, $websiteId, $lang);
@@ -288,61 +288,5 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	protected function getCommonNotifParameters($usertask)
 	{
 		return array();
-	}
-	
-	// Deprecated.
-
-	/**
-	 * @deprecated (will be removed in 4.0) use sendNotificationToAuthorCallback
-	 */
-	protected function sendNotificationToAuthor($notificationCodeName, $replacements)
-	{
-		// Look for the document author.
-		$userId = workflow_CaseService::getInstance()->getParameter($this->getWorkitem()->getCase(), '__DOCUMENT_AUTHOR_ID');
-		if (!$userId)
-		{
-			if (Framework::isInfoEnabled())
-			{
-				Framework::info(__METHOD__ . ' : there is no user to send notification');
-			}
-			return;
-		}
-		$user = DocumentHelper::getDocumentInstance($userId);
-
-		// Send the notification.
-		$receiver = sprintf('%s <%s>', f_util_StringUtils::strip_accents($user->getFullname()), $user->getEmail());
-		$this->sendNotification($notificationCodeName, array($receiver), $replacements);
-	}
-
-	/**
-	 * @deprecated (will be removed in 4.0)
-	 */
-	protected function sendNotification($notificationCodeName, $receivers, $replacements)
-	{
-		// Get the notification by codename.
-		$notificationService = notification_NotificationService::getInstance();
-		$notification = $notificationService->getByCodeName($notificationCodeName);
-		if (!$notification)
-		{
-			if (Framework::isWarnEnabled())
-			{
-				Framework::warn(__METHOD__ . ' : there is no notification for the codename "' . $notificationCodeName . '"');
-			}
-			return;
-		}
-		
-		$wes = workflow_WorkflowEngineService::getInstance();
-		$defaultParameters = $wes->getDefaultNotificationParameters($this->getDocument(), $this->getWorkitem());
-		
-		// Add the case parameters.
-		$caseParameters = workflow_CaseService::getInstance()->getParametersArray($this->getWorkitem()->getCase());
-		$replacements = array_merge($replacements, $defaultParameters, $caseParameters);
-		
-		// Send the notification.
-		$notificationService->sendMail($notification, $receivers, $replacements);
-		if (Framework::isDebugEnabled())
-		{
-			Framework::debug(__METHOD__ . ' : mail sent to ' . implode(', ', $receivers));
-		}
 	}
 }
