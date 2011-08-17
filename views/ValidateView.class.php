@@ -11,7 +11,7 @@ class workflow_ValidateView extends change_View
 	public function _execute($context, $request)
 	{
 		$this->forceModuleName('workflow');
-		$this->setTemplateName('Workflow-Validate', K::XUL);
+		$this->setTemplateName('Workflow-Validate', 'xul');
 		$task = $request->getAttribute('task');
 		$lang = $task->getWorkitem()->getCase()->getlang();
 		try
@@ -25,7 +25,7 @@ class workflow_ValidateView extends change_View
 			$document['taskId'] = $task->getId();
 			$document["type"] = f_Locale::translate($model->getLabel()) . " (" . $model->getDocumentName() . ")";
 			$document['previewUrl'] = LinkHelper::getDocumentUrl($workDocument, null,
-				array(website_DisplayAction::DISABLE_PUBLICATION_WORKFLOW => 'true', K::LANG_ACCESSOR => $lang));
+				array(website_DisplayAction::DISABLE_PUBLICATION_WORKFLOW => 'true', 'lang' => $lang));
 			RequestContext::getInstance()->endI18nWork();
 		}
 		catch (Exception $e)
@@ -40,12 +40,12 @@ class workflow_ValidateView extends change_View
 	    	  ->registerStyle('modules.dashboard.dashboard')
 	    	  ->registerStyle('modules.uixul.bindings')
 	    	  ->registerStyle('modules.uixul.backoffice')
-	    	  ->execute(K::XUL)
+	    	  ->execute('xul')
 	    );
 
 		// include JavaScript
 		$jss = website_JsService::getInstance();
 		$jss->registerScript('modules.uixul.lib.default')->registerScript('modules.dashboard.lib.js.dashboardwidget');
-        $this->setAttribute('scriptInclusion', $jss->executeInline(K::XUL));
+        $this->setAttribute('scriptInclusion', $jss->executeInline('xul'));
 	}
 }
