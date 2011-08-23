@@ -20,7 +20,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 	{
 		if (self::$instance === null)
 		{
-			self::$instance = self::getServiceClassInstance(get_class());
+			self::$instance = new self();
 		}
 		return self::$instance;
 	}
@@ -513,7 +513,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 			$actorsIds = workflow_CaseService::getInstance()->getParameter($workitem->getCase(), '__NEXT_ACTORS_IDS');
 			if (!is_array($actorsIds) && count($actorsIds) == 0)
 			{
-				$permissionService = f_permission_PermissionService::getInstance();
+				$permissionService = change_PermissionService::getInstance();
 				$roleName = $workitem->getTransition()->getRoleid();
 				$roleName = $permissionService->resolveRole($roleName, $workitem->getDocumentid());
 				if (Framework::isDebugEnabled())

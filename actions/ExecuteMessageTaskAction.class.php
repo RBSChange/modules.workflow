@@ -19,7 +19,7 @@ class workflow_ExecuteMessageTaskAction extends change_JSONAction
 		// Get user.
 		$user = users_UserService::getInstance()->getCurrentBackEndUser();
 		$userId = ($user !== null) ? $user->getId() : 0;
-		$permissionService = f_permission_PermissionService::getInstance();
+		$permissionService = change_PermissionService::getInstance();
 		$roleName = $workitem->getTransition()->getRoleid();
 		$roleName = $permissionService->resolveRole($roleName, $workitem->getDocumentid());
 		if ($roleName && !in_array($user->getId(), $permissionService->getUsersByRoleAndDocumentId($roleName, $workitem->getDocumentid())))
