@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<install type="modules" name="workflow" version="4.0.0">
+  <package type="modules" name="users"/>
+  <package type="modules" name="task"/>
+</install>
