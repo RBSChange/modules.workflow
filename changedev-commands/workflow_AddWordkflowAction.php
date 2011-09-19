@@ -3,7 +3,7 @@
  * commands_workflow_AddWordkflowaction
  * @package modules.workflow.command
  */
-class commands_workflow_AddWordkflowAction extends commands_AbstractChangeCommand
+class commands_workflow_AddWordkflowAction extends c_ChangescriptCommand
 {
 	/**
 	 * @return String
