@@ -531,7 +531,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		// If the parameter AFFECT_TASKS_TO_SUPER_ADMIN is set to true, add the super-administrator.
 		if (workflow_CaseService::getInstance()->getParameter($workitem->getCase(), 'AFFECT_TASKS_TO_SUPER_ADMIN') == 'true')
 		{
-			$rootUsers = users_BackenduserService::getInstance()->getRootUsers();
+			$rootUsers = users_UserService::getInstance()->getRootUsers();
 			foreach ($rootUsers as $rootUser) 
 			{
 				if ($rootUser->isPublished())
