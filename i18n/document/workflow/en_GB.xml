@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.workflow.document.workflow" lcid="en_GB">
+  <key id="arcs">arrows</key>
+  <key id="arcs-help">workflow arrows</key>
+  <key id="description">description</key>
+  <key id="description-help">This describes the workflow.</key>
+  <key id="document-name">workflow</key>
+  <key id="edition-form-title">workflow properties</key>
+  <key id="endpublicationdate">end date</key>
+  <key id="endpublicationdate-help">Date until which the workflow can be used.</key>
+  <key id="errors">errors</key>
+  <key id="errors-help">Errors preventing workflow validation.</key>
+  <key id="label">label</key>
+  <key id="label-help">Workflow name.</key>
+  <key id="places">places</key>
+  <key id="places-help">workflow places</key>
+  <key id="publicationstatus">status</key>
+  <key id="publicationstatus-help">workflow status. Only active workflows can be used</key>
+  <key id="startpublicationdate">start date</key>
+  <key id="startpublicationdate-help">Date after which the workflow can be used.</key>
+  <key id="starttaskid">start task</key>
+  <key id="starttaskid-help">the start task enables linking a document type to a workflow. This task has to be specified in the model of each document type to which the workflow is applied.</key>
+  <key id="transitions">transitions</key>
+  <key id="transitions-help">workflow transitions</key>
+</i18n>

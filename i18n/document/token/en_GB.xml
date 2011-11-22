@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.workflow.document.token" lcid="en_GB">
+  <key id="context">context</key>
+  <key id="document-name">token</key>
+  <key id="label">label</key>
+  <key id="place">place</key>
+  <key id="workflow">workflow</key>
+</i18n>
