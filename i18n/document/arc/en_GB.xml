@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.workflow.document.arc" lcid="en_GB">
+  <key id="arctype">type</key>
+  <key id="arctype-help">This is the arrow type.</key>
+  <key id="direction">direction</key>
+  <key id="direction-help">Direction to which the arrow is oriented.</key>
+  <key id="document-name">arrow</key>
+  <key id="label">label</key>
+  <key id="label-help">This is the arrow name.</key>
+  <key id="place">place</key>
+  <key id="place-help">Place from where the arrow departs or to where the arrow leads.</key>
+  <key id="precondition">precondition</key>
+  <key id="precondition-help">The precondition is used only with arrows of type ″separation″ in ″explicit or″ mode. It allows for determining which arrow will be chosen in each case.</key>
+  <key id="transition">transition</key>
+  <key id="transition-help">Transition from where the arrow departs or to where the arrow leads.</key>
+</i18n>

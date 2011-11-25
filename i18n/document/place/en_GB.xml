@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.workflow.document.place" lcid="en_GB">
+  <key id="description">description</key>
+  <key id="description-help">place description</key>
+  <key id="document-name">place</key>
+  <key id="label">label</key>
+  <key id="label-help">This is the place name.</key>
+  <key id="placetype">type</key>
+  <key id="placetype-help">Place type. This type cannot be modified, because the starting and ending places are automatically generated.</key>
+</i18n>
