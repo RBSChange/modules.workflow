@@ -7,7 +7,6 @@ class commands_workflow_AddWordkflowAction extends commands_AbstractChangeComman
 {
 	/**
 	 * @return String
-	 * @example "<moduleName> <name>"
 	 */
 	function getUsage()
 	{
@@ -16,7 +15,6 @@ class commands_workflow_AddWordkflowAction extends commands_AbstractChangeComman
 
 	/**
 	 * @return String
-	 * @example "initialize a document"
 	 */
 	function getDescription()
 	{
