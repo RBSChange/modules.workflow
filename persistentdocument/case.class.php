@@ -52,6 +52,7 @@ class workflow_persistentdocument_case extends workflow_persistentdocument_caseb
 	{
 		parent::addWorkitem($newValue);
 		$newValue->setCase($this);
+		$this->setModificationdate(null);
 	}
 
 	/**
@@ -62,6 +63,17 @@ class workflow_persistentdocument_case extends workflow_persistentdocument_caseb
 	{
 		parent::addToken($newValue);
 		$newValue->setCase($this);
+		$this->setModificationdate(null);
+	}
+	
+	/**
+	 * workflow_persistentdocument_workitem
+	 */
+	public function workitemTrigged($workitem)
+	{
+		$this->removeWorkitem($workitem);
+		parent::addWorkitem($workitem);
+		$this->setModificationdate(null);
 	}
 	
 	/**
