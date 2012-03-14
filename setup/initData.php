@@ -13,5 +13,6 @@ class workflow_Setup extends object_InitDataSetup
 			echo "ERROR: " . $e->getMessage() . "\n";
 			Framework::exception($e);
 		}
+		workflow_ModuleService::getInstance()->addExecuteScheduledTasks();
 	}
 }
