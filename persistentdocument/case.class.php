@@ -71,7 +71,6 @@ class workflow_persistentdocument_case extends workflow_persistentdocument_caseb
 	 */
 	public function workitemTrigged($workitem)
 	{
-		Framework::fatal(__METHOD__);
 		$this->removeWorkitem($workitem);
 		parent::addWorkitem($workitem);
 		$this->setModificationdate(null);
