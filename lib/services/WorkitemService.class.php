@@ -141,6 +141,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		}
 		$caseService = workflow_CaseService::getInstance();
 		$case = $workitem->getCase();
+		$case->workitemTrigged($workitem);
 		$caseService->setParameter($case, '__LAST_STATUS', self::EXECUTION_NOEXECUTION);
 
 		// Try to execute the action if one is defined.
