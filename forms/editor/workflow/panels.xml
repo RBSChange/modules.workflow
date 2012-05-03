@@ -2,14 +2,8 @@
 <panels>
 	<panel name="resume" />
 	<panel name="properties" />
+	<panel name="case" icon="document" labeli18n="m.workflow.bo.doceditor.case-panel.tab-label"/>
 	<panel name="publication" />
 	<panel name="history" />
 	<panel name="create" />
-	<xul>
-		<javascript>
-			<constructor><![CDATA[
-				this.addTab('case', '&modules.workflow.bo.doceditor.case-panel.Tab-label;', 'document');
-			]]></constructor>
-		</javascript>
-	</xul>	
 </panels>

@@ -2,7 +2,8 @@
 <bindings xmlns="http://www.mozilla.org/xbl" xmlns:xbl="http://www.mozilla.org/xbl"
 	xmlns:html="http://www.w3.org/1999/xhtml"
 	xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">	
-	<binding id="cCasePanel"  extends="layout.cDocumentEditor#cDocumentEditorPanel">
+	
+	<binding id="workflow_case"  extends="layout.cDocumentEditor#cDocumentEditorPanel">
 		<implementation>
 			<field name="mTargetId"></field>
 			<field name="mPageSize">20</field>
