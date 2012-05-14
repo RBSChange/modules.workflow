@@ -107,8 +107,6 @@ class commands_workflow_AddWordkflowAction extends commands_AbstractChangeComman
 			$generator->assign_by_ref('module', $moduleName);
 			$generator->assign_by_ref('date', date('r'));
 			$generator->assign_by_ref('class', $class);
-			$generator->assign_by_ref('modelName', $modelName);
-			$generator->assign_by_ref('parameters', $paramNames);
 			$result = $generator->fetch('workflowAction.tpl');
 			
 			f_util_FileUtils::mkdir($folder);
