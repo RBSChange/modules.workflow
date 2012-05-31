@@ -7,7 +7,6 @@ class commands_workflow_AddWordkflowAction extends c_ChangescriptCommand
 {
 	/**
 	 * @return String
-	 * @example "<moduleName> <name>"
 	 */
 	function getUsage()
 	{
@@ -16,7 +15,6 @@ class commands_workflow_AddWordkflowAction extends c_ChangescriptCommand
 
 	/**
 	 * @return String
-	 * @example "initialize a document"
 	 */
 	function getDescription()
 	{
@@ -109,8 +107,6 @@ class commands_workflow_AddWordkflowAction extends c_ChangescriptCommand
 			$generator->assign_by_ref('module', $moduleName);
 			$generator->assign_by_ref('date', date('r'));
 			$generator->assign_by_ref('class', $class);
-			$generator->assign_by_ref('modelName', $modelName);
-			$generator->assign_by_ref('parameters', $paramNames);
 			$result = $generator->fetch('workflowAction.tpl');
 			
 			f_util_FileUtils::mkdir($folder);

@@ -29,13 +29,4 @@ class workflow_WorkflowListener
 			}
 		}
 	}
-	
-	/**
-	 * @param f_persistentdocument_DocumentService $sender
-	 * @param array $params
-	 */
-	public function onHourChange($sender, $params)
-	{
-		workflow_WorkflowEngineService::getInstance()->executeScheduledTasks();
-	}
 }
