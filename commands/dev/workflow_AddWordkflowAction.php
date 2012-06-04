@@ -111,7 +111,7 @@ class commands_workflow_AddWordkflowAction extends c_ChangescriptCommand
 			
 			f_util_FileUtils::mkdir($folder);
 			f_util_FileUtils::write($file, $result);
-			ClassResolver::getInstance()->appendToAutoloadFile($class, realpath($file));
+			AutoloadBuilder::getInstance()->appendFile($file);
 		}
 		$this->message('Workflow action class path: ' . $file);
 	}
