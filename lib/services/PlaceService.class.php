@@ -89,7 +89,7 @@ class workflow_PlaceService extends f_persistentdocument_DocumentService
 		
 		$workflow = $place->getWorkflow();
 		$workflowService = $workflow->getDocumentService();
-		$workflowService->setActivePublicationStatusInfo($workflow, '&modules.workflow.bo.general.Error-PlaceBadlyConnected;', array('id' => $place->getId()));
+		$workflowService->setActivePublicationStatusInfo($workflow, 'm.workflow.bo.general.error-placebadlyconnected', array('id' => $place->getId()));
 		return false;
 	}
 

@@ -78,14 +78,14 @@ class workflow_WorkflowService extends f_persistentdocument_DocumentService
 		$task = $document->getStarttaskid();
 		if (empty($task))
 		{
-			$this->setActivePublicationStatusInfo($document, '&modules.workflow.bo.general.Error-TaskAndLabelNeeded;');
+			$this->setActivePublicationStatusInfo($document, 'm.workflow.bo.general.error-taskandlabelneeded');
 			return false;
 		}
 
 		// Check if there is a start place and a end place.
 		if ($this->getStartPlace($document) === null || $this->getEndPlace($document) === null)
 		{
-			$this->setActivePublicationStatusInfo($document, '&modules.workflow.bo.general.Error-StartAndEndPlacesNeeded;');
+			$this->setActivePublicationStatusInfo($document, 'm.workflow.bo.general.error-startandendplacesneeded');
 			return false;
 		}
 

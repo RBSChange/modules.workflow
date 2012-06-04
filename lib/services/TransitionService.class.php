@@ -78,7 +78,7 @@ class workflow_TransitionService extends f_persistentdocument_DocumentService
 			}
 			else if (!f_util_ClassUtils::classExists($classname))
 			{
-				$workflowService->setActivePublicationStatusInfo($workflow, '&modules.workflow.bo.general.Error-TransitionActionDoesNotExist;', array('id' => $transition->getId(), 'actionName' => $classname));
+				$workflowService->setActivePublicationStatusInfo($workflow, 'm.workflow.bo.general.error-transitionactiondoesnotexist', array('id' => $transition->getId(), 'actionName' => $classname));
 				return false;
 			}
 		}
@@ -91,7 +91,7 @@ class workflow_TransitionService extends f_persistentdocument_DocumentService
 			return true;
 		}
 
-		$workflowService->setActivePublicationStatusInfo($workflow, '&modules.workflow.bo.general.Error-TransitionBadlyConnected;', array('id' => $transition->getId()));
+		$workflowService->setActivePublicationStatusInfo($workflow, 'm.workflow.bo.general.error-transitionbadlyconnected', array('id' => $transition->getId()));
 		return false;
 	}
 

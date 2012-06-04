@@ -91,20 +91,20 @@ class workflow_ArcService extends f_persistentdocument_DocumentService
 		$workflowService = $workflow->getDocumentService();
 		if (is_null($arc->getPlace()) || is_null($arc->getTransition()))
 		{
-			$workflowService->setActivePublicationStatusInfo($workflow, '&modules.workflow.bo.general.Error-StartAndEndPlacesNeeded;', array('id' => $arc->getId()));
+			$workflowService->setActivePublicationStatusInfo($workflow, 'm.workflow.bo.general.error-startandendplacesneeded', array('id' => $arc->getId()));
 			return false;
 		}
 
 		if (!$this->checkType($arc))
 		{
-			$workflowService->setActivePublicationStatusInfo($workflow, '&modules.workflow.bo.general.Error-BadArcType;', array('id' => $arc->getId()));
+			$workflowService->setActivePublicationStatusInfo($workflow, 'm.workflow.bo.general.error-badarctype', array('id' => $arc->getId()));
 			return false;
 		}
 
 
 		if (!$this->checkPrecondition($arc))
 		{
-			$workflowService->setActivePublicationStatusInfo($workflow, '&modules.workflow.bo.general.Error-BadArcPrecondition;', array('id' => $arc->getId()));
+			$workflowService->setActivePublicationStatusInfo($workflow, 'm.workflow.bo.general.error-badarcprecondition', array('id' => $arc->getId()));
 			return false;
 		}
 		return true;
