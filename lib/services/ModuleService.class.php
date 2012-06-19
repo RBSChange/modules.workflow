@@ -1,27 +1,10 @@
 <?php
 /**
- * @package modules.workflow.lib.services
+ * @package modules.workflow
+ * @method workflow_ModuleService getInstance()
  */
 class workflow_ModuleService extends ModuleBaseService
-{
-	/**
-	 * Singleton
-	 * @var workflow_ModuleService
-	 */
-	private static $instance = null;
-
-	/**
-	 * @return workflow_ModuleService
-	 */
-	public static function getInstance()
-	{
-		if (is_null(self::$instance))
-		{
-			self::$instance = self::getServiceClassInstance(get_class());
-		}
-		return self::$instance;
-	}
-	
+{	
 	/**
 	 * @return void
 	 */

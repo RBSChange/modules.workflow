@@ -2,26 +2,10 @@
 /**
  * This service contains some methods used to process workflows.
  * @package modules.workflow
+ * @method workflow_WorkflowEngineService getInstance()
  */
-class workflow_WorkflowEngineService extends BaseService
+class workflow_WorkflowEngineService extends change_BaseService
 {
-	/**
-	 * @var workflow_WorkflowEngineService
-	 */
-	private static $instance;
-
-	/**
-	 * @return workflow_WorkflowEngineService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * Get the start task id corresponding to a given document.
 	 * @param integer $documentId

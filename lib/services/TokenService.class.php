@@ -1,26 +1,10 @@
 <?php
 /**
  * @package modules.workflow
+ * @method workflow_TokenService getInstance()
  */
 class workflow_TokenService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var workflow_TokenService
-	 */
-	private static $instance;
-
-	/**
-	 * @return workflow_TokenService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return workflow_persistentdocument_token
 	 */

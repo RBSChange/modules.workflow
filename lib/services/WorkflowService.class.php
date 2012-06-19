@@ -1,26 +1,10 @@
 <?php
 /**
  * @package modules.workflow
+ * @method workflow_WorkflowService getInstance()
  */
 class workflow_WorkflowService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var workflow_WorkflowService
-	 */
-	private static $instance;
-
-	/**
-	 * @return workflow_WorkflowService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return workflow_persistentdocument_workflow
 	 */

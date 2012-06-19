@@ -1,26 +1,10 @@
 <?php
 /**
  * @package module.workflow
+ * @method workflow_ListContextualplacesService getInstance()
  */
-class workflow_ListContextualplacesService extends BaseService
+class workflow_ListContextualplacesService extends change_BaseService
 {
-	/**
-	 * @var workflow_ListContextualplacesService
-	 */
-	private static $instance;
-	
-	/**
-	 * @return workflow_ListContextualplacesService
-	 */
-	public static function getInstance()
-	{
-		if (is_null(self::$instance))
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @var Array
 	 */

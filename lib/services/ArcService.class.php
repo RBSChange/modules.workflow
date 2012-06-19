@@ -1,25 +1,10 @@
 <?php
 /**
  * @package modules.workflow
+ * @method workflow_ArcService getInstance()
  */
 class workflow_ArcService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var workflow_ArcService
-	 */
-	private static $instance;
-
-	/**
-	 * @return workflow_ArcService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
 
 	/**
 	 * @return workflow_persistentdocument_arc

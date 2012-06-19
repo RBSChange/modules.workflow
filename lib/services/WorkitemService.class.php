@@ -1,29 +1,13 @@
 <?php
 /**
  * @package modules.workflow
+ * @method workflow_WorkitemService getInstance()
  */
 class workflow_WorkitemService extends f_persistentdocument_DocumentService
 {
 	const EXECUTION_SUCCESS = "__SUCCESS";
 	const EXECUTION_ERROR = "__ERROR";
 	const EXECUTION_NOEXECUTION = "__NOEXECUTION";
-
-	/**
-	 * @var workflow_WorkitemService
-	 */
-	private static $instance;
-
-	/**
-	 * @return workflow_WorkitemService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
 
 	/**
 	 * @return workflow_persistentdocument_workitem
