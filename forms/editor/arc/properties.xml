@@ -12,7 +12,6 @@
 			<constructor><![CDATA[
 				this.extendMethod("fireInitializeComplete", this.fireInitializeCompleteExtend);
 			]]></constructor>
-
 			<method name="fireInitializeCompleteExtend">
 				<parameter name="result" />
 				<body><![CDATA[

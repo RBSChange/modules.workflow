@@ -82,9 +82,9 @@ class workflow_persistentdocument_case extends workflow_persistentdocument_caseb
 	private $pendingCurrentUserDocumentEntries = array();
 	
 	/**
-	 * @param String $actionName
+	 * @param string $actionName
 	 * @param array $info
-	 * @param String $moduleName
+	 * @param string $moduleName
 	 */
 	public function addPendingCurrentUserDocumentEntry($actionName, $info, $moduleName)
 	{
@@ -92,13 +92,12 @@ class workflow_persistentdocument_case extends workflow_persistentdocument_caseb
 	}
 	
 	/**
-	 * @param String $actionName
+	 * @param string $actionName
 	 * @param array $info
-	 * @param String $moduleName
+	 * @param string $moduleName
 	 */
 	public function savePendingCurrentUserDocumentEntry()
 	{
-		Framework::debug(__METHOD__ . ' ' . count($this->pendingCurrentUserDocumentEntries) . ' entries to save');
 		foreach ($this->pendingCurrentUserDocumentEntries as $entry)
 		{
 			UserActionLoggerService::getInstance()->addCurrentUserDocumentEntry($entry[0], $this, $entry[1], $entry[2]);

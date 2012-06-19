@@ -2,7 +2,7 @@
 <panels>
 	<panel name="resume" />
 	<panel name="properties" />
-	<panel name="case" icon="document" labeli18n="m.workflow.bo.doceditor.case-panel.tab-label"/>
+	<panel name="case" icon="document" labeli18n="m.workflow.bo.doceditor.case-panel.tab-" />
 	<panel name="publication" />
 	<panel name="history" />
 	<panel name="create" />

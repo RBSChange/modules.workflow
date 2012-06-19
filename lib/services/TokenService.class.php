@@ -19,7 +19,7 @@ class workflow_TokenService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_workflow/token');
+		return $this->getPersistentProvider()->createQuery('modules_workflow/token');
 	}
 
 	/**

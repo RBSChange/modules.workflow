@@ -19,7 +19,7 @@ class workflow_CaseService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_workflow/case');
+		return $this->getPersistentProvider()->createQuery('modules_workflow/case');
 	}
 
 	/**
@@ -289,9 +289,9 @@ class workflow_CaseService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
-	 * @param Integer $workflowId
-	 * @param Integer $targetId
-	 * @return Integer
+	 * @param integer $workflowId
+	 * @param integer $targetId
+	 * @return integer
 	 */
 	public function getCountByWorkflow($workflowId, $targetId = null)
 	{
@@ -307,10 +307,10 @@ class workflow_CaseService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
-	 * @param Integer $workflowId
-	 * @param Integer $targetId
-	 * @param Integer $offset
-	 * @param Integer $limit
+	 * @param integer $workflowId
+	 * @param integer $targetId
+	 * @param integer $offset
+	 * @param integer $limit
 	 * @return workflow_persistentdocument_case[]
 	 */
 	public function getByWorkflow($workflowId, $targetId = null, $offset = null, $limit = null)
@@ -333,7 +333,7 @@ class workflow_CaseService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
-	 * @param Integer $targetId
+	 * @param integer $targetId
 	 * @return workflow_persistentdocument_case
 	 */
 	public function getByTargetId($targetId)
@@ -345,7 +345,7 @@ class workflow_CaseService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
-	 * @param Integer $targetId
+	 * @param integer $targetId
 	 * @return workflow_persistentdocument_case
 	 */
 	public function getAllByTargetId($targetId)
@@ -355,7 +355,7 @@ class workflow_CaseService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param workflow_persistentdocument_case $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function postSave($document, $parentNodeId = null)

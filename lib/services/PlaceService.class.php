@@ -20,7 +20,7 @@ class workflow_PlaceService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_workflow/place');
+		return $this->getPersistentProvider()->createQuery('modules_workflow/place');
 	}
 
 	/**

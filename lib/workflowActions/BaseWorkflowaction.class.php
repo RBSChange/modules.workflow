@@ -72,7 +72,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	}
 
 	/**
-	 * @return Integer
+	 * @return integer
 	 */
 	protected function getDocumentId()
 	{
@@ -197,7 +197,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	}
 	
 	/**
-	 * @param String $notificationCodeName
+	 * @param string $notificationCodeName
 	 * @return array array(websiteId, lang) by default, workflow's document websiteId and original lang
 	 */
 	public function getNotificationWebsiteIdAndLang($notificationCodeName)
@@ -207,8 +207,8 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	}
 
 	/**
-	 * @param String $name
-	 * @return String
+	 * @param string $name
+	 * @return string
 	 */
 	protected function getCaseParameter($name)
 	{
@@ -217,8 +217,8 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	}
 
 	/**
-	 * @param String $name
-	 * @param String $value
+	 * @param string $name
+	 * @param string $value
 	 */
 	protected function setCaseParameter($name, $value)
 	{
@@ -227,7 +227,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	}	
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	protected function getDecision()
 	{
@@ -235,7 +235,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	}
 
 	/**
-	 * @return String
+	 * @return string
 	 */
 	protected function getCommentary()
 	{

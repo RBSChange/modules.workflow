@@ -23,7 +23,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_workflow/workitem');
+		return $this->getPersistentProvider()->createQuery('modules_workflow/workitem');
 	}
 
 	/**
@@ -218,10 +218,10 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 	}
 	
 	/**
-	 * @param String $actionName
+	 * @param string $actionName
 	 * @param workflow_persistentdocument_case $document
 	 * @param array $info
-	 * @param String $moduleName
+	 * @param string $moduleName
 	 */
 	private function addCurrentUserDocumentEntry($actionName, $document, $info, $moduleName)
 	{
@@ -313,7 +313,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		$workitem->setPublicationstatus('TRASH');
 
 		// Cancel the tasks for the workitem.
-		$query = $this->pp->createQuery('modules_task/usertask');
+		$query = $this->getPersistentProvider()->createQuery('modules_task/usertask');
 		$query->createCriteria('workitem')->add(Restrictions::eq('id', $workitem->getId()));
 		$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLICATED')));
 		$tasksToCancel = $query->find();

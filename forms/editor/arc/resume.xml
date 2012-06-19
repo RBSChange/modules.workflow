@@ -9,8 +9,7 @@
 		<property name="status" labeli18n="m.uixul.bo.doceditor.property.status" />
 		<property name="workflow" labeli18n="m.uixul.bo.doceditor.property.workflow" />
 	</section>
-	<section name="history" linkedtab="history" actiontexti18n="m.uixul.bo.doceditor.section.action.view" labeli18n="m.uixul.bo.doceditor.section.history"
-		image="{IconsBase}/small/history.png">
+	<section name="history" linkedtab="history" actiontexti18n="m.uixul.bo.doceditor.section.action.view" labeli18n="m.uixul.bo.doceditor.section.history" image="{IconsBase}/small/history.png">
 		<property name="modificationdate" labeli18n="m.uixul.bo.doceditor.property.modificationdate" />
 	</section>
 </panel>

@@ -12,14 +12,14 @@ class workflow_ValidateWorkflowAction extends change_JSONAction
 		$this->logAction($workflow);
 		if ($workflow->isPublished())
 		{
-			$message = LocaleService::getInstance()->transBO('m.workflow.bo.actions.validate-workflow-success', array('ucf'));
+			$message = LocaleService::getInstance()->trans('m.workflow.bo.actions.validate-workflow-success', array('ucf'));
 		}
 		else
 		{
 			$message = $workflow->getDocumentService()->getUIActivePublicationStatusInfo($workflow, RequestContext::getInstance()->getLang());
 			if (!$message)
 			{
-				$message = LocaleService::getInstance()->transBO('m.workflow.bo.actions.validate-workflow-error', array('ucf'));
+				$message = LocaleService::getInstance()->trans('m.workflow.bo.actions.validate-workflow-error', array('ucf'));
 			}
 		}
 		return $this->sendJSON(array('message' => $message));

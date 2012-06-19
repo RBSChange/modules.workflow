@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <rights>
 	<actions>
 		<document name="rootfolder" />
@@ -11,7 +12,7 @@
 		<document name="workflow" />
 		<document name="workitem" />
 	</actions>
-	<roles>	
+	<roles>
 		<role name="Admin">
 			<permission name="LoadPermissions.*" />
 			<permission name="SavePermissions.*" />

@@ -255,7 +255,7 @@ class workflow_WorkflowEngineService extends change_BaseService
 
 	/**
 	 * Execute all the scheduled tasks that have to be executed.
-	 * @return Integer the number of executed scheduled tasks.
+	 * @return integer the number of executed scheduled tasks.
 	 */
 	public function executeScheduledTasks()
 	{

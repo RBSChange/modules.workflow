@@ -33,7 +33,7 @@ class workflow_WorkflowService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_workflow/workflow');
+		return $this->getPersistentProvider()->createQuery('modules_workflow/workflow');
 	}
 
 	/**
@@ -43,9 +43,9 @@ class workflow_WorkflowService extends f_persistentdocument_DocumentService
 	protected function preDelete($document)
 	{
 		// Delete all cases associated to the deleted workflow.
-		$query = $this->pp->createQuery('modules_workflow/case');
+		$query = $this->getPersistentProvider()->createQuery('modules_workflow/case');
 		$query->createCriteria('workflow')->add(Restrictions::eq('id', $document->getId()));
-		$casesArray = $this->pp->find($query);
+		$casesArray = $this->getPersistentProvider()->find($query);
 		foreach ($casesArray as $case)
 		{
 			$case->delete();
@@ -158,8 +158,8 @@ class workflow_WorkflowService extends f_persistentdocument_DocumentService
 	}
 
 	/**
-	 * @param String $startTaskId
-	 * @return Boolean
+	 * @param string $startTaskId
+	 * @return boolean
 	 */
 	public function hasWorkflowStartTaskId($startTaskId)
 	{

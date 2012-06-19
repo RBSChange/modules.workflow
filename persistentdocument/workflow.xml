@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd" model-version="1.0" icon="workflow-workflow" linked-to-root-module="true" has-url="false">
-  <properties>
-    <property name="description" type="LongString"/>
-    <property name="starttaskid" type="String" min-occurs="1" db-size="50"/>
-    <property name="errors" type="LongString"/>
-    <property name="arcs" type="modules_workflow/arc" max-occurs="-1" tree-node="true" cascade-delete="true"/>
-    <property name="places" type="modules_workflow/place" max-occurs="-1" tree-node="true" cascade-delete="true"/>
-    <property name="transitions" type="modules_workflow/transition" max-occurs="-1" tree-node="true" cascade-delete="true"/>
-  </properties>
+	<properties>
+		<property name="description" type="LongString" />
+		<property name="starttaskid" type="String" min-occurs="1" db-size="50" />
+		<property name="errors" type="LongString" />
+		<property name="arcs" type="modules_workflow/arc" max-occurs="-1" tree-node="true" cascade-delete="true" />
+		<property name="places" type="modules_workflow/place" max-occurs="-1" tree-node="true" cascade-delete="true" />
+		<property name="transitions" type="modules_workflow/transition" max-occurs="-1" tree-node="true" cascade-delete="true" />
+	</properties>
 </document>

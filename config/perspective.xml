@@ -8,8 +8,8 @@
 				<child model="modules_generic/systemfolder" />
 			</children>
 			<drops>
-				<drop model="modules_workflow/workflow" action="move"/>
-				<drop model="modules_generic/folder" action="move"/>
+				<drop model="modules_workflow/workflow" action="move" />
+				<drop model="modules_generic/folder" action="move" />
 			</drops>
 			<contextactions>
 				<contextaction name="edit" />
@@ -25,8 +25,8 @@
 				<child model="modules_generic/folder" />
 			</children>
 			<drops>
-				<drop model="modules_workflow/workflow" action="move"/>
-				<drop model="modules_generic/folder" action="move"/>
+				<drop model="modules_workflow/workflow" action="move" />
+				<drop model="modules_generic/folder" action="move" />
 			</drops>
 			<contextactions>
 				<contextaction name="edit" />
@@ -47,7 +47,7 @@
 				<contextaction name="openTreeNodeOrder" />
 				<contextaction name="openFolder" />
 			</contextactions>
-		</model>		
+		</model>
 		<model name="modules_workflow/workflow">
 			<children>
 				<child model="modules_workflow/place" from="places" />

@@ -5,7 +5,6 @@
  */
 class workflow_ArcService extends f_persistentdocument_DocumentService
 {
-
 	/**
 	 * @return workflow_persistentdocument_arc
 	 */
@@ -20,7 +19,7 @@ class workflow_ArcService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_workflow/arc');
+		return $this->getPersistentProvider()->createQuery('modules_workflow/arc');
 	}
 
 	/**

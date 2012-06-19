@@ -50,14 +50,14 @@ class workflow_LoadCasesForWorkflowAction extends change_JSONAction
 	private $statusLabels = array();
 	
 	/**
-	 * @param String $status
-	 * @return String
+	 * @param string $status
+	 * @return string
 	 */
 	private function getStatusLabel($status)
 	{
 		if (!isset($this->statusLabels[$status]))
 		{
-			$this->statusLabels[$status] = LocaleService::getInstance()->transBO('m.workflow.bo.doceditor.case-panel.status-' . strtolower($status), array('ucf'));
+			$this->statusLabels[$status] = LocaleService::getInstance()->trans('m.workflow.bo.doceditor.case-panel.status-' . strtolower($status), array('ucf'));
 		}
 		return $this->statusLabels[$status];
 	}

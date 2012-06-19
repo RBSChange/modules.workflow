@@ -34,7 +34,7 @@ class workflow_persistentdocument_workitem extends workflow_persistentdocument_w
 	}
 
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getExecActionName()
 	{

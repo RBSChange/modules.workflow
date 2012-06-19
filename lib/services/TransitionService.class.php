@@ -19,13 +19,13 @@ class workflow_TransitionService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_workflow/transition');
+		return $this->getPersistentProvider()->createQuery('modules_workflow/transition');
 	}
 
 	/**
 	 * Updates associated arcs' labels.
 	 * @param workflow_persistentdocument_transition $transition
-	 * @param Integer $parentNodeId Parent node ID where to save the document (optionnal).
+	 * @param integer $parentNodeId Parent node ID where to save the document (optionnal).
 	 * @return void
 	 */
 	public function postSave($transition, $parentNodeId = null)
