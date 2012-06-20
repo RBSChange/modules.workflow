@@ -96,8 +96,8 @@ class workflow_WorkflowEngineService extends change_BaseService
 			$user = users_UserService::getInstance()->getCurrentUser();
 			if ($user)
 			{
-			    $cs->setParameter($case, '__DOCUMENT_AUTHOR_ID', $user->getId());
-			    $cs->setParameter($case, 'workflowAuthor', $user->getFullname());
+				$cs->setParameter($case, '__DOCUMENT_AUTHOR_ID', $user->getId());
+				$cs->setParameter($case, 'workflowAuthor', $user->getFullname());
 			}
 			else
 			{
@@ -552,7 +552,7 @@ class workflow_WorkflowEngineService extends change_BaseService
 	 */
 	public function getDefaultNotificationParameters($document, $workitem = null, $usertask = null)
 	{
-	    $replacements = array();	    
+		$replacements = array();		
 		$replacements['documentId'] = $document->getId();
 		$replacements['documentLabel'] = $document->getLabel();
 		$replacements['documentLang'] = $document->getLang();
@@ -560,27 +560,27 @@ class workflow_WorkflowEngineService extends change_BaseService
 		$ds = $document->getDocumentService();
 		if (f_util_ClassUtils::methodExists($ds, 'getPathOf'))
 		{
-		    $replacements['documentPath'] = $ds->getPathOf($document);
+			$replacements['documentPath'] = $ds->getPathOf($document);
 		}
 		else
 		{
-		    $replacements['documentPath'] = '';
+			$replacements['documentPath'] = '';
 		}
 		
 		if ($workitem !== null)
 		{
-    		$transition = $workitem->getTransition();
-    		$replacements['transitionId'] = $transition->getId();
-    		$replacements['transitionLabel'] = $transition->getLabel();
-    
-    		$workflow = $transition->getWorkflow();
-    		$replacements['workflowId'] = $workflow->getId();
-    		$replacements['workflowLabel'] = $workflow->getLabel();
+			$transition = $workitem->getTransition();
+			$replacements['transitionId'] = $transition->getId();
+			$replacements['transitionLabel'] = $transition->getLabel();
+	
+			$workflow = $transition->getWorkflow();
+			$replacements['workflowId'] = $workflow->getId();
+			$replacements['workflowLabel'] = $workflow->getLabel();
 		}
 		if ($usertask !== null)
 		{
-		    $replacements['taskLabel'] = $usertask->getLabel();
-		    $replacements['taskDescription'] = $usertask->getDescription();
+			$replacements['taskLabel'] = $usertask->getLabel();
+			$replacements['taskDescription'] = $usertask->getDescription();
 		}
 			
 		$currentUser = users_UserService::getInstance()->getCurrentUser();

@@ -6,7 +6,7 @@ class workflow_Setup extends object_InitDataSetup
 		try
 		{
 			$scriptReader = import_ScriptReader::getInstance();
-       	 	$scriptReader->executeModuleScript('workflow', 'init.xml');
+			$scriptReader->executeModuleScript('workflow', 'init.xml');
 		}
 		catch (Exception $e)
 		{

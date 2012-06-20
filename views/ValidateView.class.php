@@ -35,17 +35,17 @@ class workflow_ValidateView extends change_View
 		$this->setAttribute('document', $document);
 
 		$this->setAttribute(
-           'cssInclusion',
-           website_StyleService::getInstance()
-	    	  ->registerStyle('modules.dashboard.dashboard')
-	    	  ->registerStyle('modules.uixul.bindings')
-	    	  ->registerStyle('modules.uixul.backoffice')
-	    	  ->execute('xul')
-	    );
+			'cssInclusion',
+			website_StyleService::getInstance()
+				->registerStyle('modules.dashboard.dashboard')
+				->registerStyle('modules.uixul.bindings')
+				->registerStyle('modules.uixul.backoffice')
+				->execute('xul')
+		);
 
 		// include JavaScript
 		$jss = website_JsService::getInstance();
 		$jss->registerScript('modules.uixul.lib.default')->registerScript('modules.dashboard.lib.js.dashboardwidget');
-        $this->setAttribute('scriptInclusion', $jss->executeInline('xul'));
+		$this->setAttribute('scriptInclusion', $jss->executeInline('xul'));
 	}
 }

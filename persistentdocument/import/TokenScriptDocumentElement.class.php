@@ -5,11 +5,11 @@
  */
 class workflow_TokenScriptDocumentElement extends import_ScriptDocumentElement
 {
-    /**
-     * @return workflow_persistentdocument_token
-     */
-    protected function initPersistentDocument()
-    {
-    	return workflow_TokenService::getInstance()->getNewDocumentInstance();
-    }
+	/**
+	 * @return workflow_persistentdocument_token
+	 */
+	protected function initPersistentDocument()
+	{
+		return workflow_TokenService::getInstance()->getNewDocumentInstance();
+	}
 }
