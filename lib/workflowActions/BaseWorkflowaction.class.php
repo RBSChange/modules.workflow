@@ -103,10 +103,6 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	protected function changeDocumentStatus($newStatus)
 	{
 		$document = $this->getDocument();
-		if (Framework::isDebugEnabled())
-		{
-			Framework::debug(__METHOD__ . ' : change document ' . $document->getId() . ' status from ' . $document->getPublicationStatus() . ' to ' . $newStatus);
-		}
 		$document->setPublicationstatus($newStatus);
 		$document->save();
 	}
@@ -127,7 +123,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 			$user = users_persistentdocument_user::getInstanceById($userId);
 			return $this->sendNotificationToUserCallback($codeName, $user, $callback, $callbackParameter);
 		}
-		else if (Framework::isInfoEnabled())
+		elseif (Framework::isInfoEnabled())
 		{
 			Framework::info(__METHOD__ . '(codename = ' . $codeName . '): there is no user to send notification');
 		}
@@ -150,7 +146,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 			$user = users_persistentdocument_user::getInstanceById($userId);
 			return $this->sendSuffixedNotificationToUserCallback($codeName, $suffix, $user, $callback, $callbackParameter);
 		}
-		else if (Framework::isInfoEnabled())
+		elseif (Framework::isInfoEnabled())
 		{
 			Framework::info(__METHOD__ . '(codename = ' . $codeName . '): there is no user to send notification');
 		}
@@ -161,7 +157,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 * Send a notification to the document author with the default sender. The notification replacements are returned by the callback function.
 	 * @param string $codeName
 	 * @param users_persistentdocument_user $user
-	 * @param string $callback function name
+	 * @param array $callback
 	 * @param mixed $callbackParameter
 	 * @return boolean
 	 */
@@ -169,11 +165,16 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	{
 		list($websiteId, $lang) = $this->getNotificationWebsiteIdAndLang($codeName);
 		$notification = notification_NotificationService::getInstance()->getConfiguredByCodeName($codeName, $websiteId, $lang);
-		if ($notification !== null)
+		if ($notification === null)
 		{
-			$notification->setSendingModuleName('workflow');
+			return true;
 		}
-		return $user->getDocumentService()->sendNotificationToUserCallback($notification, $user, $callback, $callbackParameter);
+		$notification->setSendingModuleName('workflow');
+		if (is_array($callback) && count($callback) == 2)
+		{
+			$notification->registerCallback($callback[0], $callback[1], $callbackParameter);
+		}
+		return $notification->sendToUser($user);
 	}
 
 	/**
@@ -189,11 +190,16 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	{
 		list($websiteId, $lang) = $this->getNotificationWebsiteIdAndLang($codeName);
 		$notification = notification_NotificationService::getInstance()->getConfiguredByCodeNameAndSuffix($codeName, $suffix, $websiteId, $lang);
-		if ($notification !== null)
+		if ($notification === null)
 		{
-			$notification->setSendingModuleName('workflow');
+			return true;
 		}
-		return $user->getDocumentService()->sendNotificationToUserCallback($notification, $user, $callback, $callbackParameter);
+		$notification->setSendingModuleName('workflow');
+		if (is_array($callback) && count($callback) == 2)
+		{
+			$notification->registerCallback($callback[0], $callback[1], $callbackParameter);
+		}
+		return $notification->sendToUser($user);
 	}
 	
 	/**
