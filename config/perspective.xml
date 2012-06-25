@@ -58,6 +58,8 @@
 				<contextaction name="edit" />
 				<contextaction name="delete" />
 				<contextaction name="validateWorkflow" />
+				<contextaction name="deactivated" />
+				<contextaction name="reactivate" />
 				<groupactions name="create_">
 					<contextaction name="createPlace" />
 					<contextaction name="createTransition" />
@@ -88,19 +90,23 @@
 		<toolbarbutton name="edit" />
 		<toolbarbutton name="delete" />
 		<toolbarbutton name="validateWorkflow" />
+		<toolbarbutton name="deactivated" />
+		<toolbarbutton name="reactivate" />
 	</toolbar>
 	<actions>
-		<action name="delete" permission="Delete" icon="delete" labeli18n="m.uixul.bo.actions.Delete" />
+		<action name="delete" permission="Delete" icon="delete" labeli18n="m.uixul.bo.actions.delete" />
 		<action name="edit" single="true" permission="Load" icon="edit" labeli18n="m.uixul.bo.actions.Edit" />
-		<action name="validateWorkflow" single="true" permission="Activate" icon="check" labeli18n="m.workflow.bo.actions.Validate-Workflow" />
+		<action name="validateWorkflow" single="true" permission="Activate" icon="check" labeli18n="m.workflow.bo.actions.validate-workflow" />
 		<action name="create_" actions="createPlace,createTransition,createArc" icon="add" />
-		<action name="createPlace" group="create_" permission="Insert_place" icon="add" labeli18n="m.workflow.bo.actions.Create-Place" />
-		<action name="createTransition" group="create_" permission="Insert_transition" icon="add" labeli18n="m.workflow.bo.actions.Create-Transition" />
-		<action name="createArc" group="create_" permission="Insert_arc" icon="add" labeli18n="m.workflow.bo.actions.Create-Arc" />
-		<action name="createFolder" single="true" permission="Insert_folder" icon="create-folder" labeli18n="m.uixul.bo.actions.Create-folder" />
-		<action name="createWorkflow" icon="add" permission="Insert_workflow" labeli18n="m.workflow.bo.actions.Create-Workflow" />
-		<action name="openTreeNodeOrder" single="true" permission="Order" icon="sort" labeli18n="m.uixul.bo.actions.Set-children-order" />
-		<action name="openFolder" icon="open-folder" labeli18n="m.uixul.bo.actions.OpenFolder" />
-		<action name="refresh" single="true" icon="refresh" labeli18n="m.uixul.bo.actions.Refresh" />
+		<action name="createPlace" group="create_" permission="Insert_place" icon="add" labeli18n="m.workflow.bo.actions.create-place" />
+		<action name="createTransition" group="create_" permission="Insert_transition" icon="add" labeli18n="m.workflow.bo.actions.create-transition" />
+		<action name="createArc" group="create_" permission="Insert_arc" icon="add" labeli18n="m.workflow.bo.actions.create-arc" />
+		<action name="createFolder" single="true" permission="Insert_folder" icon="create-folder" labeli18n="m.uixul.bo.actions.create-folder" />
+		<action name="createWorkflow" icon="add" permission="Insert_workflow" labeli18n="m.workflow.bo.actions.create-workflow" />
+		<action name="openTreeNodeOrder" single="true" permission="Order" icon="sort" labeli18n="m.uixul.bo.actions.set-children-order" />
+		<action name="openFolder" icon="open-folder" labeli18n="m.uixul.bo.actions.openfolder" />
+		<action name="refresh" single="true" icon="refresh" labeli18n="m.uixul.bo.actions.refresh" />
+		<action name="deactivated" permission="Deactivated" icon="deactivated" labeli18n="m.uixul.bo.actions.deactivate"/>
+		<action name="reactivate" permission="ReActivate" icon="reactivate" labeli18n="m.uixul.bo.actions.reactivate"/>
 	</actions>
 </perspective>
