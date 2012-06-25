@@ -54,6 +54,19 @@ class workflow_WorkflowService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param workflow_persistentdocument_workflow $document
+	 * @param Integer $parentNodeId
+	 */
+	protected function postInsert($document, $parentNodeId)
+	{
+		// Replace linked-to-root-module document model attribute.
+		if ($document->getTreeId() === null)
+		{
+			TreeService::getInstance()->newLastChild(ModuleService::getInstance()->getRootFolderId('workflow'), $document->getId());
+		}
+	}
+	
+	/**
+	 * @param workflow_persistentdocument_workflow $document
 	 * @return boolean true if the document is publishable, false if it is not.
 	 */
 	public function isPublishable($document)
