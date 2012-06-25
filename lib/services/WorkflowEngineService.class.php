@@ -387,9 +387,8 @@ class workflow_WorkflowEngineService extends change_BaseService
 		// Calculate dates.
 		if ($date === null)
 		{
-			$date = date('Y-m-d H:i:s');
+			$date = date_Calendar::getInstance()->toString();
 		}
-
 		return array_shift($this->execGetActiveWorkflowDefinitions($startTaskId, $date, $date, false, true));
 	}
 
