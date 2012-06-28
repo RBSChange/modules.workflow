@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd" model-version="1.0" icon="workflow-arc" use-publication-dates="false" has-url="false">
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/schema/persistentdocument-4.0.xsd" model-version="1.0" icon="workflow-arc" use-publication-dates="false" has-url="false">
 	<properties>
-		<property name="transition" type="modules_workflow/transition" min-occurs="1" from-list="modules_workflow/contextualtransitions" />
-		<property name="place" type="modules_workflow/place" min-occurs="1" from-list="modules_workflow/contextualplaces" />
+		<property name="transition" type="Document" min-occurs="1" from-list="modules_workflow/contextualtransitions" document-type="modules_workflow/transition" />
+		<property name="place" type="Document" min-occurs="1" from-list="modules_workflow/contextualplaces" document-type="modules_workflow/place" />
 		<property name="direction" type="String" min-occurs="1" db-size="3" from-list="modules_workflow/direction" />
 		<property name="arctype" type="String" min-occurs="1" db-size="10" from-list="modules_workflow/arctype" />
 		<property name="precondition" type="String" db-size="255" />

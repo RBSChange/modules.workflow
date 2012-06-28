@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd" model-version="1.0" icon="token" use-publication-dates="false" has-url="false" backoffice-indexable="false">
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/schema/persistentdocument-4.0.xsd" model-version="1.0" icon="token" use-publication-dates="false" has-url="false" backoffice-indexable="false">
 	<properties>
-		<property name="transition" type="modules_workflow/transition" min-occurs="1" />
+		<property name="transition" type="Document" min-occurs="1" document-type="modules_workflow/transition" />
 		<property name="documentid" type="Integer" min-occurs="1" />
 		<property name="deadline" type="DateTime" />
 		<property name="userid" type="Integer" />
