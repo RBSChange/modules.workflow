@@ -19,22 +19,22 @@
 	<action name="validateWorkflow">
 		<parameter name="listWidget" />
 		<body><![CDATA[
-	    	var id = listWidget.getSelectedIds()[0];
+			var id = listWidget.getSelectedIds()[0];
 			this.executeJSON("ValidateWorkflow", {cmpref: id});
-	    ]]></body>
+		]]></body>
 	</action>
 	<action name="onValidateWorkflowSuccess">
 		<parameter name="result" />
 		<body><![CDATA[
-	    	getController().alert(result.contents.message);
-	    	this.refreshMainViewDeck();
-	    ]]></body>
+			getController().alert(result.contents.message);
+			this.refreshMainViewDeck();
+		]]></body>
 	</action>
 	<action name="onValidateWorkflowError">
 		<parameter name="result" />
 		<body><![CDATA[
-	    	getController().alert(result.contents.message);
-	    	this.refreshMainViewDeck();
-	    ]]></body>
+			getController().alert(result.contents.message);
+			this.refreshMainViewDeck();
+		]]></body>
 	</action>
 </actions>

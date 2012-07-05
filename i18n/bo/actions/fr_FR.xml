@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.workflow.bo.actions" lcid="fr_FR">
 	<key id="create_">créer</key>
 	<key id="create-workflow">créer un workflow</key>

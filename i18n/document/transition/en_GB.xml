@@ -1,24 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.workflow.document.transition" lcid="en_GB">
-  <key id="actionname">action name</key>
-  <key id="actionname-help">Name of the action that will be carried out by the transition.</key>
-  <key id="cancellationnotification">cancellation notification</key>
-  <key id="cancellationnotification-help">This notification is sent to the task's owner after it has been cancelled.</key>
-  <key id="creationnotification">creation notification</key>
-  <key id="creationnotification-help">This notification is sent to the task's owner after it has been created.</key>
-  <key id="description">description</key>
-  <key id="description-help">This describes the transition.</key>
-  <key id="document-name">transition</key>
-  <key id="label">label</key>
-  <key id="label-help">This is the name of the transition.</key>
-  <key id="roleid">role</key>
-  <key id="roleid-help">The role allowing the transition to be performed.</key>
-  <key id="taskid">task</key>
-  <key id="taskid-help">This is the task identifier.</key>
-  <key id="terminationnotification">termination notification</key>
-  <key id="terminationnotification-help">This notification is sent to the task's owner after its execution has finished.</key>
-  <key id="timelimit">delay</key>
-  <key id="timelimit-help">delay (in hours) after which the transition will be carried out. This delay  is only used in the case of scheduled transitions.</key>
-  <key id="trigger">trigger</key>
-  <key id="trigger-help">Type of event that can trigger this transition.</key>
+	<key id="actionname">action name</key>
+	<key id="actionname-help">Name of the action that will be carried out by the transition.</key>
+	<key id="cancellationnotification">cancellation notification</key>
+	<key id="cancellationnotification-help">This notification is sent to the task's owner after it has been cancelled.</key>
+	<key id="creationnotification">creation notification</key>
+	<key id="creationnotification-help">This notification is sent to the task's owner after it has been created.</key>
+	<key id="description">description</key>
+	<key id="description-help">This describes the transition.</key>
+	<key id="document-name">transition</key>
+	<key id="label">label</key>
+	<key id="label-help">This is the name of the transition.</key>
+	<key id="roleid">role</key>
+	<key id="roleid-help">The role allowing the transition to be performed.</key>
+	<key id="taskid">task</key>
+	<key id="taskid-help">This is the task identifier.</key>
+	<key id="terminationnotification">termination notification</key>
+	<key id="terminationnotification-help">This notification is sent to the task's owner after its execution has finished.</key>
+	<key id="timelimit">delay</key>
+	<key id="timelimit-help">delay (in hours) after which the transition will be carried out. This delay	is only used in the case of scheduled transitions.</key>
+	<key id="trigger">trigger</key>
+	<key id="trigger-help">Type of event that can trigger this transition.</key>
 </i18n>

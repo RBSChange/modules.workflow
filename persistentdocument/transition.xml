@@ -3,7 +3,7 @@
 	<properties>
 		<property name="description" type="LongString" />
 		<property name="actionname" type="String" db-size="255" />
-		<property name="trigger" type="String" min-occurs="1" db-size="10" from-list="modules_workflow/trigger" />
+		<property name="trigger" type="String" db-size="10" from-list="modules_workflow/trigger" required="true" />
 		<property name="timelimit" type="Integer" />
 		<property name="taskid" type="String" db-size="50" />
 		<property name="roleid" type="String" db-size="50" />

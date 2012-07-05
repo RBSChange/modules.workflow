@@ -23,7 +23,7 @@ class workflow_ValidateView extends change_View
 			$document = DocumentHelper::getPropertiesOf($workDocument);
 			$document['id'] = $workDocument->getId();
 			$document['taskId'] = $task->getId();
-			$document["type"] = f_Locale::translate($model->getLabel()) . " (" . $model->getDocumentName() . ")";
+			$document["type"] = LocaleService::getInstance()->trans($model->getLabelKey()) . " (" . $model->getDocumentName() . ")";
 			$document['previewUrl'] = LinkHelper::getDocumentUrl($workDocument, null,
 				array(website_DisplayAction::DISABLE_PUBLICATION_WORKFLOW => 'true', 'lang' => $lang));
 			RequestContext::getInstance()->endI18nWork();

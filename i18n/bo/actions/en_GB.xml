@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.workflow.bo.actions" lcid="en_GB">
-  <key id="create_">create</key>
-  <key id="create-workflow">create a workflow</key>
-  <key id="create-place">create a place</key>
-  <key id="create-transition">create a transition</key>
-  <key id="create-arc">create an arrow</key>
-  <key id="validate-workflow">validate the workflow</key>
-  <key id="validate-workflow-error">The workflow has not been published.</key>
-  <key id="validate-workflow-success">The workflow has been published.</key>
+	<key id="create_">create</key>
+	<key id="create-workflow">create a workflow</key>
+	<key id="create-place">create a place</key>
+	<key id="create-transition">create a transition</key>
+	<key id="create-arc">create an arrow</key>
+	<key id="validate-workflow">validate the workflow</key>
+	<key id="validate-workflow-error">The workflow has not been published.</key>
+	<key id="validate-workflow-success">The workflow has been published.</key>
 </i18n>

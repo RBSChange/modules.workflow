@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/schema/persistentdocument-4.0.xsd" model-version="1.0" icon="workflow-arc" use-publication-dates="false" has-url="false">
 	<properties>
-		<property name="transition" type="Document" min-occurs="1" from-list="modules_workflow/contextualtransitions" document-type="modules_workflow/transition" />
-		<property name="place" type="Document" min-occurs="1" from-list="modules_workflow/contextualplaces" document-type="modules_workflow/place" />
-		<property name="direction" type="String" min-occurs="1" db-size="3" from-list="modules_workflow/direction" />
-		<property name="arctype" type="String" min-occurs="1" db-size="10" from-list="modules_workflow/arctype" />
+		<property name="transition" type="Document" from-list="modules_workflow/contextualtransitions" document-type="modules_workflow/transition" required="true" />
+		<property name="place" type="Document" from-list="modules_workflow/contextualplaces" document-type="modules_workflow/place" required="true" />
+		<property name="direction" type="String" db-size="3" from-list="modules_workflow/direction" required="true" />
+		<property name="arctype" type="String" db-size="10" from-list="modules_workflow/arctype" required="true" />
 		<property name="precondition" type="String" db-size="255" />
 	</properties>
 	<statuses default="ACTIVE" />

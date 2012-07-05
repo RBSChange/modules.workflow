@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.workflow.bo.doceditor.case-panel" lcid="en_GB">
-  <key id="tab-label">instances</key>
-  <key id="target">target</key>
-  <key id="creation-date">start</key>
-  <key id="last-modification-date">last modification</key>
-  <key id="view-informations">view information</key>
-  <key id="status">status</key>
-  <key id="status-publicated">in progress</key>
-  <key id="status-filed">completed</key>
-  <key id="status-trash">cancelled</key>
-  <key id="filter-by-target-id">filter by target ID</key>
-  <key id="refresh">refresh</key>
+	<key id="tab-label">instances</key>
+	<key id="target">target</key>
+	<key id="creation-date">start</key>
+	<key id="last-modification-date">last modification</key>
+	<key id="view-informations">view information</key>
+	<key id="status">status</key>
+	<key id="status-publicated">in progress</key>
+	<key id="status-filed">completed</key>
+	<key id="status-trash">cancelled</key>
+	<key id="filter-by-target-id">filter by target ID</key>
+	<key id="refresh">refresh</key>
 </i18n>

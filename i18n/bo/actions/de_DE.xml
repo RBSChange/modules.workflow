@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.workflow.bo.actions" lcid="de_DE">
-  <key id="create_">neu</key>
-  <key id="create-workflow">einen Workflow erstellen</key>
-  <key id="create-place">einen Platz erstellen</key>
-  <key id="create-transition">einen Übergang erstellen</key>
-  <key id="create-arc">einen Bogen erstellen</key>
-  <key id="validate-workflow">den Workflow freigeben</key>
+	<key id="create_">neu</key>
+	<key id="create-workflow">einen Workflow erstellen</key>
+	<key id="create-place">einen Platz erstellen</key>
+	<key id="create-transition">einen Übergang erstellen</key>
+	<key id="create-arc">einen Bogen erstellen</key>
+	<key id="validate-workflow">den Workflow freigeben</key>
 </i18n>

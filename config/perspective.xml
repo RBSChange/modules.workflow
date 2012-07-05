@@ -106,7 +106,7 @@
 		<action name="openTreeNodeOrder" single="true" permission="Order" icon="sort" labeli18n="m.uixul.bo.actions.set-children-order" />
 		<action name="openFolder" icon="open-folder" labeli18n="m.uixul.bo.actions.openfolder" />
 		<action name="refresh" single="true" icon="refresh" labeli18n="m.uixul.bo.actions.refresh" />
-		<action name="deactivated" permission="Deactivated" icon="deactivated" labeli18n="m.uixul.bo.actions.deactivate"/>
-		<action name="reactivate" permission="ReActivate" icon="reactivate" labeli18n="m.uixul.bo.actions.reactivate"/>
+		<action name="deactivated" permission="Deactivated" icon="deactivated" labeli18n="m.uixul.bo.actions.deactivate" />
+		<action name="reactivate" permission="ReActivate" icon="reactivate" labeli18n="m.uixul.bo.actions.reactivate" />
 	</actions>
 </perspective>

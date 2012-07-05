@@ -193,18 +193,18 @@
 				<xul:vbox class="filters" />
 				<xul:toolbox anonid="pagination-toolbox" orient="horizontal" class="change-toolbox">
 					<xul:toolbar align="center" pack="center" anonid="navigationtb" orient="horizontal" flex="1" class="change-toolbar">
-						<xul:toolbarbutton anonid="navigationbegin" disabled="true" oncommand="navigateBegin()" image="{IconsBase}/small/control-begin.png" tooltiptext="${trans:m.uixul.bo.general.Navigate-begin,ucf,attr}" />
-						<xul:toolbarbutton anonid="navigationback2" disabled="true" oncommand="navigateBack(true)" image="{IconsBase}/small/control-double-backward.png" tooltiptext="${trans:m.uixul.bo.general.Navigate-back-quick,ucf,attr}" />
-						<xul:toolbarbutton anonid="navigationback" disabled="true" oncommand="navigateBack()" image="{IconsBase}/small/control-backward.png" tooltiptext="${trans:m.uixul.bo.general.Navigate-back,ucf,attr}" />
+						<xul:toolbarbutton anonid="navigationbegin" disabled="true" oncommand="navigateBegin()" image="{IconsBase}/small/control-begin.png" tooltiptext="${trans:m.uixul.bo.general.navigate-begin,ucf,attr}" />
+						<xul:toolbarbutton anonid="navigationback2" disabled="true" oncommand="navigateBack(true)" image="{IconsBase}/small/control-double-backward.png" tooltiptext="${trans:m.uixul.bo.general.navigate-back-quick,ucf,attr}" />
+						<xul:toolbarbutton anonid="navigationback" disabled="true" oncommand="navigateBack()" image="{IconsBase}/small/control-backward.png" tooltiptext="${trans:m.uixul.bo.general.navigate-back,ucf,attr}" />
 						<xul:hbox align="center">
-							<xul:label anonid="navigationpagelabel" value="${trans:m.uixul.bo.general.Documents,ucf,attr}" />
+							<xul:label anonid="navigationpagelabel" value="${trans:m.uixul.bo.general.documents,ucf,attr}" />
 							<xul:label anonid="navigationindex" value="0" />
 							<xul:label anonid="navigationpageseparator" value="${trans:m.uixul.bo.general.out-of,ucf,attr}" />
 							<xul:label anonid="navigationtotal" value="0" />
 						</xul:hbox>
-						<xul:toolbarbutton anonid="navigationnext" disabled="true" oncommand="navigateNext()" image="{IconsBase}/small/control-forward.png" tooltiptext="${trans:m.uixul.bo.general.Navigate-next,ucf,attr}" />
-						<xul:toolbarbutton anonid="navigationnext2" disabled="true" oncommand="navigateNext(true)" image="{IconsBase}/small/control-double-forward.png" tooltiptext="${trans:m.uixul.bo.general.Navigate-next-quick,ucf,attr}" />
-						<xul:toolbarbutton anonid="navigationend" disabled="true" oncommand="navigateEnd()" image="{IconsBase}/small/control-end.png" tooltiptext="${trans:m.uixul.bo.general.Navigate-end,ucf,attr}" />
+						<xul:toolbarbutton anonid="navigationnext" disabled="true" oncommand="navigateNext()" image="{IconsBase}/small/control-forward.png" tooltiptext="${trans:m.uixul.bo.general.navigate-next,ucf,attr}" />
+						<xul:toolbarbutton anonid="navigationnext2" disabled="true" oncommand="navigateNext(true)" image="{IconsBase}/small/control-double-forward.png" tooltiptext="${trans:m.uixul.bo.general.navigate-next-quick,ucf,attr}" />
+						<xul:toolbarbutton anonid="navigationend" disabled="true" oncommand="navigateEnd()" image="{IconsBase}/small/control-end.png" tooltiptext="${trans:m.uixul.bo.general.navigate-end,ucf,attr}" />
 					</xul:toolbar>
 				</xul:toolbox>
 					<xul:grid flex="1">
@@ -221,7 +221,7 @@
 	<binding id="cCasePanelFilters">
 		<content>
 			<xul:hbox align="center">
-				<xul:label value="${trans:m.workflow.bo.doceditor.case-panel.Filter-by-target-id,ucf,attr}" /> <xul:cfield anonid="targetId" name="targetId" fieldtype="integer" hidehelp="true" hidespinbuttons="true" /> <xul:button action="refresh" image="{IconsBase}/small/refresh.png" label="${trans:m.workflow.bo.doceditor.case-panel.Refresh,ucf,attr}" />
+				<xul:label value="${trans:m.workflow.bo.doceditor.case-panel.filter-by-target-id,ucf,attr}" /> <xul:cfield anonid="targetId" name="targetId" fieldtype="integer" hidehelp="true" hidespinbuttons="true" /> <xul:button action="refresh" image="{IconsBase}/small/refresh.png" label="${trans:m.workflow.bo.doceditor.case-panel.refresh,ucf,attr}" />
 			</xul:hbox>
 		</content>
 	</binding>
@@ -238,10 +238,10 @@
 	
 	<binding id="cCasePanelHead">
 		<content>
-			<xul:label value="${trans:m.workflow.bo.doceditor.case-panel.Target,ucf,attr}" />
-			<xul:label value="${trans:m.workflow.bo.doceditor.case-panel.Creation-date,ucf,attr}" />
-			<xul:label value="${trans:m.workflow.bo.doceditor.case-panel.Last-modification-date,ucf,attr}" />
-			<xul:label value="${trans:m.workflow.bo.doceditor.case-panel.Status,ucf,attr}" />
+			<xul:label value="${trans:m.workflow.bo.doceditor.case-panel.target,ucf,attr}" />
+			<xul:label value="${trans:m.workflow.bo.doceditor.case-panel.creation-date,ucf,attr}" />
+			<xul:label value="${trans:m.workflow.bo.doceditor.case-panel.last-modification-date,ucf,attr}" />
+			<xul:label value="${trans:m.workflow.bo.doceditor.case-panel.status,ucf,attr}" />
 			<xul:label />
 		</content>
 	</binding>
@@ -253,7 +253,7 @@
 			<xul:label xbl:inherits="value=modificationdate" />
 			<xul:label xbl:inherits="value=statusLabel" />
 			<xul:toolbar class="actions">
-				<xul:toolbarbutton xbl:inherits="documentId" action="edit" hidespinbuttons="true" image="{IconsBase}/small/edit.png" tooltiptext="${trans:m.workflow.bo.doceditor.case-panel.View-informations,ucf,attr}" />
+				<xul:toolbarbutton xbl:inherits="documentId" action="edit" hidespinbuttons="true" image="{IconsBase}/small/edit.png" tooltiptext="${trans:m.workflow.bo.doceditor.case-panel.view-informations,ucf,attr}" />
 			</xul:toolbar>
 		</content>
 	</binding>

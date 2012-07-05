@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.workflow.document.workflow" lcid="fr_FR">
 	<key id="document-name">workflow</key>
 	<key id="edition-form-title">propriétés du workflow</key>

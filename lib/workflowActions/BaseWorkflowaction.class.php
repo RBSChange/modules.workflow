@@ -272,7 +272,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	public function getCancellationNotifParameters($usertask)
 	{
 		// Add the decision.
-		$decision = f_Locale::translate('&modules.workflow.bo.general.decision-' . strtolower($this->getDecision()) . ';');
+		$decision = LocaleService::getInstance()->trans('m.workflow.bo.general.decision-' . strtolower($this->getDecision()));
 		return array_merge($this->getCommonNotifParameters($usertask), array('decision' => $decision));
 	}
 	
@@ -283,7 +283,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	public function getTerminationNotifParameters($usertask)
 	{
 		// Add the decision.
-		$decision = f_Locale::translate('&modules.workflow.bo.general.decision-' . strtolower($this->getDecision()) . ';');
+		$decision = LocaleService::getInstance()->trans('m.workflow.bo.general.decision-' . strtolower($this->getDecision()));
 		return array_merge($this->getCommonNotifParameters($usertask), array('decision' => $decision));
 	}
 	

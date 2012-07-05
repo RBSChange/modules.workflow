@@ -83,7 +83,7 @@ class commands_workflow_AddWordkflowAction extends c_ChangescriptCommand
 	 */
 	private function generateAction($moduleName, $actionName)
 	{
-		$folder = f_util_FileUtils::buildWebeditPath('modules', $moduleName, 'lib', 'workflowactions');
+		$folder = f_util_FileUtils::buildProjectPath('modules', $moduleName, 'lib', 'workflowactions');
 		$file = $folder . DIRECTORY_SEPARATOR . $actionName . 'WorkflowAction.php';
 		$class = $moduleName . '_' . $actionName . 'WorkflowAction';
 		
@@ -94,7 +94,7 @@ class commands_workflow_AddWordkflowAction extends c_ChangescriptCommand
 		else
 		{
 			$generator = new builder_Generator();
-			$generator->setTemplateDir(f_util_FileUtils::buildWebeditPath('modules', 'workflow', 'templates', 'builder'));
+			$generator->setTemplateDir(f_util_FileUtils::buildProjectPath('modules', 'workflow', 'templates', 'builder'));
 			$generator->assign_by_ref('author', $this->getAuthor());
 			$generator->assign_by_ref('name', $actionName);
 			$generator->assign_by_ref('module', $moduleName);

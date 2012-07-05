@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <script>
-  <binding fileName="modules/useractionlogger/persistentdocument/import/useractionlogger_binding.xml"/>
-  <actiondef modulename="workflow" actionname="execute.workitem.user" label="modules.workflow.bo.useractionlogger.execute-workitem-user"/>
-  <actiondef modulename="workflow" actionname="execute.workitem.auto" label="modules.workflow.bo.useractionlogger.execute-workitem-auto"/>
-  <actiondef modulename="workflow" actionname="execute.workitem.time" label="modules.workflow.bo.useractionlogger.execute-workitem-time"/>
-  <actiondef modulename="workflow" actionname="execute.workitem.msg" label="modules.workflow.bo.useractionlogger.execute-workitem-msg"/>
-  <actiondef modulename="workflow" actionname="execute.workitem.auto" label="modules.workflow.bo.useractionlogger.execute-workitem-auto"/>
-  <actiondef modulename="workflow" actionname="validateworkflow.workflow" label="m.workflow.bo.useractionlogger.validateworkflow-workflow"/>
-  <actiondef modulename="workflow" actionname="savepermissions.rootfolder" label="m.workflow.bo.useractionlogger.savepermissions-rootfolder"/>
-  <actiondef modulename="workflow" actionname="deactivated.workflow" label="m.workflow.bo.useractionlogger.deactivated-workflow"/>
-  <actiondef modulename="workflow" actionname="reactivate.workflow" label="m.workflow.bo.useractionlogger.reactivate-workflow"/>
+	<binding fileName="modules/useractionlogger/persistentdocument/import/useractionlogger_binding.xml" />
+	<actiondef modulename="workflow" actionname="execute.workitem.user" label="modules.workflow.bo.useractionlogger.execute-workitem-user" />
+	<actiondef modulename="workflow" actionname="execute.workitem.auto" label="modules.workflow.bo.useractionlogger.execute-workitem-auto" />
+	<actiondef modulename="workflow" actionname="execute.workitem.time" label="modules.workflow.bo.useractionlogger.execute-workitem-time" />
+	<actiondef modulename="workflow" actionname="execute.workitem.msg" label="modules.workflow.bo.useractionlogger.execute-workitem-msg" />
+	<actiondef modulename="workflow" actionname="execute.workitem.auto" label="modules.workflow.bo.useractionlogger.execute-workitem-auto" />
+	<actiondef modulename="workflow" actionname="validateworkflow.workflow" label="m.workflow.bo.useractionlogger.validateworkflow-workflow" />
+	<actiondef modulename="workflow" actionname="savepermissions.rootfolder" label="m.workflow.bo.useractionlogger.savepermissions-rootfolder" />
+	<actiondef modulename="workflow" actionname="deactivated.workflow" label="m.workflow.bo.useractionlogger.deactivated-workflow" />
+	<actiondef modulename="workflow" actionname="reactivate.workflow" label="m.workflow.bo.useractionlogger.reactivate-workflow" />
 </script>
