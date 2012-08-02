@@ -13,4 +13,8 @@
   <key id="log-deactivated-workflow">log deactivated workflow</key>
   <key id="reactivate-workflow">reactivate.workflow {documentlabel}</key>
   <key id="log-reactivate-workflow">log reactivate workflow</key>
+  <key id="insert-workflow">insert.workflow {documentlabel}</key>
+  <key id="log-insert-workflow">log insert workflow</key>
+  <key id="activate-workflow">activate.workflow {documentlabel}</key>
+  <key id="log-activate-workflow">log activate workflow</key>
 </i18n>
