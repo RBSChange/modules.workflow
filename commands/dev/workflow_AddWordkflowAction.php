@@ -95,11 +95,11 @@ class commands_workflow_AddWordkflowAction extends c_ChangescriptCommand
 		{
 			$generator = new builder_Generator();
 			$generator->setTemplateDir(f_util_FileUtils::buildProjectPath('modules', 'workflow', 'templates', 'builder'));
-			$generator->assign_by_ref('author', $this->getAuthor());
-			$generator->assign_by_ref('name', $actionName);
-			$generator->assign_by_ref('module', $moduleName);
-			$generator->assign_by_ref('date', date('r'));
-			$generator->assign_by_ref('class', $class);
+			$generator->assign('author', $this->getAuthor());
+			$generator->assign('name', $actionName);
+			$generator->assign('module', $moduleName);
+			$generator->assign('date', date('r'));
+			$generator->assign('class', $class);
 			$result = $generator->fetch('workflowAction.tpl');
 			
 			f_util_FileUtils::mkdir($folder);
