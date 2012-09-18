@@ -10,4 +10,6 @@
 	<actiondef modulename="workflow" actionname="savepermissions.rootfolder" label="m.workflow.bo.useractionlogger.savepermissions-rootfolder" />
 	<actiondef modulename="workflow" actionname="deactivated.workflow" label="m.workflow.bo.useractionlogger.deactivated-workflow" />
 	<actiondef modulename="workflow" actionname="reactivate.workflow" label="m.workflow.bo.useractionlogger.reactivate-workflow" />
+	<actiondef modulename="workflow" actionname="insert.workflow" label="m.workflow.bo.useractionlogger.insert-workflow" />
+	<actiondef modulename="workflow" actionname="activate.workflow" label="m.workflow.bo.useractionlogger.activate-workflow" />
 </script>

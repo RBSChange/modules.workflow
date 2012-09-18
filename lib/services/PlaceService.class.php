@@ -26,8 +26,9 @@ class workflow_PlaceService extends f_persistentdocument_DocumentService
 	/**
 	 * Updates associated arcs' labels.
 	 * @param workflow_persistentdocument_place $place
+	 * @param integer $parentNodeId Parent node ID where to save the document (optionnal).
 	 */
-	public function postSave($place)
+	public function postSave($place, $parentNodeId)
 	{
 		$as = workflow_ArcService::getInstance();
 		$arcsArray = $as->getArcsByPlace($place);

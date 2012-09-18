@@ -389,7 +389,8 @@ class workflow_WorkflowEngineService extends change_BaseService
 		{
 			$date = date_Calendar::getInstance()->toString();
 		}
-		return array_shift($this->execGetActiveWorkflowDefinitions($startTaskId, $date, $date, false, true));
+		$result = $this->execGetActiveWorkflowDefinitions($startTaskId, $date, $date, false, true);
+		return array_shift($result);
 	}
 
 	/**

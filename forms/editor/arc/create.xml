@@ -17,8 +17,8 @@
 				<body><![CDATA[
 					try
 					{
-						panel.fields.transition.replaceItems({workflowId: this.documentEditor.parentid});
-						panel.fields.place.replaceItems({workflowId: this.documentEditor.parentid});
+						this.fields.transition.replaceItems({workflowId: this.documentEditor.parentid});
+						this.fields.place.replaceItems({workflowId: this.documentEditor.parentid});
 					}
 					catch (e)
 					{
