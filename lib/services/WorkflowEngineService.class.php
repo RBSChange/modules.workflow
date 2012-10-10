@@ -408,7 +408,7 @@ class workflow_WorkflowEngineService extends change_BaseService
 		$query = $provider->createQuery('modules_workflow/workflow');
 		if (!$getInvalide)
 		{
-			$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLICATED')));
+			$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLISHED')));
 		}
 		if ($startTaskId)
 		{
@@ -442,7 +442,7 @@ class workflow_WorkflowEngineService extends change_BaseService
 	{
 		$provider = f_persistentdocument_PersistentProvider::getInstance();
 		$query = $provider->createQuery('modules_workflow/case');
-		$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLICATED')));
+		$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLISHED')));
 		$query->createCriteria('workflow')->add(Restrictions::eq('id', $workflowId));
 		return $provider->find($query);
 	}

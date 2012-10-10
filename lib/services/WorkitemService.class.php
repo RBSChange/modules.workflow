@@ -315,7 +315,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		// Cancel the tasks for the workitem.
 		$query = $this->getPersistentProvider()->createQuery('modules_task/usertask');
 		$query->createCriteria('workitem')->add(Restrictions::eq('id', $workitem->getId()));
-		$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLICATED')));
+		$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLISHED')));
 		$tasksToCancel = $query->find();
 		foreach ($tasksToCancel as $task)
 		{
@@ -455,7 +455,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 
 		$query = $this->createQuery();
 		$query->add(Restrictions::eq('documentid', $documentId));
-		$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLICATED')));
+		$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLISHED')));
 		$query->createCriteria('transition')->add(Restrictions::eq('taskid', $taskId));
 		return $query->find();
 	}
@@ -468,7 +468,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 	{
 		$query = $this->createQuery();
 		$query->add(Restrictions::eq('documentid', $documentId));
-		$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLICATED')));
+		$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLISHED')));
 		$query->add(Restrictions::eq('transition.trigger', WorkflowHelper::TRIGGER_MESSAGE));
 		return $query->find();
 	}
