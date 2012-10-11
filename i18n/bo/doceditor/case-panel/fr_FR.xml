@@ -6,7 +6,7 @@
 	<key id="last-modification-date">dernière modification</key>
 	<key id="view-informations">voir les informations</key>
 	<key id="status">statut</key>
-	<key id="status-publicated">en cours</key>
+	<key id="status-published">en cours</key>
 	<key id="status-filed">terminé</key>
 	<key id="status-trash">annulé</key>
 	<key id="filter-by-target-id">filtrer par identifiant de la cible</key>

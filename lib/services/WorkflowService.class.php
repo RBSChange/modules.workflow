@@ -189,7 +189,7 @@ class workflow_WorkflowService extends f_persistentdocument_DocumentService
 	public function hasOtherActiveWorkflowDefinitions($workflow)
 	{
 		$query = $this->createQuery()->add(Restrictions::ne('id', $workflow->getId()));
-		$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLICATED')));
+		$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLISHED')));
 		$query->add(Restrictions::eq('starttaskid', $workflow->getStarttaskid()));
 		$endDate = $workflow->getEndpublicationdate();
 		if ($endDate)
