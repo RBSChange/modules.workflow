@@ -341,11 +341,19 @@ class workflow_WorkflowEngineService extends change_BaseService
 			}
 			else
 			{
-				if (Framework::isDebugEnabled())
+				$case = $workitem->getCase();
+				workflow_CaseService::getInstance()->cancelCase($case);
+				if (!$case->isNew())
 				{
-					Framework::debug(__METHOD__ . ' : No valid user found, so cancel the case and throw NoUserForWorkitemException.');
+					$case->save();
 				}
-				workflow_WorkflowEngineService::getInstance()->execCancelWorkflowInstance($workitem->getDocumentid(), $workitem->getCase());
+				
+				// For publication workflows, the document status is currently set to WORKFLOW and needs to be set it back to DRAFT or CORRECTION.
+				$document = $workitem->getDocument();
+				if ($document->getPublicationstatus() == 'WORKFLOW')
+				{
+					$document->getDocumentService()->cancel($document->getId());
+				}
 				throw new BaseException('No-valid-user-found-for-this-workitem', 'framework.exception.errors.No-valid-user-found-for-this-workitem');
 			}
 		}
