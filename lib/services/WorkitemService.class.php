@@ -114,12 +114,23 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		$workitem->setLabel($transition->getLabel());
 		$workitem->setDocumentId($case->getDocumentId());
 		$workitem->setPublicationStatus('ACTIVE');
-		if ($transition->getTimelimit() !== null)
+		if ($transition->getTrigger() === WorkflowHelper::TRIGGER_TIME)
 		{
+			$workflowAction = $workitem->getExecAction();
+			if (method_exists($workflowAction, 'getTimelimit'))
+			{
+				$timeLimit = $workflowAction->getTimelimit();
+			}
+			else
+			{
+				$timeLimit = min(1, intval($transition->getTimelimit()));
+			}
 			$date = date_Calendar::getInstance();
-			$date->add(date_Calendar::HOUR, $transition->getTimelimit());
-			$workitem->setDeadline($date->toString());
+			$date->add(date_Calendar::HOUR, $timeLimit);
+			$deadline = $date->toString();
+			$workitem->setDeadline($deadline);
 		}
+		
 		$case->addWorkitem($workitem);
 
 		// Create the associated tasks.
