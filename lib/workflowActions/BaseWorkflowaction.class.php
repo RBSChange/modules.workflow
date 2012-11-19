@@ -169,11 +169,17 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	{
 		list($websiteId, $lang) = $this->getNotificationWebsiteIdAndLang($codeName);
 		$notification = notification_NotificationService::getInstance()->getConfiguredByCodeName($codeName, $websiteId, $lang);
-		if ($notification !== null)
+		if ($notification && $notification->isPublished() && $user && $user->isPublished())
 		{
 			$notification->setSendingModuleName('workflow');
+			$notification->registerCallback($this, 'getNotificationParameters', array('usertask' => $this));
+			if (is_array($callback))
+			{
+				$notification->registerCallback($callback[0], $callback[1], $callbackParameter);
+			}
+			return $notification->sendToUser($user);
 		}
-		return $user->getDocumentService()->sendNotificationToUserCallback($notification, $user, $callback, $callbackParameter);
+		return false;
 	}
 
 	/**
@@ -189,11 +195,16 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	{
 		list($websiteId, $lang) = $this->getNotificationWebsiteIdAndLang($codeName);
 		$notification = notification_NotificationService::getInstance()->getConfiguredByCodeNameAndSuffix($codeName, $suffix, $websiteId, $lang);
-		if ($notification !== null)
+		if ($notification && $notification->isPublished() && $user && $user->isPublished())
 		{
 			$notification->setSendingModuleName('workflow');
+			$notification->registerCallback($this, 'getNotificationParameters', array('usertask' => $this));
+			if (is_array($callback))
+			{
+				return $notification->registerCallback($callback[0], $callback[1], $callbackParameter);
+			}
 		}
-		return $user->getDocumentService()->sendNotificationToUserCallback($notification, $user, $callback, $callbackParameter);
+		return false;
 	}
 	
 	/**
@@ -266,7 +277,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	public function getCancellationNotifParameters($usertask)
 	{
 		// Add the decision.
-		$decision = f_Locale::translate('&modules.workflow.bo.general.decision-' . strtolower($this->getDecision()) . ';');
+		$decision = LocaleService::getInstance()->transFO('m.workflow.bo.general.decision-' . strtolower($this->getDecision()));
 		return array_merge($this->getCommonNotifParameters($usertask), array('decision' => $decision));
 	}
 	
@@ -277,10 +288,22 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	public function getTerminationNotifParameters($usertask)
 	{
 		// Add the decision.
-		$decision = f_Locale::translate('&modules.workflow.bo.general.decision-' . strtolower($this->getDecision()) . ';');
+		$decision = LocaleService::getInstance()->transFO('m.workflow.bo.general.decision-' . strtolower($this->getDecision()));
 		return array_merge($this->getCommonNotifParameters($usertask), array('decision' => $decision));
 	}
 	
+	/**
+	 * @param array $parameters
+	 * @return array
+	 */
+	public function getNotificationParameters($parameters)
+	{
+		if (is_array($parameters) && isset($parameters['usertask']))
+		{
+			return $this->getCommonNotifParameters($parameters['usertask']);
+		}
+		return array();
+	}
 	/**
 	 * @param task_persistentdocument_usertask $task
 	 * @return array
@@ -297,21 +320,18 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 */
 	protected function sendNotificationToAuthor($notificationCodeName, $replacements)
 	{
-		// Look for the document author.
-		$userId = workflow_CaseService::getInstance()->getParameter($this->getWorkitem()->getCase(), '__DOCUMENT_AUTHOR_ID');
-		if (!$userId)
-		{
-			if (Framework::isInfoEnabled())
-			{
-				Framework::info(__METHOD__ . ' : there is no user to send notification');
-			}
-			return;
-		}
-		$user = DocumentHelper::getDocumentInstance($userId);
-
-		// Send the notification.
-		$receiver = sprintf('%s <%s>', f_util_StringUtils::strip_accents($user->getFullname()), $user->getEmail());
-		$this->sendNotification($notificationCodeName, array($receiver), $replacements);
+		$this->sendNotificationToAuthorCallback($notificationCodeName, array($this, 'authorNotifParameters', $replacements));
+	}
+	
+	/**
+	 * @deprecated (will be removed in 4.0)
+	 */
+	public function authorNotifParameters($replacements)
+	{
+		$replacements = is_array($replacements) ? $replacements : array();
+		$defaultParameters = workflow_WorkflowEngineService::getInstance()->getDefaultNotificationParameters($this->getDocument(), $this->getWorkitem());
+		$caseParameters = workflow_CaseService::getInstance()->getParametersArray($this->getWorkitem()->getCase());		
+		return array_merge($replacements, $defaultParameters, $caseParameters);
 	}
 
 	/**
