@@ -320,7 +320,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 */
 	protected function sendNotificationToAuthor($notificationCodeName, $replacements)
 	{
-		$this->sendNotificationToAuthorCallback($notificationCodeName, array($this, 'authorNotifParameters', $replacements));
+		$this->sendNotificationToAuthorCallback($notificationCodeName, array($this, 'authorNotifParameters'), $replacements);
 	}
 	
 	/**
