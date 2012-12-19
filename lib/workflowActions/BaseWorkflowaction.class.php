@@ -9,12 +9,12 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 * @var string
 	 */
 	protected $executionStatus = workflow_WorkitemService::EXECUTION_NOEXECUTION;
-
+	
 	/**
 	 * @var workflow_persistentdocument_workitem
 	 */
 	protected $workitem = null;
-
+	
 	/**
 	 * This method initializes the action. It must be called before the execute one.
 	 * @param workflow_persistentdocument_workitem $workitem
@@ -23,7 +23,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	{
 		$this->setWorkitem($workitem);
 	}
-
+	
 	/**
 	 * This method needs to be redefined to execute the action.
 	 * @return boolean true if the execution end successfully, false in error case.
@@ -34,7 +34,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 		$this->setExecutionStatus(workflow_WorkitemService::EXECUTION_SUCCESS);
 		return true;
 	}
-
+	
 	/**
 	 * Return a value which will be compared with the precondition in explicit or split case.
 	 * @return string
@@ -43,7 +43,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	{
 		return $this->executionStatus;
 	}
-
+	
 	/**
 	 * Return a value which will be compared with the precondition in explicit or split case.
 	 * @param string $status
@@ -52,7 +52,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	{
 		$this->executionStatus = $status;
 	}
-
+	
 	/**
 	 * Get the workitem.
 	 * @return workflow_persistentdocument_workitem
@@ -61,7 +61,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	{
 		return $this->workitem;
 	}
-
+	
 	/**
 	 * Set the workitem.
 	 * @param workflow_persistentdocument_workitem $workitem
@@ -70,7 +70,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	{
 		$this->workitem = $workitem;
 	}
-
+	
 	/**
 	 * @return integer
 	 */
@@ -82,7 +82,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 		}
 		return 0;
 	}
-
+	
 	/**
 	 * Get the associated document.
 	 * @return f_persistentdocument_PersistentDocument
@@ -95,7 +95,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Change the document's publication status.
 	 * @param string $newStatus
@@ -106,7 +106,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 		$document->setPublicationstatus($newStatus);
 		$document->save();
 	}
-
+	
 	/**
 	 * Send a notification to the document author with the default sender. The notification replacements are returned by the callback function.
 	 * @param string $codeName
@@ -129,7 +129,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 		}
 		return false;
 	}
-
+	
 	/**
 	 * Send a notification to the document author with the default sender. The notification replacements are returned by the callback function.
 	 * @param string $codeName
@@ -152,7 +152,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 		}
 		return false;
 	}
-
+	
 	/**
 	 * Send a notification to the document author with the default sender. The notification replacements are returned by the callback function.
 	 * @param string $codeName
@@ -163,20 +163,21 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 */
 	protected function sendNotificationToUserCallback($codeName, $user, $callback = null, $callbackParameter = array())
 	{
-		list($websiteId, $lang) = $this->getNotificationWebsiteIdAndLang($codeName);
+		list ($websiteId, $lang) = $this->getNotificationWebsiteIdAndLang($codeName);
 		$notification = notification_NotificationService::getInstance()->getConfiguredByCodeName($codeName, $websiteId, $lang);
-		if ($notification === null)
+		if ($notification && $notification->isPublished() && $user && $user->isPublished())
 		{
-			return true;
+			$notification->setSendingModuleName('workflow');
+			$notification->registerCallback($this, 'getNotificationParameters', array('usertask' => $this));
+			if (is_array($callback))
+			{
+				$notification->registerCallback($callback[0], $callback[1], $callbackParameter);
+			}
+			return $notification->sendToUser($user);
 		}
-		$notification->setSendingModuleName('workflow');
-		if (is_array($callback) && count($callback) == 2)
-		{
-			$notification->registerCallback($callback[0], $callback[1], $callbackParameter);
-		}
-		return $notification->sendToUser($user);
+		return false;
 	}
-
+	
 	/**
 	 * Send a notification to the document author with the default sender. The notification replacements are returned by the callback function.
 	 * @param string $codeName
@@ -188,18 +189,18 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	 */
 	protected function sendSuffixedNotificationToUserCallback($codeName, $suffix, $user, $callback = null, $callbackParameter = array())
 	{
-		list($websiteId, $lang) = $this->getNotificationWebsiteIdAndLang($codeName);
+		list ($websiteId, $lang) = $this->getNotificationWebsiteIdAndLang($codeName);
 		$notification = notification_NotificationService::getInstance()->getConfiguredByCodeNameAndSuffix($codeName, $suffix, $websiteId, $lang);
-		if ($notification === null)
+		if ($notification && $notification->isPublished() && $user && $user->isPublished())
 		{
-			return true;
+			$notification->setSendingModuleName('workflow');
+			$notification->registerCallback($this, 'getNotificationParameters', array('usertask' => $this));
+			if (is_array($callback))
+			{
+				return $notification->registerCallback($callback[0], $callback[1], $callbackParameter);
+			}
 		}
-		$notification->setSendingModuleName('workflow');
-		if (is_array($callback) && count($callback) == 2)
-		{
-			$notification->registerCallback($callback[0], $callback[1], $callbackParameter);
-		}
-		return $notification->sendToUser($user);
+		return false;
 	}
 	
 	/**
@@ -211,7 +212,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 		$document = $this->getDocument();
 		return array($document->getDocumentService()->getWebsiteId($document), $document->getLang());
 	}
-
+	
 	/**
 	 * @param string $name
 	 * @return string
@@ -221,7 +222,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 		$case = $this->getWorkitem()->getCase();
 		return workflow_CaseService::getInstance()->getParameter($case, $name);
 	}
-
+	
 	/**
 	 * @param string $name
 	 * @param string $value
@@ -230,7 +231,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	{
 		$case = $this->getWorkitem()->getCase();
 		workflow_CaseService::getInstance()->setParameter($case, $name, $value);
-	}	
+	}
 	
 	/**
 	 * @return string
@@ -239,7 +240,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	{
 		return $this->getCaseParameter('__LAST_DECISION');
 	}
-
+	
 	/**
 	 * @return string
 	 */
@@ -272,7 +273,7 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	public function getCancellationNotifParameters($usertask)
 	{
 		// Add the decision.
-		$decision = LocaleService::getInstance()->trans('m.workflow.bo.general.decision-' . strtolower($this->getDecision()));
+		$decision = LocaleService::getInstance()->transFO('m.workflow.bo.general.decision-' . strtolower($this->getDecision()));
 		return array_merge($this->getCommonNotifParameters($usertask), array('decision' => $decision));
 	}
 	
@@ -283,8 +284,21 @@ class workflow_BaseWorkflowaction implements workflow_Workflowaction
 	public function getTerminationNotifParameters($usertask)
 	{
 		// Add the decision.
-		$decision = LocaleService::getInstance()->trans('m.workflow.bo.general.decision-' . strtolower($this->getDecision()));
+		$decision = LocaleService::getInstance()->transFO('m.workflow.bo.general.decision-' . strtolower($this->getDecision()));
 		return array_merge($this->getCommonNotifParameters($usertask), array('decision' => $decision));
+	}
+	
+	/**
+     * @param array $parameters
+     * @return array
+     */
+	public function getNotificationParameters($parameters)
+	{
+		if (is_array($parameters) && isset($parameters['usertask']))
+		{
+			return $this->getCommonNotifParameters($parameters['usertask']);
+		}
+		return array();
 	}
 	
 	/**

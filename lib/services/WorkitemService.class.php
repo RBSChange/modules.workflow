@@ -8,7 +8,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 	const EXECUTION_SUCCESS = "__SUCCESS";
 	const EXECUTION_ERROR = "__ERROR";
 	const EXECUTION_NOEXECUTION = "__NOEXECUTION";
-
+	
 	/**
 	 * @return workflow_persistentdocument_workitem
 	 */
@@ -16,7 +16,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 	{
 		return $this->getNewDocumentInstanceByModelName('modules_workflow/workitem');
 	}
-
+	
 	/**
 	 * Create a query based on 'modules_workflow/workitem' model
 	 * @return f_persistentdocument_criteria_Query
@@ -25,7 +25,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 	{
 		return $this->getPersistentProvider()->createQuery('modules_workflow/workitem');
 	}
-
+	
 	/**
 	 * @param workflow_persistentdocument_workitem $workitem
 	 * @return void
@@ -38,8 +38,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 			$usertaskToDelete->delete();
 		}
 	}
-
-
+	
 	/**
 	 * Get the associated workflow.
 	 * @param workflow_persistentdocument_workitem $workitem
@@ -49,7 +48,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 	{
 		return $workitem->getCase()->getWorkflow();
 	}
-
+	
 	/**
 	 * Check the status to know if this workitem is active.
 	 * @param workflow_persistentdocument_workitem $workitem
@@ -64,7 +63,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		}
 		return ($publicationStatus == 'ACTIVE' || $workitem->isPublished());
 	}
-
+	
 	/**
 	 * Check the status to know if this workitem is closed.
 	 * @param workflow_persistentdocument_workitem $workitem
@@ -79,7 +78,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		}
 		return ($publicationStatus == 'FILED');
 	}
-
+	
 	/**
 	 * Initialize a workitem.
 	 * @param workflow_persistentdocument_case $case
@@ -98,20 +97,30 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		$workitem->setLabel($transition->getLabel());
 		$workitem->setDocumentId($case->getDocumentId());
 		$workitem->setPublicationStatus('ACTIVE');
-		if ($transition->getTimelimit() !== null)
+		if ($transition->getTrigger() === WorkflowHelper::TRIGGER_TIME)
 		{
+			$workflowAction = $workitem->getExecAction();
+			if (method_exists($workflowAction, 'getTimelimit'))
+			{
+				$timeLimit = $workflowAction->getTimelimit();
+			}
+			else
+			{
+				$timeLimit = min(1, intval($transition->getTimelimit()));
+			}
 			$date = date_Calendar::getInstance();
-			$date->add(date_Calendar::HOUR, $transition->getTimelimit());
-			$workitem->setDeadline($date->toString());
+			$date->add(date_Calendar::HOUR, $timeLimit);
+			$deadline = $date->toString();
+			$workitem->setDeadline($deadline);
 		}
 		$case->addWorkitem($workitem);
-
+		
 		// Create the associated tasks.
 		$wes->createTasksForWorkitem($workitem);
-
+		
 		return $workitem;
 	}
-
+	
 	/**
 	 * Execute this workitem.
 	 * @param workflow_persistentdocument_workitem $workitem
@@ -127,7 +136,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		$case = $workitem->getCase();
 		$case->workitemTrigged($workitem);
 		$caseService->setParameter($case, '__LAST_STATUS', self::EXECUTION_NOEXECUTION);
-
+		
 		// Try to execute the action if one is defined.
 		$classname = $workitem->getExecActionName();
 		if (!empty($classname))
@@ -170,46 +179,43 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 			}
 			$caseService->setParameter($case, '__LAST_STATUS', self::EXECUTION_SUCCESS);
 		}
-
+		
 		// Error management.
-		$lastStatus =  $caseService->getParameter($case, '__LAST_STATUS');
+		$lastStatus = $caseService->getParameter($case, '__LAST_STATUS');
 		if ($lastStatus != self::EXECUTION_NOEXECUTION && $lastStatus != self::EXECUTION_ERROR)
 		{
 			$workitem->setPublicationstatus('FILED');
 		}
-
+		
 		if (Framework::isDebugEnabled())
 		{
-			Framework::debug(__METHOD__ . ' END : last status = ' . $lastStatus . ' for workItem = ' . $workitem->getId() . ', workitem status = ' .  $workitem->getPublicationstatus());
+			Framework::debug(__METHOD__ . ' END : last status = ' . $lastStatus . ' for workItem = ' . $workitem->getId() . ', workitem status = ' . $workitem->getPublicationstatus());
 		}
 		
 		// Log action.
 		$transition = $workitem->getTransition();
-		$params = array(
-			'transition' => $transition->getLabelAsHtml(),
-			'status' => $caseService->getParameter($case, '__LAST_STATUS')
-		);
+		$params = array('transition' => $transition->getLabelAsHtml(), 'status' => $caseService->getParameter($case, '__LAST_STATUS'));
 		switch ($transition->getTrigger())
 		{
-			case 'USER':
+			case 'USER' :
 				$user = DocumentHelper::getDocumentInstance($workitem->getUserid());
 				$params['user'] = $user->getLabelAsHtml();
 				$this->addCurrentUserDocumentEntry('execute.workitem.user', $case, $params, 'workflow');
 				break;
-				
-			case 'AUTO':
+			
+			case 'AUTO' :
 				$this->addCurrentUserDocumentEntry('execute.workitem.auto', $case, $params, 'workflow');
 				break;
-				
-			case 'TIME':
+			
+			case 'TIME' :
 				$this->addCurrentUserDocumentEntry('execute.workitem.time', $case, $params, 'workflow');
 				break;
-
-			case 'MSG':
+			
+			case 'MSG' :
 				$this->addCurrentUserDocumentEntry('execute.workitem.msg', $case, $params, 'workflow');
 				break;
-								
-			default:
+			
+			default :
 				Framework::warn(__METHOD__ . ' unknown trigger "' . $transition->getTrigger() . '"');
 				break;
 		}
@@ -235,7 +241,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 			$document->addPendingCurrentUserDocumentEntry($actionName, $info, $moduleName);
 		}
 	}
-
+	
 	/**
 	 * Finish the workitem.
 	 * @param workflow_persistentdocument_workitem $workitem
@@ -253,9 +259,9 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 			$tokenService = workflow_TokenService::getInstance();
 			$caseService = workflow_CaseService::getInstance();
 			$transitionService = workflow_TransitionService::getInstance();
-
+			
 			$case = $workitem->getCase();
-
+			
 			// Get output places for this workitem.
 			$placesArray = array();
 			$outArcsArray = $transitionService->getOutputArcsArray($workitem->getTransition());
@@ -266,7 +272,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 					$placesArray[] = $arc->getPlace();
 				}
 			}
-
+			
 			if (count($placesArray) != 0)
 			{
 				// Consume input tokens.
@@ -274,12 +280,12 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 				foreach ($inArcsArray as $arc)
 				{
 					$token = $caseService->getActiveToken($case, $arc->getPlace()->getId());
-					if($token)
+					if ($token)
 					{
 						$tokenService->consume($token);
 					}
 				}
-
+				
 				// Activate output token.
 				foreach ($placesArray as $place)
 				{
@@ -296,10 +302,10 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 				}
 			}
 		}
-
+		
 		return ($workitem->getPublicationstatus() == 'FILED');
 	}
-
+	
 	/**
 	 * Cancel this workitem.
 	 * @param workflow_persistentdocument_workitem $workitem
@@ -311,7 +317,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 			Framework::debug(__METHOD__ . ' : workitem = ' . $workitem->getId());
 		}
 		$workitem->setPublicationstatus('TRASH');
-
+		
 		// Cancel the tasks for the workitem.
 		$query = $this->getPersistentProvider()->createQuery('modules_task/usertask');
 		$query->createCriteria('workitem')->add(Restrictions::eq('id', $workitem->getId()));
@@ -322,7 +328,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 			TaskHelper::getUsertaskService()->cancelUsertask($task);
 		}
 	}
-
+	
 	/**
 	 * Activate an automatic trigger.
 	 * @param workflow_persistentdocument_workitem $workitem
@@ -338,7 +344,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		$this->finish($workitem);
 		return $workitem;
 	}
-
+	
 	/**
 	 * Activate a user trigger.
 	 * @param workflow_persistentdocument_workitem $workitem
@@ -375,7 +381,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 				}
 				$workitem->setUserid($userId);
 			}
-			catch(Exception $e)
+			catch (Exception $e)
 			{
 				Framework::exception($e);
 			}
@@ -384,7 +390,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		}
 		return $workitem;
 	}
-
+	
 	/**
 	 * Activate a timer trigger.
 	 * @param workflow_persistentdocument_workitem $workitem
@@ -403,7 +409,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		}
 		return $workitem;
 	}
-
+	
 	/**
 	 * Activate a message trigger.
 	 * @param workflow_persistentdocument_workitem $workitem
@@ -424,7 +430,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		}
 		return $workitem;
 	}
-
+	
 	/**
 	 * Get all active workitems associated to the given document and task.
 	 * @param integer $documentId
@@ -442,7 +448,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 			}
 			return array();
 		}
-
+		
 		// Get the start task id for this document.
 		if (empty($taskId))
 		{
@@ -452,14 +458,14 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 			}
 			return array();
 		}
-
+		
 		$query = $this->createQuery();
 		$query->add(Restrictions::eq('documentid', $documentId));
 		$query->add(Restrictions::in('publicationstatus', array('ACTIVE', 'PUBLISHED')));
 		$query->createCriteria('transition')->add(Restrictions::eq('taskid', $taskId));
 		return $query->find();
 	}
-
+	
 	/**
 	 * @param integer $documentId
 	 * @return array<workflow_persistentdocument_workitem>
@@ -512,12 +518,12 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 				workflow_CaseService::getInstance()->clearParameter($workitem->getCase(), '__NEXT_ACTORS_IDS');
 			}
 		}
-
+		
 		// If the parameter AFFECT_TASKS_TO_SUPER_ADMIN is set to true, add the super-administrator.
 		if (workflow_CaseService::getInstance()->getParameter($workitem->getCase(), 'AFFECT_TASKS_TO_SUPER_ADMIN') == 'true')
 		{
 			$rootUsers = users_UserService::getInstance()->getRootUsers();
-			foreach ($rootUsers as $rootUser) 
+			foreach ($rootUsers as $rootUser)
 			{
 				if ($rootUser->isPublished())
 				{
@@ -526,10 +532,10 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 					{
 						$actorsIds[] = $rootUserId;
 					}
-				}				
+				}
 			}
 		}
-
+		
 		// If there are user ids, instanciate them.
 		if (count($actorsIds) == 0)
 		{
@@ -541,7 +547,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 		{
 			$users[] = DocumentHelper::getDocumentInstance($actorId, 'modules_users/user');
 		}
-
+		
 		return $users;
 	}
 	
