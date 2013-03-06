@@ -20,7 +20,7 @@ class workflow_ListContextualtransitionsService extends BaseService
 		}
 		return self::$instance;
 	}
-
+	
 	/**
 	 * @var Array
 	 */
@@ -37,13 +37,13 @@ class workflow_ListContextualtransitionsService extends BaseService
 	/**
 	 * @return array<list_Item>
 	 */
-	public final function getItems()
+	public function getItems()
 	{
 		if (isset($this->parameters['workflowId']))
 		{
 			$workflow = DocumentHelper::getDocumentInstance($this->parameters['workflowId']);
 		}
-		else if (isset($this->parameters['arcId'])) 
+		else if (isset($this->parameters['arcId']))
 		{
 			$arc = DocumentHelper::getDocumentInstance($this->parameters['arcId']);
 			$workflow = $arc->getWorkflow();
@@ -52,16 +52,16 @@ class workflow_ListContextualtransitionsService extends BaseService
 		{
 			if (Framework::isDebugEnabled())
 			{
-				Framework::debug(__METHOD__ . ' No parameter to find the current workflow: '.var_export($this->parameters, true));
+				Framework::debug(__METHOD__ . ' No parameter to find the current workflow: ' . var_export($this->parameters, true));
 			}
 			return array();
 		}
 		
-		$items = array();		
+		$items = array();
 		foreach ($workflow->getTransitionsArray() as $transition)
 		{
 			$items[] = new list_Item($transition->getLabel(), $transition->getId());
-		}		
+		}
 		return $items;
 	}
 }

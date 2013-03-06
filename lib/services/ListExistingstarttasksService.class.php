@@ -20,7 +20,7 @@ class workflow_ListExistingstarttasksService extends BaseService
 		}
 		return self::$instance;
 	}
-
+	
 	/**
 	 * @var Array
 	 */
@@ -37,7 +37,7 @@ class workflow_ListExistingstarttasksService extends BaseService
 	/**
 	 * @return array<list_Item>
 	 */
-	public final function getItems()
+	public function getItems()
 	{
 		$query = workflow_WorkflowService::getInstance()->createQuery();
 		$workflowsByTask = array();
@@ -50,11 +50,11 @@ class workflow_ListExistingstarttasksService extends BaseService
 			}
 		}
 		
-		$items = array();		
+		$items = array();
 		foreach ($workflowsByTask as $key => $workflow)
 		{
 			$items[] = new list_Item($workflow->getLabel(), $key);
-		}		
+		}
 		return $items;
 	}
 }
