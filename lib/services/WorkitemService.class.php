@@ -123,7 +123,7 @@ class workflow_WorkitemService extends f_persistentdocument_DocumentService
 			}
 			else
 			{
-				$timeLimit = min(1, intval($transition->getTimelimit()));
+				$timeLimit = max(1, intval($transition->getTimelimit()));
 			}
 			$date = date_Calendar::getInstance();
 			$date->add(date_Calendar::HOUR, $timeLimit);
